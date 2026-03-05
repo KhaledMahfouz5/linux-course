@@ -1,0 +1,430 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% ----------------------------------------------------------
+%  Linux Penguin Theme — Based on Recommended Colors
+% ----------------------------------------------------------
+
+% --- COLOR SETUP ---
+\usepackage{xcolor}
+
+\definecolor{cream}{RGB}{246,242,219}
+\definecolor{teamred}{RGB}{209,57,64}
+\definecolor{navy}{RGB}{40,46,87}
+\definecolor{softwhite}{RGB}{250,250,230}
+\definecolor{accentyellow}{RGB}{240,200,60}
+
+% Extra utility colors
+\definecolor{muted}{RGB}{120,125,140}
+\definecolor{darkcream}{RGB}{230,225,205}
+
+% ----------------------------------------------------------
+%  FONT SETUP (Optional but Recommended)
+%  Works best with XeLaTeX or LuaLaTeX
+% ----------------------------------------------------------
+\usepackage{fontspec}
+
+% Main document font (Google fonts — upload to Overleaf)
+% If you don't upload fonts, comment these two lines.
+\setmainfont{SourceSans3}[
+  Path=./,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold
+]
+
+\newfontfamily\headingfont{ScienceGothic}[
+  Path=./,
+]
+
+% Font Awesome for minimal icons
+\usepackage{fontawesome5}
+
+% ----------------------------------------------------------
+%  SECTION STYLE
+% ----------------------------------------------------------
+\usepackage{titlesec}
+
+% Section
+\titleformat{\section}
+  {\Large\headingfont\bfseries\color{navy}}
+  {\thesection}
+  {1em}
+  {\rule{\linewidth}{1pt}\vspace{0.5em}\\}
+
+% Subsection
+\titleformat{\subsection}
+  {\large\headingfont\bfseries\color{teamred}}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+% Subsubsection
+\titleformat{\subsubsection}
+  {\bfseries\color{navy}}
+  {\thesubsubsection}
+  {0.6em}
+  {}
+
+% ----------------------------------------------------------
+%  PAGE STYLE
+% ----------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf{} % clear all
+
+\lhead{\textcolor{navy}{\headingfont \courseTitle}}
+\rhead{\textcolor{teamred}{\thepage}}
+\renewcommand{\headrule}{\color{teamred}\hrule height 1pt}
+
+% ----------------------------------------------------------
+%  HYPERLINK STYLE
+% ----------------------------------------------------------
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = teamred,
+  urlcolor   = navy,
+  citecolor  = accentyellow
+}
+
+% ----------------------------------------------------------
+%  CUSTOM BOX ENVIRONMENTS
+% ----------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Info box
+\newtcolorbox{infobox}{
+  enhanced,
+  breakable,
+  colback   = softwhite,
+  colframe  = navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Warning box
+\newtcolorbox{warningbox}{
+  enhanced,
+  breakable,
+  colback   = accentyellow!30,
+  colframe  = accentyellow!80!navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Highlight box
+\newtcolorbox{highlightbox}{
+  enhanced,
+  breakable,
+  colback   = teamred!10,
+  colframe  = teamred,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% ----------------------------------------------------------
+%  ITEMIZE / ENUMERATE STYLE
+% ----------------------------------------------------------
+\usepackage{enumitem}
+
+\setlist[itemize]{
+  label=\textcolor{teamred}{\large\textbullet},
+  leftmargin=1.2em,
+  itemsep=4pt
+}
+
+\setlist[enumerate]{
+  label=\textcolor{navy}{\arabic*.},
+  leftmargin=1.4em,
+  itemsep=4pt
+}
+
+% ----------------------------------------------------------
+%  TITLE STYLE
+% ----------------------------------------------------------
+\usepackage{titling}
+
+\pretitle{
+  \begin{center}
+  \headingfont\bfseries\LARGE\color{navy}
+}
+\posttitle{
+  \end{center}
+}
+
+\preauthor{
+  \begin{center}
+  \color{teamred}
+}
+\postauthor{
+  \end{center}
+}
+
+% ----------------------------------------------------------
+%  OPTIONAL — SOFT PAGE BACKGROUND
+%  Comment out if you want white pages
+% ----------------------------------------------------------
+\usepackage{pagecolor}
+\pagecolor{cream}
+\color{navy}
+
+% ----------------------------------------------------------
+% CUSTOM COMMANDS FOR TEMPLATE
+% ----------------------------------------------------------
+\newcommand{\courseTitle}{Linux Process Monitoring \& Management}
+\newcommand{\courseDate}{23-02-2026}
+\newcommand{\authorName}{Khaled Mahfouz}
+\newcommand{\contactInfo}{\texttt{@khaledmhfz}}
+
+% Minimal icon commands
+\newcommand{\penguinicon}{\faLinux}
+\newcommand{\htopicon}{\faChartLine}
+\newcommand{\killicon}{\faSkullCrossbones}
+\newcommand{\searchicon}{\faSearch}
+\newcommand{\backgroundicon}{\faSleep}
+\newcommand{\chainicon}{\faLink}
+\newcommand{\summaryicon}{\faList}
+\newcommand{\tipsicon}{\faLightbulb}
+\newcommand{\bookicon}{\faBook}
+\newcommand{\arrowicon}{\faArrowRight}
+
+% ----------------------------------------------------------
+% END OF THEME
+% ----------------------------------------------------------
+
+\begin{document}
+
+% Title with minimal space
+\begin{center}
+\headingfont\Huge\bfseries\color{navy}
+\penguinicon\ \courseTitle\\[0.5em]
+\Large\color{teamred}
+\courseDate
+\end{center}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{\faInfoCircle\ What Is a Process?}
+
+Every program you run becomes a \textit{process} — an instance of a running program with a unique ID (PID). Linux lets you \textbf{list}, \textbf{monitor}, and \textbf{control} these processes using simple tools.
+
+\section*{\htopicon\ 1) \textbf{htop — Interactive Process Viewer}}
+
+\begin{infobox}
+\faLightbulb\ \texttt{htop} is like \texttt{top}, but \textit{way more human-friendly}: color, scrolling, arrow navigation, signal menus, and killer shortcuts. (\href{https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/}{\texttt{GeeksforGeeks}})
+\end{infobox}
+
+\subsection*{Why \texttt{htop}?}
+
+\begin{itemize}
+    \item Shows CPU, RAM, threads in real-time
+    \item Scroll through processes
+    \item Select and kill without typing PIDs
+\end{itemize}
+
+\subsection*{Install \& Run (Debian/Ubuntu/Mint)}
+
+\begin{highlightbox}
+\texttt{\$ sudo apt update}\\
+\texttt{\$ sudo apt install htop}\\
+\texttt{\$ htop}
+\end{highlightbox}
+
+\subsection*{Inside \texttt{htop}}
+
+\begin{itemize}
+    \item \faArrowUp\ / \faArrowDown\ — move
+    \item F9 — kill selected process
+    \item F3 — search/filter
+    \item F5 — tree view (parent/child structure)
+\end{itemize}
+
+\begin{infobox}
+\arrowicon\ Best tutorial: \textit{GeeksforGeeks: Using htop to Monitor System Processes on Linux} (\href{https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/}{\texttt{Click Here !!}})
+\end{infobox}
+
+\section*{\killicon\ 2) \texttt{kill} and \texttt{pkill} — End Processes}
+
+When a process misbehaves (freezes, uses all your CPU), you kill it.
+
+\subsection*{\texttt{kill}}
+
+Targets a specific \textit{PID}.
+
+\begin{highlightbox}
+\texttt{\$ kill 1234}\\
+\texttt{\$ kill -9 1234    \# force kill}
+\end{highlightbox}
+
+\begin{itemize}
+    \item SIGTERM (\texttt{kill}) politely asks to quit
+    \item SIGKILL (\texttt{kill -9}) stops immediately
+\end{itemize}
+
+\subsection*{\texttt{pkill}}
+
+Targets by \textit{name} or pattern — no need to look up PID:
+
+\begin{highlightbox}
+\texttt{\$ pkill firefox}\\
+\texttt{\$ pkill -u someuser}
+\end{highlightbox}
+
+\begin{infobox}
+\faBrain\ \textbf{Tip:} \texttt{kill} works on PIDs, \texttt{pkill} works on \textit{names}.
+\end{infobox}
+
+\begin{infobox}
+\arrowicon\ Great deep dive: \textit{How to Manage Linux Processes Using ps, kill, and pkill (How-To Geek)} (\href{https://www.howtogeek.com/how-to-manage-linux-processes-using-ps-kill-and-pkill/}{\texttt{Click Here !!}})
+\end{infobox}
+
+\section*{\searchicon\ 3) \texttt{ps} + \texttt{grep} — Find Processes via CLI}
+
+\texttt{ps} gives you a \textit{snapshot} of currently running processes — it isn't real-time like \texttt{htop}, but it's extremely useful.
+
+\subsection*{Common Pattern}
+
+\begin{highlightbox}
+\texttt{\$ ps aux            \# list ALL processes}\\
+\texttt{\$ ps aux | grep firefox   \# find firefox}\\
+\texttt{\$ ps -ef | grep python    \# find python instances}
+\end{highlightbox}
+
+\begin{infobox}
+\faEye\  \texttt{grep} filters output — super handy when you're hunting a specific process. 
+\end{infobox}
+
+\begin{infobox}
+\faBolt\ \textbf{Pro tip:} wrap your grep to \textit{not} match itself (e.g., \texttt{grep "[f]irefox"}), because normal grep often shows its \textit{own} process.
+\end{infobox}
+
+\begin{infobox}
+\arrowicon\ For a beginner overview of \texttt{ps}, search, and manage processes, see \textit{Ubuntu Community Tutorial}. (\href{https://discourse.ubuntu.com/t/viewing-and-monitoring-processes-in-linux/26024}{\texttt{Click Here !!}})
+\end{infobox}
+
+\section*{4) Run in Background (\texttt{\&})}
+
+Sometimes you want to start a long-running task \textit{without blocking your terminal}. That's where \textbf{background jobs} come in.
+
+\subsection*{Example}
+
+\begin{highlightbox}
+\texttt{\$ sleep 60 \&}
+\end{highlightbox}
+
+\begin{itemize}
+    \item \texttt{\&} → run command in the background
+    \item You get your prompt back immediately
+    \item Shell assigns a job number and PID
+\end{itemize}
+
+\subsection*{Job Management}
+
+\begin{highlightbox}
+\texttt{\$ jobs            \# list jobs}\\
+\texttt{\$ fg \%1           \# bring job 1 to foreground}\\
+\texttt{\$ bg \%1           \# resume job 1 in background}
+\end{highlightbox}
+
+\begin{infobox}
+\faLocationArrow\ These are Bash's built-in \textit{job control} features.
+\end{infobox}
+
+\begin{infobox}
+\arrowicon\ For a full walk-through on background/foreground jobs, see DigitalOcean's guide. (\href{https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes}{\texttt{Click Here !!}})
+\end{infobox}
+
+\section*{\chainicon\ 5) \textbf{Command Chaining — \texttt{\&\&}, \texttt{||}, \texttt{;}}}
+
+Command chaining lets you fire off multiple commands in one line — \textit{with logic about success or failure}.
+
+\subsection*{The Operators}
+
+\begin{infobox}
+\begin{tabular}{ll}
+\textbf{Operator} & \textbf{What it Means} \\
+\texttt{cmd1 ; cmd2} & Run cmd1, then cmd2 no matter what \\
+\texttt{cmd1 \&\& cmd2} & Run cmd2 ONLY if cmd1 succeeds (exit status 0) \\
+\texttt{cmd1 || cmd2} & Run cmd2 ONLY if cmd1 fails \\
+\end{tabular}
+\end{infobox}
+
+\subsection*{Examples}
+
+\begin{highlightbox}
+\texttt{\$ sudo apt update \&\& sudo apt upgrade -y}\\
+\texttt{\$ rm temp.log || echo "Could not delete temp.log"}\\
+\texttt{\$ cmd1 ; cmd2 ; cmd3}
+\end{highlightbox}
+
+\begin{infobox}
+\faCheckCircle\ Perfect for chaining updates, scripts, and error handling.
+\end{infobox}
+
+\begin{infobox}
+\arrowicon\ See \textit{GeeksforGeeks: Chaining Commands in Linux} for examples. (\href{https://www.geeksforgeeks.org/linux-unix/chaining-commands-in-linux/}{\texttt{Click Here !!}})
+\end{infobox}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{\summaryicon\ Summary — Process Control Toolkit}
+
+\begin{infobox}
+\begin{tabular}{ll}
+\textbf{Task} & \textbf{Tools Covered} \\
+View all processes & \texttt{ps}, \texttt{htop}, real-time \\
+Find specific process & \texttt{ps | grep} \\
+Kill / stop process & \texttt{kill}, \texttt{pkill} \\
+Run jobs & \texttt{\&}, \texttt{jobs} \\
+Chain actions & \texttt{\&\&}, \texttt{||}, \texttt{;} \\
+\end{tabular}
+\end{infobox}
+
+\section*{\bookicon\ Recommended Reading/Docs}
+
+\begin{itemize}
+    \item \penguinicon\ Ubuntu Command Line For Beginners — official Canonical tutorial (\href{https://ubuntu.com/tutorials/command-line-for-beginners}{\texttt{Ubuntu}})\\
+    \arrowicon\ \href{https://ubuntu.com/tutorials/command-line-for-beginners}{\texttt{https://ubuntu.com/tutorials/command-line-for-beginners}}
+    
+    \item \penguinicon\ Bash Reference Manual — job control details\\
+    \arrowicon\ \href{https://www.gnu.org/software/bash/manual/}{\texttt{https://www.gnu.org/software/bash/manual/}}
+\end{itemize}
+
+\subsection*{Reference Links}
+
+\begin{itemize}
+    \item \href{https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/}{\texttt{Using htop to Monitor System Processes on Linux - GeeksforGeeks}}
+    \item \href{https://www.howtogeek.com/how-to-manage-linux-processes-using-ps-kill-and-pkill/}{\texttt{How to Manage Linux Processes Using ps, kill, and pkill}}
+    \item \href{https://www.owais.io/blog/2025-10-06_linux-process-management-monitoring-beginners/}{\texttt{Complete Guide to Linux Process Management and Monitoring for Absolute Beginners | Owais.io}}
+    \item \href{https://www.reddit.com/r/linuxquestions/comments/dneenk}{\texttt{Grep command appearing when grepping processes?}}
+    \item \href{https://discourse.ubuntu.com/t/viewing-and-monitoring-processes-in-linux/26024}{\texttt{Viewing and Monitoring Processes in Linux - Tutorials - Ubuntu Community Hub}}
+    \item \href{https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes}{\texttt{How To Use Bash's Job Control to Manage Foreground and Background Processes}}
+    \item \href{https://www.geeksforgeeks.org/linux-unix/chaining-commands-in-linux/}{\texttt{Chaining Commands in Linux}}
+    \item \href{https://ubuntu.com/tutorials/command-line-for-beginners}{\texttt{The Linux command line for beginners}}
+\end{itemize}
+
+% Updated Footer
+\vspace{\fill}
+\begin{center}
+\color{muted}
+All rights reserved for \texttt{TogetherTeam} [NOT For Commercial Use] !!\\
+contact the author via email \href{mailto:khaledmhfz2004@gmail.com}{\texttt{khaledmhfz2004@gmail.com}}
+\end{center}
+
+\end{document}

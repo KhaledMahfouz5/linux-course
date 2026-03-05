@@ -1,0 +1,1027 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% ----------------------------------------------------------
+%  Linux Penguin Theme — Based on Recommended Colors
+% ----------------------------------------------------------
+
+% --- COLOR SETUP ---
+\usepackage{xcolor}
+
+\definecolor{cream}{RGB}{246,242,219}
+\definecolor{teamred}{RGB}{209,57,64}
+\definecolor{navy}{RGB}{40,46,87}
+\definecolor{softwhite}{RGB}{250,250,230}
+\definecolor{accentyellow}{RGB}{240,200,60}
+
+% Extra utility colors
+\definecolor{muted}{RGB}{120,125,140}
+\definecolor{darkcream}{RGB}{230,225,205}
+
+% ----------------------------------------------------------
+%  FONT SETUP (Optional but Recommended)
+%  Works best with XeLaTeX or LuaLaTeX
+% ----------------------------------------------------------
+\usepackage{fontspec}
+
+% Main document font (Google fonts — upload to Overleaf)
+\setmainfont{SourceSans3}[
+  Path=./,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold
+]
+
+\newfontfamily\headingfont{ScienceGothic}[
+  Path=./,
+]
+
+% Arabic font support - VERY IMPORTANT for the final phrase
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{arabic}
+
+% Simple Arabic font setup without fallback package
+\newfontfamily\arabicfont[Script=Arabic]{Amiri}
+\newfontfamily\arabicfontsf[Script=Arabic]{Amiri}
+
+% If Amiri is not available, provide a warning and use a default
+\ifx\arabicfont\undefined
+  \PackageWarning{main}{Amiri font not found! Arabic text may not display correctly.}
+\fi
+
+% Font Awesome for minimal icons
+\usepackage{fontawesome5}
+
+% For tree characters and special symbols
+\usepackage{pmboxdraw}
+\usepackage{textcomp}
+
+% ----------------------------------------------------------
+%  SECTION STYLE
+% ----------------------------------------------------------
+\usepackage{titlesec}
+
+% Section
+\titleformat{\section}
+  {\Large\headingfont\bfseries\color{navy}}
+  {\thesection}
+  {1em}
+  {\rule{\linewidth}{1pt}\vspace{0.5em}\\}
+
+% Subsection
+\titleformat{\subsection}
+  {\large\headingfont\bfseries\color{teamred}}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+% Subsubsection
+\titleformat{\subsubsection}
+  {\bfseries\color{navy}}
+  {\thesubsubsection}
+  {0.6em}
+  {}
+
+% ----------------------------------------------------------
+%  PAGE STYLE
+% ----------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf{} % clear all
+
+% Fix headheight
+\setlength{\headheight}{15.5pt}
+
+\lhead{\textcolor{navy}{\headingfont \courseTitle}}
+\rhead{\textcolor{teamred}{\thepage}}
+\renewcommand{\headrule}{\color{teamred}\hrule height 1pt}
+
+% ----------------------------------------------------------
+%  HYPERLINK STYLE
+% ----------------------------------------------------------
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = teamred,
+  urlcolor   = navy,
+  citecolor  = accentyellow
+}
+
+% ----------------------------------------------------------
+%  CUSTOM BOX ENVIRONMENTS
+% ----------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Info box
+\newtcolorbox{infobox}{
+  enhanced,
+  breakable,
+  colback   = softwhite,
+  colframe  = navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Warning box
+\newtcolorbox{warningbox}{
+  enhanced,
+  breakable,
+  colback   = accentyellow!30,
+  colframe  = accentyellow!80!navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Highlight box
+\newtcolorbox{highlightbox}{
+  enhanced,
+  breakable,
+  colback   = teamred!10,
+  colframe  = teamred,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% ----------------------------------------------------------
+%  ITEMIZE / ENUMERATE STYLE
+% ----------------------------------------------------------
+\usepackage{enumitem}
+
+\setlist[itemize]{
+  label=\textcolor{teamred}{\large\textbullet},
+  leftmargin=1.2em,
+  itemsep=4pt
+}
+
+\setlist[enumerate]{
+  label=\textcolor{navy}{\arabic*.},
+  leftmargin=1.4em,
+  itemsep=4pt
+}
+
+% ----------------------------------------------------------
+%  TITLE STYLE
+% ----------------------------------------------------------
+\usepackage{titling}
+
+\pretitle{
+  \begin{center}
+  \headingfont\bfseries\LARGE\color{navy}
+}
+\posttitle{
+  \end{center}
+}
+
+\preauthor{
+  \begin{center}
+  \color{teamred}
+}
+\postauthor{
+  \end{center}
+}
+
+% ----------------------------------------------------------
+%  OPTIONAL — SOFT PAGE BACKGROUND
+%  Comment out if you want white pages
+% ----------------------------------------------------------
+\usepackage{pagecolor}
+\pagecolor{cream}
+\color{navy}
+
+% ----------------------------------------------------------
+% CUSTOM COMMANDS FOR TEMPLATE
+% ----------------------------------------------------------
+\newcommand{\courseTitle}{Shell Scripting and Networking Tools}
+\newcommand{\courseDate}{05-03-2026}
+\newcommand{\authorName}{Khaled Mahfouz}
+\newcommand{\contactInfo}{\texttt{@khaledmhfz}}
+
+% Icon commands
+\newcommand{\penguinicon}{\faLinux}
+\newcommand{\scripticon}{\faCode}
+\newcommand{\networkicon}{\faWifi}
+\newcommand{\riceicon}{\faPaintBrush}
+\newcommand{\warningicon}{\faExclamationTriangle}
+\newcommand{\tipsicon}{\faLightbulb}
+\newcommand{\arrowicon}{\faArrowRight}
+\newcommand{\bookicon}{\faBook}
+\newcommand{\videoicon}{\faVideo}
+\newcommand{\labicon}{\faFlask}
+\newcommand{\rocketicon}{\faRocket}
+\newcommand{\checkicon}{\faCheck}
+\newcommand{\homeworkicon}{\faPencilAlt}
+\newcommand{\referenceicon}{\faLink}
+
+% ----------------------------------------------------------
+% END OF THEME
+% ----------------------------------------------------------
+
+\begin{document}
+
+% Title with minimal space
+\begin{center}
+\headingfont\Huge\bfseries\color{navy}
+\scripticon\ \courseTitle\\[0.5em]
+\Large\color{teamred}
+\courseDate
+\end{center}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{\faCheckSquare\ Pre-Session Checklist}
+
+Before we dive in, make sure your arsenal is stocked. Run this quick check:
+
+\begin{highlightbox}
+\texttt{\# Check if essential packages are installed}\\
+\texttt{\$ which curl aria2c ssh wget ping ip}\\
+\\
+\texttt{\# If anything is missing, install them:}\\
+\texttt{\# Debian/Ubuntu: sudo apt install curl aria2 openssh-client wget iproute2}\\
+\texttt{\# Arch: sudo pacman -S curl aria2 openssh wget iproute2}\\
+\texttt{\# Fedora: sudo dnf install curl aria2 openssh-clients wget iproute2}
+\end{highlightbox}
+
+\section*{Part 1: Bash Scripting — Beyond the Basics}
+
+You already know how to navigate the terminal. You've used \texttt{grep}, \texttt{sed}, and \texttt{awk}. You've redirected output and written basic scripts. Now it's time to think like a developer and build tools that actually \textit{do} things.
+
+\begin{infobox}
+\videoicon\ \textbf{Video Reference:} For the foundational concepts, \href{https://youtu.be/tK9Oc6AEnR4?si=y3M0s1AIVfqtzCJB}{\texttt{<Click Here>}}. Remember: we covered \texttt{Basic commands}, \texttt{Output/Input redirection}, \texttt{AWK}, and \texttt{SED} in previous sessions, so we'll touch on them only briefly here.
+\end{infobox}
+
+\subsection*{1.1 Variables and Data Types}
+
+In Bash, everything is a string. But that doesn't mean you can't be clever.
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+# Variable assignment (no spaces!)
+user_name="hacker"
+age=21
+is_cool=true
+
+# Accessing variables
+echo "Hey $user_name, you're $age years old!"
+
+# Command substitution
+current_date=$(date +%Y-%m-%d)
+kernel_version=$(uname -r)
+
+echo "Today is $current_date, running kernel $kernel_version"
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\tipsicon\ \textbf{Pro Tip:} Use \texttt{\$()} for command substitution instead of backticks. It's nestable and easier to read.
+\end{infobox}
+
+\subsection*{1.2 Control Flow}
+
+\subsubsection*{If Statements}
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+file_count=$(ls | wc -l)
+
+if [ $file_count -gt 10 ]; then
+    echo "Directory is cluttered ($file_count files). Time to clean up!"
+elif [ $file_count -eq 0 ]; then
+    echo "Empty directory. Lonely vibes."
+else
+    echo "Looking good with $file_count files."
+fi
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\warningicon\ \textbf{Important:} Always use spaces inside brackets \texttt{[ ]}. \texttt{[ \$var -eq 1 ]} works, \texttt{[\$var -eq 1]} fails.
+\end{infobox}
+
+\subsubsection*{Case Statements}
+
+Perfect for handling multiple options cleanly:
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+echo "Choose your distro:"
+echo "1) Arch"
+echo "2) Debian"
+echo "3) Fedora"
+read choice
+
+case $choice in
+    1)
+        echo "I use Arch, btw"
+        ;;
+    2)
+        echo "Stable and reliable. Nice."
+        ;;
+    3)
+        echo "Red Hat family represent!"
+        ;;
+    *)
+        echo "Invalid choice. Try again."
+        ;;
+esac
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{1.3 Loops}
+
+\subsubsection*{For Loops}
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+# Iterate over files
+for file in *.txt; do
+    echo "Processing $file..."
+    wc -l "$file"
+done
+
+# C-style for loop
+for ((i=0; i<5; i++)); do
+    echo "Iteration $i"
+done
+\end{verbatim}
+\end{highlightbox}
+
+\subsubsection*{While Loops}
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+# Read file line by line
+while IFS= read -r line; do
+    echo "Line: $line"
+done < input.txt
+
+# Infinite loop with break
+counter=0
+while true; do
+    echo "Loop $counter"
+    ((counter++))
+    [ $counter -eq 5 ] && break
+done
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{1.4 Functions}
+
+Write reusable code blocks:
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+# Function definition
+check_port() {
+    local host=$1
+    local port=$2
+    timeout 2 bash -c "</dev/tcp/$host/$port" 2>/dev/null && \
+        echo "Port $port on $host is OPEN" || \
+        echo "Port $port on $host is CLOSED"
+}
+
+# Call functions
+check_port "google.com" 443
+check_port "localhost" 22
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\tipsicon\ \textbf{Key Points:}
+\begin{itemize}
+    \item Use \texttt{local} for variables inside functions to avoid global scope pollution
+    \item Functions should do one thing well (Unix philosophy)
+    \item Return values are 0-255 (exit codes), not strings
+\end{itemize}
+\end{infobox}
+
+\subsection*{1.5 Error Handling}
+
+Don't let your scripts crash silently:
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+# You Can Use Automatic Error Handling
+set -euo pipefail
+# -e: Exit on error
+# -u: Exit on undefined variable
+# -o pipefail: Catch errors in pipelines
+
+# Or handle errors manually
+if ! ping -c 1 google.com &> /dev/null; then
+    echo "ERROR: No internet connection" >&2
+    exit 1
+fi
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{1.6 Working with APIs}
+
+Modern scripting is all about data. Here's how to fetch and parse JSON:
+
+\begin{infobox}
+\warningicon\ Check that \texttt{jq} and \texttt{curl} are installed before running this script below.
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+
+# Fetch data from API
+response=$(curl -s "https://api.github.com/users/torvalds")
+
+# Parse with jq (install it!)
+login=$(echo "$response" | jq -r '.login')
+followers=$(echo "$response" | jq -r '.followers')
+created_at=$(echo "$response" | jq -r '.created_at')
+
+echo "User: $login"
+echo "Followers: $followers"
+echo "Joined: $created_at"
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{Quick Reference: I/O Redirection}
+
+\begin{infobox}
+\textbf{(Review from previous sessions)}
+
+\begin{tabular}{ll}
+\textbf{Operator} & \textbf{Description} \\
+\texttt{>} & Redirect stdout to file (overwrite) \\
+\texttt{>>} & Redirect stdout to file (append) \\
+\texttt{<} & Redirect file to stdin \\
+\texttt{2>} & Redirect stderr \\
+\texttt{\&>} & Redirect both stdout and stderr \\
+\texttt{|} & Pipe stdout to another command \\
+\texttt{2>\&1} & Redirect stderr to stdout \\
+\end{tabular}
+\end{infobox}
+
+\subsection*{Quick Reference: Text Processing}
+
+\begin{infobox}
+\textbf{(Review from previous sessions)}
+
+\textbf{AWK - Column extraction and calculations}
+\begin{verbatim}
+$ awk '{print $1}' file.txt          # Print first column
+$ awk -F: '{print $NF}' /etc/passwd  # Print last field (delimiter :)
+$ awk '{sum+=$1} END {print sum}'    # Sum first column
+\end{verbatim}
+
+\textbf{SED - Stream editing}
+\begin{verbatim}
+$ sed 's/old/new/g' file.txt         # Replace all occurrences
+$ sed -i 's/foo/bar/' file.txt       # Edit in-place
+$ sed -n '5,10p' file.txt            # Print lines 5-10 only
+\end{verbatim}
+\end{infobox}
+
+\section*{Part 2: Networking Tools — The Hacker's Swiss Army Knife}
+
+Linux networking tools are your eyes and ears into the digital world. Whether you're debugging connectivity, downloading files, or managing remote systems, these commands are essential.
+
+\subsection*{2.1 Connectivity Testing}
+
+\subsubsection*{ping — The Classic}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man ping}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Basic usage
+$ ping google.com
+
+# Limit count (stop after 4 packets)
+$ ping -c 4 google.com
+
+# Set interval (faster ping, requires sudo)
+$ sudo ping -i 0.2 google.com
+
+# Audible ping (beep on reply)
+$ ping -a 192.168.1.1
+\end{verbatim}
+\end{highlightbox}
+
+What it does: Sends ICMP echo requests to test host reachability and measure latency.
+
+\subsubsection*{traceroute / tracepath}
+
+\begin{highlightbox}
+\begin{verbatim}
+# See the path your packets take
+$ traceroute google.com
+
+# Alternative without root (uses UDP instead of ICMP)
+$ tracepath google.com
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{2.2 Network Interface Configuration}
+
+\subsubsection*{ip (Modern Replacement for ifconfig)}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man ip}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Show all interfaces
+$ ip addr show
+$ ip a  # Short form
+
+# Show specific interface
+$ ip addr show eth0
+
+# Bring interface up/down
+$ sudo ip link set eth0 up
+$ sudo ip link set eth0 down
+
+# Add IP address
+$ sudo ip addr add 192.168.1.100/24 dev eth0
+
+# Show routing table
+$ ip route show
+
+# Add route
+$ sudo ip route add default via 192.168.1.1
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\faQuestionCircle\ \textbf{Why \texttt{ip} over \texttt{ifconfig}?} \texttt{ip} is part of the iproute2 package, actively maintained, and supports modern networking features like network namespaces and policy routing.
+\end{infobox}
+
+\subsubsection*{ifconfig (Legacy)}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man ifconfig}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Still works on many systems
+$ ifconfig
+$ ifconfig eth0
+$ sudo ifconfig eth0 up
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\faInfoCircle\ \textbf{Note:} While \texttt{ifconfig} is deprecated, you'll still encounter it on older systems and embedded devices.
+\end{infobox}
+
+\subsection*{2.3 Data Transfer}
+
+\subsubsection*{curl — The URL Swiss Army Knife}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man curl}, \href{https://curl.se/docs/}{curl.se/docs}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Simple GET request
+$ curl https://api.example.com/data
+
+# Save to file
+$ curl -o file.zip https://example.com/file.zip
+
+# Follow redirects
+$ curl -L https://bit.ly/xyz
+
+# Include headers
+$ curl -I https://google.com
+
+# POST data
+$ curl -X POST -d "name=john&age=30" https://api.example.com/users
+
+# POST JSON
+$ curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"user":"john","pass":"secret"}' \
+  https://api.example.com/login
+
+# Download with resume capability
+$ curl -C - -o large.iso https://example.com/large.iso
+
+# Use authentication
+$ curl -u username:password https://api.example.com/protected
+
+# Silent mode (progress bar only)
+$ curl -s https://api.ipify.org
+
+# Show progress and speed
+$ curl --progress-bar -o file.zip https://example.com/file.zip
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\tipsicon\ \textbf{Pro Tip:} Create a \texttt{.curlrc} file in your home directory for default options like \texttt{-L} (follow redirects) or custom headers.
+\end{infobox}
+
+\subsubsection*{wget — The Download Specialist}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man wget}, \href{https://www.gnu.org/software/wget/manual/wget.html}{GNU Wget Manual}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Simple download
+$ wget https://example.com/file.zip
+
+# Download to specific directory
+$ wget -P ~/Downloads https://example.com/file.zip
+
+# Resume broken download
+$ wget -c https://example.com/large.iso
+
+# Download entire website (spider mode)
+$ wget --spider https://example.com
+
+# Mirror website locally
+$ wget --mirror --convert-links --adjust-extension --page-requisites \
+  --no-parent https://example.com/docs
+
+# Download in background
+$ wget -b https://example.com/large-file.tar.gz
+
+# Limit download speed (be nice to servers!)
+$ wget --limit-rate=500k https://example.com/file.zip
+
+# Download via FTP
+$ wget ftp://user:pass@ftp.example.com/file.txt
+
+# Recursive download with specific file types
+$ wget -r -A.pdf https://example.com/documents/
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\faBalanceScale\ \textbf{curl vs wget:} Use \texttt{curl} for APIs and complex HTTP operations. Use \texttt{wget} for reliable downloads, mirroring, and recursive fetching.
+\end{infobox}
+
+\subsubsection*{aria2 — The Download Accelerator}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man aria2c}, \href{https://aria2.github.io/manual/en/html/}{aria2.github.io}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Multi-connection download (faster!)
+$ aria2c -x 16 -s 16 https://example.com/large.iso
+
+# Download BitTorrent
+$ aria2c https://example.com/file.torrent
+
+# Download with Metalink
+$ aria2c file.metalink
+
+# Download multiple files
+$ aria2c -i urls.txt
+
+# Limit speed
+$ aria2c --max-download-limit=2M https://example.com/file.zip
+
+# Continue incomplete download
+$ aria2c -c https://example.com/large.iso
+
+# RPC mode (for web UI control)
+$ aria2c --enable-rpc --rpc-listen-all
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\faRocket\ \textbf{Why aria2?} It splits files into multiple segments and downloads them simultaneously, often saturating your bandwidth better than single-threaded tools.
+\end{infobox}
+
+\subsection*{2.4 Remote Access}
+
+\subsubsection*{ssh — Secure Shell}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man ssh}, \href{https://www.openssh.com/manual.html}{OpenSSH Manual}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Basic connection
+$ ssh username@remote-host
+
+# Specify port
+$ ssh -p 2222 username@remote-host
+
+# Execute command remotely
+$ ssh user@host "ls -la /var/log"
+
+# Tunnel local port to remote
+$ ssh -L 8080:localhost:80 user@host
+
+# Reverse tunnel (expose local port on remote)
+$ ssh -R 9090:localhost:3000 user@host
+
+# SOCKS proxy (browse securely through remote)
+$ ssh -D 1080 user@host
+
+# X11 forwarding (run GUI apps remotely)
+$ ssh -X user@host
+
+# Key-based authentication (no password!)
+$ ssh-copy-id user@host
+
+# Use specific key
+$ ssh -i ~/.ssh/my_key user@host
+
+# Config file (~/.ssh/config)
+Host myserver
+    HostName 192.168.1.100
+    User admin
+    Port 2222
+    IdentityFile ~/.ssh/my_key
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\tipsicon\ \textbf{Next Steps:}
+\begin{itemize}
+    \item Disable password authentication in \texttt{/etc/ssh/sshd\_config}
+    \item Use key pairs with passphrase
+    \item Change default port (security through obscurity + fewer log spam)
+    \item Use \texttt{fail2ban} to block brute force attempts
+\end{itemize}
+\end{infobox}
+
+\subsubsection*{scp — Secure Copy}
+
+\begin{infobox}
+\bookicon\ \textbf{Official Documentation:} \texttt{man scp}
+\end{infobox}
+
+\begin{highlightbox}
+\begin{verbatim}
+# Copy local to remote
+$ scp file.txt user@host:/home/user/
+
+# Copy remote to local
+$ scp user@host:/var/log/syslog ./local-syslog
+
+# Copy directory recursively
+$ scp -r ./project user@host:/var/www/
+
+# Preserve file attributes
+$ scp -p file.txt user@host:/backup/
+
+# Limit bandwidth (KB/s)
+$ scp -l 1000 large.iso user@host:/tmp/
+
+# Use specific SSH port
+$ scp -P 2222 file.txt user@host:/home/user/
+\end{verbatim}
+\end{highlightbox}
+
+\begin{infobox}
+\faSync\ \textbf{Modern Alternative:} \texttt{rsync} is often preferred for large transfers as it supports resume and delta transfer.
+\end{infobox}
+
+\section*{Part 3: Ricing Linux — Making It Yours}
+
+\subsection*{Why Ricing Matters}
+
+Look, you could use Windows or macOS and accept whatever design choices some corporation made for you. Or... you could build a computing environment that matches \textit{your} workflow, \textit{your} aesthetic, and \textit{your} personality.
+
+\begin{infobox}
+\textbf{Ricing} is the art of customizing your Linux desktop. The term comes from "Rice Rocket" — cheap cars modified to look expensive and perform better. In the Linux world, it's about taking a minimal base and making it beautiful and functional.
+\end{infobox}
+
+\begin{infobox}
+\videoicon\ \textbf{The Revelation:} \href{https://youtu.be/z1-yuolwrVs?si=3IKioFlYz9L8vkNS}{<Click Here>} to watch the video . Seriously, this is the video that inspired this entire course. It shows what's possible when you stop accepting defaults and start crafting your digital workspace.
+\end{infobox}
+
+\subsection*{Why It Matters for You?}
+
+\begin{enumerate}
+    \item \textbf{Productivity:} Tiling window managers let you navigate entirely with keyboard shortcuts. No more hunting for that tiny close button.
+    
+    \item \textbf{Minimalism:} Your 10-years-old laptop can feel brand new when you're not running bloated desktop environments.
+    
+    \item \textbf{Aesthetics:} Your desktop can look like it belongs in a cyberpunk movie. Neon colors, transparency, animated wallpapers — it's art.
+    
+    \item \textbf{Learning:} Configuring a tiling WM teaches you more about Linux than any tutorial ever could.
+    
+    \item \textbf{Community:} Share your setup, get feedback and inspire others.
+\end{enumerate}
+
+\subsection*{The Components of a Riced Setup}
+
+\subsubsection*{Window Managers vs Desktop Environments}
+
+\begin{infobox}
+\begin{tabular}{lll}
+\textbf{Feature} & \textbf{Desktop Environment} & \textbf{Window Manager} \\
+Resource Usage & High (500MB-1GB RAM) & Low (10-50MB RAM) \\
+Customization & Limited/themed & Unlimited \\
+Learning Curve & Gentle & Steep but rewarding \\
+Built-in Tools & File manager, panel, settings & None (you choose everything) \\
+Aesthetic & Corporate/polished & Minimal/personal \\
+\end{tabular}
+\end{infobox}
+
+\subsubsection*{Popular Tiling Window Managers}
+
+\begin{itemize}
+    \item \textbf{i3/i3-gaps:} The gateway drug. Easy config, great docs, huge community.
+    \item \textbf{bspwm:} Binary space partitioning. Scriptable with bash.
+    \item \textbf{AwesomeWM:} Built on Lua, very powerful.
+    \item \textbf{Hyprland:} Modern Wayland compositor with eye candy animations.
+    \item \textbf{Qtile:} Python-based, hackable, dynamic.
+\end{itemize}
+
+\subsubsection*{Essential Ricing Components}
+
+\begin{enumerate}
+    \item \textbf{Status Bar:} Display workspace info, system stats, time. Try \textbf{Polybar} (X11) or \textbf{Waybar} (Wayland), or you can make a simple script to do this for you.
+    
+    \item \textbf{Application Launcher:} Ditch the menu. Use \textbf{rofi} or \textbf{dmenu} for lightning-fast app launching.
+    
+    \item \textbf{Terminal:} Your most-used app, choose what you are comfortable with.
+    
+    \item \textbf{Shell:} Upgrade from Bash to \textbf{Zsh} (with Oh-My-Zsh) or \textbf{Fish} for better autocomplete and plugins.
+    
+    \item \textbf{Compositor:} Add blur, transparency, animations. \textbf{picom} or \textbf{compton} for X11, built-in for Wayland.
+    
+    \item \textbf{Dotfiles:} Store your configs on Github repo or any git based service. When your system dies, \texttt{git clone} and you're back.
+\end{enumerate}
+
+\subsection*{Getting Started}
+
+Don't rice your main machine immediately. Use a VM or old laptop. Choose a WM that you have liked. Read its User's Guide, modify the config line by line, and watch your system become uniquely \textit{yours}.
+
+\begin{infobox}
+Remember: ricing is never "done." It's a continuous process of tweaking, breaking, fixing, and discovering. Your setup evolves with you.
+\end{infobox}
+
+\section*{\homeworkicon\ Homework for Session 11}
+
+Time to switch from theory to practice !!
+
+\subsection*{Assignment 1: Info Script}
+
+Write a bash script that uses \texttt{curl} to fetch and display one of the following:
+
+\begin{enumerate}
+    \item \textbf{Currency rates} (USD to EUR, USD to GBP, USD to JPY) — use exchangerate-api.com or similar
+    \item \textbf{Prayer times} for your city — use aladhan.com API
+    \item \textbf{Weather forecast} — use OpenWeatherMap or wttr.in
+\end{enumerate}
+
+\begin{infobox}
+\tipsicon\ \textbf{Suggestions:}
+\begin{itemize}
+    \item Clean, colored output
+    \item Error handling for failed API calls (maybe the script runs without internet connection)
+    \item Configurable (city, currency base stored as variables)
+    \item Use functions for each data type
+\end{itemize}
+\end{infobox}
+
+\subsection*{Assignment 2: Mobile SSH Mastery}
+
+Install Termux (Android) or iSH (iOS) on your phone and:
+
+\begin{enumerate}
+    \item Generate SSH keys on your mobile device
+    \item Copy the public key to your PC's `\verb|~/.ssh/authorized_keys|`
+    \item Successfully SSH into your PC from your phone over local WiFi
+    \item Run a command on your PC from your phone (take a screenshot, check system stats, etc.)
+\end{enumerate}
+
+\section*{\rocketicon\ Course Final Project}
+
+Congratulations!! You've made it through the course. Now it's time to practice what you've learned.
+
+\subsection*{Suggested Practice: Build Your Setup}
+
+\textbf{At home, complete the following:}
+
+\begin{enumerate}
+    \item \textbf{Install Linux}
+    \begin{itemize}
+        \item Any distribution you choose (Arch, Debian, Fedora, etc.)
+        \item Bare metal or VM (bare metal preferred for full experience)
+    \end{itemize}
+    
+    \item \textbf{Rice Your Desktop}
+    \begin{itemize}
+        \item Create a customized, personalized desktop environment
+        \item Desktop Environments allowed: GNOME (heavily themed), KDE Plasma, XFCE
+        \item Window Managers allowed: i3, bspwm, Awesome, Hyprland, Qtile, Sway, or any other
+    \end{itemize}
+    
+    \item \textbf{Document Your Journey}
+    \begin{itemize}
+        \item Take screenshots of your progress
+        \item Keep your dotfiles in a Git repository
+        \item Write a short README explaining your choices
+    \end{itemize}
+    
+    \item \textbf{Share With The Group}
+    \begin{itemize}
+        \item Post final screenshots to the group
+        \item Share your dotfiles repository link
+        \item Explain one challenging part and how you solved it
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Best Practices:}
+
+\begin{itemize}
+    \item Functionality (does it work for daily use?)
+    \item Aesthetics (is it visually cohesive?)
+    \item Technical complexity (did you challenge yourself?)
+    \item Documentation (can others learn from your setup?)
+\end{itemize}
+
+\section*{\bookicon\ Resources \& Further Reading}
+
+\begin{itemize}
+    \item \textbf{Bash Guide:} \href{https://mywiki.wooledge.org/BashGuide}{BashGuide}
+    \item \textbf{ShellCheck:} \href{https://www.shellcheck.net/}{shellcheck.net} — Lint your scripts
+    \item \textbf{ExplainShell:} \href{https://explainshell.com/}{explainshell.com} — Understand complex commands
+    \item \textbf{Arch Wiki:} \href{https://wiki.archlinux.org/}{wiki.archlinux.org} — Rich Linux documentation
+\end{itemize}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{End of Linux Course}
+
+\begin{center}
+\large\textit{Now go forth and script, network, and rice like the Linux wizard you're becoming.} \penguinicon
+\end{center}
+
+\vspace{1em}
+
+\subsection*{References}
+
+\begin{scriptsize}
+\begin{itemize}
+    \item \referenceicon\ ping(8) - Linux man page - \href{https://linux.die.net/man/8/ping}{https://linux.die.net/man/8/ping}
+    \item \referenceicon\ ip(8) - Linux man page - \href{https://man7.org/linux/man-pages/man8/ip.8.html}{https://man7.org/linux/man-pages/man8/ip.8.html}
+    \item \referenceicon\ ifconfig(8) - Linux man page - \href{https://linux.die.net/man/8/ifconfig}{https://linux.die.net/man/8/ifconfig}
+    \item \referenceicon\ curl documentation - \href{https://curl.se/docs/}{https://curl.se/docs/}
+    \item \referenceicon\ GNU Wget Manual - \href{https://www.gnu.org/software/wget/manual/wget.html}{https://www.gnu.org/software/wget/manual/wget.html}
+    \item \referenceicon\ aria2 documentation - \href{https://aria2.github.io/manual/en/html/}{https://aria2.github.io/manual/en/html/}
+    \item \referenceicon\ OpenSSH Manual - \href{https://www.openssh.com/manual.html}{https://www.openssh.com/manual.html}
+    \item \referenceicon\ scp(1) - Linux man page - \href{https://man7.org/linux/man-pages/man1/scp.1.html}{https://man7.org/linux/man-pages/man1/scp.1.html}
+\end{itemize}
+\end{scriptsize}
+
+\begin{infobox}
+\centering
+\Large\textcolor{teamred}{\textarabic{تمت بحمد الله}}
+\end{infobox}
+
+% Updated Footer
+\vspace{\fill}
+\begin{center}
+\color{muted}
+All rights reserved for \texttt{TogetherTeam} [NOT For Commercial Use] !!\\
+contact the author via email \href{mailto:khaledmhfz2004@gmail.com}{\texttt{khaledmhfz2004@gmail.com}}
+\end{center}
+
+\end{document}

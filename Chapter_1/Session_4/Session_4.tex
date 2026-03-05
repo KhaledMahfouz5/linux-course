@@ -1,0 +1,761 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% ----------------------------------------------------------
+%  Linux Penguin Theme — Based on Recommended Colors
+% ----------------------------------------------------------
+
+% --- COLOR SETUP ---
+\usepackage{xcolor}
+
+\definecolor{cream}{RGB}{246,242,219}
+\definecolor{teamred}{RGB}{209,57,64}
+\definecolor{navy}{RGB}{40,46,87}
+\definecolor{softwhite}{RGB}{250,250,230}
+\definecolor{accentyellow}{RGB}{240,200,60}
+
+% Extra utility colors
+\definecolor{muted}{RGB}{120,125,140}
+\definecolor{darkcream}{RGB}{230,225,205}
+
+% ----------------------------------------------------------
+%  FONT SETUP (Optional but Recommended)
+%  Works best with XeLaTeX or LuaLaTeX
+% ----------------------------------------------------------
+\usepackage{fontspec}
+
+% Main document font (Google fonts — upload to Overleaf)
+% If you don't upload fonts, comment these two lines.
+\setmainfont{SourceSans3}[
+  Path=./,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold
+]
+
+\newfontfamily\headingfont{ScienceGothic}[
+  Path=./,
+]
+
+% Font Awesome for icons
+\usepackage{fontawesome5}
+
+% ----------------------------------------------------------
+%  SECTION STYLE
+% ----------------------------------------------------------
+\usepackage{titlesec}
+
+% Section
+\titleformat{\section}
+  {\Large\headingfont\bfseries\color{navy}}
+  {\thesection}
+  {1em}
+  {\rule{\linewidth}{1pt}\vspace{0.5em}\\}
+
+% Subsection
+\titleformat{\subsection}
+  {\large\headingfont\bfseries\color{teamred}}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+% Subsubsection
+\titleformat{\subsubsection}
+  {\bfseries\color{navy}}
+  {\thesubsubsection}
+  {0.6em}
+  {}
+
+% ----------------------------------------------------------
+%  PAGE STYLE
+% ----------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf{} % clear all
+
+\lhead{\textcolor{navy}{\headingfont \courseTitle}}
+\rhead{\textcolor{teamred}{\thepage}}
+\renewcommand{\headrule}{\color{teamred}\hrule height 1pt}
+
+% ----------------------------------------------------------
+%  HYPERLINK STYLE
+% ----------------------------------------------------------
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = teamred,
+  urlcolor   = navy,
+  citecolor  = accentyellow
+}
+
+% ----------------------------------------------------------
+%  CUSTOM BOX ENVIRONMENTS
+% ----------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Info box
+\newtcolorbox{infobox}{
+  enhanced,
+  breakable,
+  colback   = softwhite,
+  colframe  = navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Warning box
+\newtcolorbox{warningbox}{
+  enhanced,
+  breakable,
+  colback   = accentyellow!30,
+  colframe  = accentyellow!80!navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Highlight box
+\newtcolorbox{highlightbox}{
+  enhanced,
+  breakable,
+  colback   = teamred!10,
+  colframe  = teamred,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% ----------------------------------------------------------
+%  ITEMIZE / ENUMERATE STYLE
+% ----------------------------------------------------------
+\usepackage{enumitem}
+
+\setlist[itemize]{
+  label=\textcolor{teamred}{\large\textbullet},
+  leftmargin=1.2em,
+  itemsep=4pt
+}
+
+\setlist[enumerate]{
+  label=\textcolor{navy}{\arabic*.},
+  leftmargin=1.4em,
+  itemsep=4pt
+}
+
+% ----------------------------------------------------------
+%  TITLE STYLE
+% ----------------------------------------------------------
+\usepackage{titling}
+
+\pretitle{
+  \begin{center}
+  \headingfont\bfseries\LARGE\color{navy}
+}
+\posttitle{
+  \end{center}
+}
+
+\preauthor{
+  \begin{center}
+  \color{teamred}
+}
+\postauthor{
+  \end{center}
+}
+
+% ----------------------------------------------------------
+%  OPTIONAL — SOFT PAGE BACKGROUND
+%  Comment out if you want white pages
+% ----------------------------------------------------------
+\usepackage{pagecolor}
+\pagecolor{cream}
+\color{navy}
+
+% ----------------------------------------------------------
+% CUSTOM COMMANDS FOR TEMPLATE
+% ----------------------------------------------------------
+\newcommand{\courseTitle}{Text Manipulation on Linux}
+\newcommand{\courseDate}{09-12-2025}
+
+% Icon commands using Font Awesome
+\newcommand{\threadicon}{\faLink}
+\newcommand{\searchicon}{\faSearch}
+\newcommand{\brainicon}{\faBrain}
+\newcommand{\targeticon}{\faBullseye}
+\newcommand{\fireicon}{\faFire}
+\newcommand{\exerciseicon}{\faTasks}
+\newcommand{\toolicon}{\faTools}
+\newcommand{\bulbicon}{\faLightbulb}
+\newcommand{\crownicon}{\faCrown}
+\newcommand{\coffeeicon}{\faCoffee}
+\newcommand{\pipeicon}{\faProjectDiagram}
+\newcommand{\outputicon}{\faArrowRight}
+\newcommand{\inputicon}{\faArrowLeft}
+\newcommand{\chainicon}{\faLink}
+\newcommand{\celebrationicon}{\faTrophy}
+\newcommand{\checkicon}{\faCheck}
+\newcommand{\warningicon}{\faExclamationTriangle}
+\newcommand{\fileicon}{\faFile}
+\newcommand{\foldericon}{\faFolder}
+\newcommand{\sizeicon}{\faWeightHanging}
+\newcommand{\permissionicon}{\faLock}
+\newcommand{\excludeicon}{\faBan}
+
+% ----------------------------------------------------------
+% END OF THEME
+% ----------------------------------------------------------
+
+\begin{document}
+
+% Title with minimal space
+\begin{center}
+\headingfont\Huge\bfseries\color{navy}
+\courseTitle\\[0.5em]
+\Large\color{teamred}
+\courseDate
+\end{center}
+
+\section*{Topics}
+
+\begin{itemize}
+    \item \textbf{grep}
+          \\\emph{Link:} \href{https://youtu.be/N05sWPgj-44?si=RqN-cKCBSae4bvK7}{\texttt{https://youtu.be/N05sWPgj-44?si=RqN-cKCBSae4bvK7}}
+    
+    \item \textbf{sed}
+          \\\emph{Link:} \href{https://youtu.be/EACe7aiGczw?si=q8Hyf9d1VgsO-uj2}{\texttt{https://youtu.be/EACe7aiGczw?si=q8Hyf9d1VgsO-uj2}}
+    
+    \item \textbf{awk}
+          \\\emph{Link:} \href{https://youtu.be/9YOZmI-zWok?si=Larx5zKGgMMSrsn-}{\texttt{https://youtu.be/9YOZmI-zWok?si=Larx5zKGgMMSrsn-}}
+    
+    \item \textbf{find}
+          \\\emph{Link:} \href{https://youtu.be/BZ5gsFiIKOQ?si=WEDUXPu6DCi2anNL}{\texttt{https://youtu.be/BZ5gsFiIKOQ?si=WEDUXPu6DCi2anNL}}
+    
+    \item \textbf{Pipes and Redirections (> , >> , | , <)}
+\end{itemize}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{\threadicon\ Session 4 — Text Manipulation in Linux}
+
+Welcome to one of the most \textit{useful and exciting} sessions in your Linux journey.
+In this session, we learn how Linux becomes a \textbf{superpower} when working with text, logs, automation, scripting, and filtering.
+
+These commands are not just "nice-to-have".
+They are the \textit{backbone} of every serious developer, sysadmin, DevOps engineer, hacker, or sleepy student debugging their broken assignment at 2:30 AM.
+
+By the end of this guide, you will:
+
+\begin{itemize}
+    \item \textbf{\checkicon} Search like a pro using \textbf{grep}
+    \item \textbf{\checkicon} Transform data using \textbf{sed}
+    \item \textbf{\checkicon} Process structured text using \textbf{awk}
+    \item \textbf{\checkicon} Locate \textit{anything} using \textbf{find}
+    \item \textbf{\checkicon} Combine commands like LEGO with \textbf{pipes \& redirection}
+\end{itemize}
+
+And of course:
+\begin{itemize}
+    \item \textbf{\checkicon} Solve a bunch of hands-on exercises !!
+\end{itemize}
+
+Let's begin.
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{1. grep — The Search Engine of the Terminal}
+
+\subsection*{\searchicon\ 1.1 What is grep?}
+
+\texttt{grep} stands for \textbf{Global Regular Expression Print} — but don't worry, we don't need to understand 1970s developer humor to use it.
+
+In simple words:
+
+\begin{infobox}
+\textbf{grep searches for text inside files or command output.}
+\end{infobox}
+
+\subsection*{\brainicon\ 1.2 Basic Syntax}
+
+\begin{highlightbox}
+\texttt{\$ grep [options] "pattern" file}
+\end{highlightbox}
+
+\subsubsection*{Example:}
+
+\begin{highlightbox}
+\texttt{\$ grep "error" /var/log/syslog}
+\end{highlightbox}
+
+Finds all lines containing \textit{error}.
+
+\subsection*{\targeticon\ 1.3 Useful Options}
+
+\subsubsection*{\textbf{-i} → ignore case}
+
+\begin{highlightbox}
+\texttt{\$ grep -i "linux" notes.txt}
+\end{highlightbox}
+
+\subsubsection*{\textbf{-r} → recursive search in directories}
+
+\begin{highlightbox}
+\texttt{\$ grep -r "password" /etc}
+\end{highlightbox}
+
+\subsubsection*{\textbf{-n} → show line numbers}
+
+\begin{highlightbox}
+\texttt{\$ grep -n "TODO" project.py}
+\end{highlightbox}
+
+\subsubsection*{\textbf{-v} → invert match (show lines \textit{not} matching)}
+
+\begin{highlightbox}
+\texttt{\$ grep -v "DEBUG" logs.txt}
+\end{highlightbox}
+
+\subsubsection*{\textbf{-E} → extended regex}
+
+\begin{highlightbox}
+\texttt{\$ grep -E "cat|dog" animals.txt}
+\end{highlightbox}
+
+\subsection*{\fireicon\ 1.4 Examples (real and practical)}
+
+\subsubsection*{Find all \texttt{.pdf} files listed in a directory:}
+
+\begin{highlightbox}
+\texttt{\$ ls | grep ".pdf"}
+\end{highlightbox}
+
+\subsubsection*{Search inside all \texttt{.log} files:}
+
+\begin{highlightbox}
+\texttt{\$ grep "failed" *.log}
+\end{highlightbox}
+
+\subsubsection*{Search for IP addresses:}
+
+\begin{highlightbox}
+\texttt{\$ grep -E "[0-9]+.[0-9]+.[0-9]+.[0-9]+" nginx.log}
+\end{highlightbox}
+
+\subsection*{\exerciseicon\ 1.5 Exercises}
+
+\begin{enumerate}
+    \item \textbf{E1.} Find all lines containing the word \texttt{error} in \texttt{/var/log/syslog}.
+    
+    \item \textbf{E2.} Use \texttt{grep} to find lines NOT containing "DEBUG".
+    
+    \item \textbf{E3.} Recursively search for your name in your home directory.
+\end{enumerate}
+
+\begin{infobox}
+Take your time. Stretch. Drink water. Continue.
+\end{infobox}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{2. sed — The Stream Editor}
+
+\subsection*{\toolicon\ 2.1 What is sed?}
+
+\texttt{sed} is a \textbf{text transformer}.
+
+You can use it to:
+
+\begin{itemize}
+    \item \checkicon\ Replace words
+    \item \checkicon\ Delete lines
+    \item \checkicon\ Insert text
+    \item \checkicon\ Extract text
+    \item \checkicon\ Edit files \textit{without opening them}
+\end{itemize}
+
+\subsection*{\brainicon\ 2.2 Basic Syntax}
+
+\begin{highlightbox}
+\texttt{\$ sed 's/old/new/' file}
+\end{highlightbox}
+
+This replaces the \textit{first} occurrence of \texttt{old} with \texttt{new} per line.
+
+\subsubsection*{Replace globally (all occurrences):}
+
+\begin{highlightbox}
+\texttt{\$ sed 's/old/new/g' file}
+\end{highlightbox}
+
+\subsection*{\toolicon\ 2.3 Common sed operations}
+
+\subsubsection*{Replace text:}
+
+\begin{highlightbox}
+\texttt{\$ sed 's/linux/Linux/' notes.txt}
+\end{highlightbox}
+
+\subsubsection*{Delete lines containing a word:}
+
+\begin{highlightbox}
+\texttt{\$ sed '/error/d' logs.txt}
+\end{highlightbox}
+
+\subsubsection*{Print only lines matching a pattern:}
+
+\begin{highlightbox}
+\texttt{\$ sed -n '/INFO/p' logs.txt}
+\end{highlightbox}
+
+\subsubsection*{Edit a file \textbf{in-place}:}
+
+\begin{warningbox}
+\warningicon\ BE CAREFUL (seriously)
+\end{warningbox}
+
+\begin{highlightbox}
+\texttt{\$ sed -i 's/foo/bar/g' file.txt}
+\end{highlightbox}
+
+\subsection*{\bulbicon\ 2.4 Cool examples}
+
+\subsubsection*{Remove all spaces:}
+
+\begin{highlightbox}
+\texttt{\$ sed 's/ //g' text.txt}
+\end{highlightbox}
+
+\subsubsection*{Replace multiple spaces with one:}
+
+\begin{highlightbox}
+\texttt{\$ sed 's/  */ /g'}
+\end{highlightbox}
+
+\subsubsection*{Add prefix to each line:}
+
+\begin{highlightbox}
+\texttt{\$ sed 's/\^{}/[INFO] /' file.txt}
+\end{highlightbox}
+
+\subsection*{\exerciseicon\ 2.5 Exercises}
+
+\begin{enumerate}
+    \item \textbf{E5.} Replace all \texttt{2024} with \texttt{2025} in \texttt{report.txt}.
+    
+    \item \textbf{E6.} Remove all lines containing the word "temp".
+    
+    \item \textbf{E7.} Add the prefix \texttt{[LOG]} to each line of \texttt{output.txt}.
+    
+    \item \textbf{E8.} Delete empty lines.
+\end{enumerate}
+
+\begin{infobox}
+You're doing great. Take a breath. Continue.
+\end{infobox}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{3. awk — The Text Processor King}
+
+\subsection*{\crownicon\ 3.1 What is awk?}
+
+\texttt{awk} is a \textbf{programming language}… hidden inside a terminal command.
+
+It is perfect for:
+
+\begin{itemize}
+    \item \checkicon\ Extracting columns
+    \item \checkicon\ Summing numbers
+    \item \checkicon\ Processing CSV files
+    \item \checkicon\ Analyzing logs
+    \item \checkicon\ Building mini-scripts
+\end{itemize}
+
+\subsection*{\brainicon\ 3.2 Basic Syntax}
+
+\begin{highlightbox}
+\texttt{\$ awk 'pattern \{ action \}' file}
+\end{highlightbox}
+
+\subsubsection*{Example:}
+
+Display first column:
+
+\begin{highlightbox}
+\texttt{\$ awk '\{print \$1\}' file.txt}
+\end{highlightbox}
+
+\subsection*{\targeticon\ 3.3 Field processing}
+
+Given a line:
+
+\begin{highlightbox}
+\texttt{Alice 23 Student}
+\end{highlightbox}
+
+Fields are:
+
+\begin{itemize}
+    \item \texttt{\$1} = Alice
+    \item \texttt{\$2} = 23
+    \item \texttt{\$3} = Student
+\end{itemize}
+
+\subsection*{\fireicon\ 3.4 Useful tricks}
+
+\subsubsection*{Print only the second column:}
+
+\begin{highlightbox}
+\texttt{\$ awk '\{print \$2\}' data.txt}
+\end{highlightbox}
+
+\subsubsection*{Print lines where second field > 50:}
+
+\begin{highlightbox}
+\texttt{\$ awk '\$2 > 50' data.txt}
+\end{highlightbox}
+
+\subsubsection*{Sum column 3:}
+
+\begin{highlightbox}
+\texttt{\$ awk '\{sum += \$3\} END \{print sum\}' sales.txt}
+\end{highlightbox}
+
+\subsection*{\exerciseicon\ 3.5 Exercises}
+
+\begin{enumerate}
+    \item \textbf{E9.} Print only usernames from \texttt{/etc/passwd}.
+    
+    \item \textbf{E10.} Sum the numbers in the second column of a file.
+    
+    \item \textbf{E11.} Print rows where third column equals "admin".
+    
+    \item \textbf{E12.} Print the first and last field of each line.
+\end{enumerate}
+
+\begin{infobox}
+You are now officially becoming powerful.
+\end{infobox}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{4. find — The Ultimate Search Tool}
+
+\subsection*{\searchicon\ 4.1 What is find?}
+
+\texttt{find} searches your filesystem \textbf{recursively} for:
+
+\begin{itemize}
+    \item \checkicon\ \fileicon\ Files
+    \item \checkicon\ \foldericon\ Directories
+    \item \checkicon\ \sizeicon\ Sizes
+    \item \checkicon\ \permissionicon\ Permissions
+    \item \checkicon\ \searchicon\ Names
+    \item \checkicon\ \fileicon\ Types
+    \item \checkicon\ Everything
+\end{itemize}
+
+\subsection*{\brainicon\ 4.2 Basic Syntax}
+
+\begin{highlightbox}
+\texttt{\$ find path options}
+\end{highlightbox}
+
+\subsubsection*{Example:}
+
+\begin{highlightbox}
+\texttt{\$ find . -name "*.txt"}
+\end{highlightbox}
+
+\subsection*{\targeticon\ 4.3 Essential Options}
+
+\subsubsection*{Search by name:}
+
+\begin{highlightbox}
+\texttt{\$ find /home -name "notes.txt"}
+\end{highlightbox}
+
+\subsubsection*{Case-insensitive:}
+
+\begin{highlightbox}
+\texttt{\$ find /home -iname "linux"}
+\end{highlightbox}
+
+\subsubsection*{Search for directories:}
+
+\begin{highlightbox}
+\texttt{\$ find . -type d -name "src"}
+\end{highlightbox}
+
+\subsubsection*{Search by size:}
+
+\begin{highlightbox}
+\texttt{\$ find . -size +1M}
+\end{highlightbox}
+
+\subsubsection*{Search by permissions:}
+
+\begin{highlightbox}
+\texttt{\$ find / -perm 777}
+\end{highlightbox}
+
+\subsubsection*{Exclude matching:}
+
+\begin{highlightbox}
+\texttt{\$ find . ! -name "*.txt"}
+\end{highlightbox}
+
+\subsection*{\exerciseicon\ 4.4 Exercises}
+
+\begin{enumerate}
+    \item \textbf{E13.} Find all \texttt{.py} files in your home directory.
+    
+    \item \textbf{E14.} Find all files larger than 10 MB.
+    
+    \item \textbf{E15.} List all directories named \texttt{backup}.
+    
+    \item \textbf{E16.} Find files with permission 777.
+\end{enumerate}
+
+\begin{infobox}
+Great! \coffeeicon\ Grab some coffee. The final boss fight is next.
+\end{infobox}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{5. Pipes and Redirection}
+
+\subsection*{\pipeicon\ 5.1 What are pipes?}
+
+Pipes (\texttt{|}) send the output of one command into another.
+
+\begin{infobox}
+\textbf{Think of it as plugging commands together like LEGO Pieces.}
+\end{infobox}
+
+\subsubsection*{Example:}
+
+\begin{highlightbox}
+\texttt{\$ ls | grep ".txt"}
+\end{highlightbox}
+
+\subsection*{\outputicon\ 5.2 Output Redirection}
+
+\subsubsection*{Write to a file:}
+
+\begin{highlightbox}
+\texttt{\$ echo "Hello" > file.txt}
+\end{highlightbox}
+
+\subsubsection*{Append to a file:}
+
+\begin{highlightbox}
+\texttt{\$ echo "World" >> file.txt}
+\end{highlightbox}
+
+\subsubsection*{Redirect command output:}
+
+\begin{highlightbox}
+\texttt{\$ ls > list.txt}
+\end{highlightbox}
+
+\subsection*{\inputicon\ 5.3 Input Redirection}
+
+\begin{highlightbox}
+\texttt{\$ command < file}
+\end{highlightbox}
+
+\subsubsection*{Example:}
+
+\begin{highlightbox}
+\texttt{\$ wc -l < notes.txt}
+\end{highlightbox}
+
+\subsection*{\chainicon\ 5.4 Combining pipes}
+
+\subsubsection*{Count python files:}
+
+\begin{highlightbox}
+\texttt{\$ ls | grep ".py" | wc -l}
+\end{highlightbox}
+
+\subsubsection*{Get top 10 largest files:}
+
+\begin{highlightbox}
+\texttt{\$ du -ah | sort -h | tail}
+\end{highlightbox}
+
+\subsubsection*{See unique words (sorted):}
+
+\begin{highlightbox}
+\texttt{\$ cat text.txt | tr ' ' \textbackslash n' | sort | uniq}
+\end{highlightbox}
+
+\subsection*{\exerciseicon\ 5.5 Exercises}
+
+\begin{enumerate}
+    \item \textbf{E17.} Count how many lines contain "error" in \texttt{logs.txt}.
+    
+    \item \textbf{E18.} Save all \texttt{.txt} filenames into \texttt{files.txt}.
+    
+    \item \textbf{E19.} Print the first 5 unique words in \texttt{story.txt}.
+    
+    \item \textbf{E20.} Display only lines containing "user" from \texttt{/etc/passwd}.
+\end{enumerate}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{\celebrationicon\ Conclusion}
+
+Congratulations — you just learned the \textit{core skills} that make Linux insanely powerful.
+
+From now on:
+
+\begin{itemize}
+    \item Logs won't scare you
+    \item Large files won't slow you
+    \item Searching becomes instant
+    \item Processing data becomes easy
+    \item Automation becomes natural
+    \item Your terminal becomes a \textbf{superweapon}
+\end{itemize}
+
+\begin{highlightbox}
+This session prepares you for scripting, DevOps, automation, cybersecurity, and everything cool in Linux.
+\end{highlightbox}
+
+% Footer
+\vspace{\fill}
+\begin{center}
+\color{muted}
+All rights reserved for \texttt{TogetherTeam} [NOT For Commercial Use] !!\\
+contact the author via email \href{mailto:khaledmhfz2004@gmail.com}{\texttt{khaledmhfz2004@gmail.com}}
+\end{center}
+\end{document}

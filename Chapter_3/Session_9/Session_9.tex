@@ -1,0 +1,900 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% ----------------------------------------------------------
+%  Linux Penguin Theme — Based on Recommended Colors
+% ----------------------------------------------------------
+
+% --- COLOR SETUP ---
+\usepackage{xcolor}
+
+\definecolor{cream}{RGB}{246,242,219}
+\definecolor{teamred}{RGB}{209,57,64}
+\definecolor{navy}{RGB}{40,46,87}
+\definecolor{softwhite}{RGB}{250,250,230}
+\definecolor{accentyellow}{RGB}{240,200,60}
+
+% Extra utility colors
+\definecolor{muted}{RGB}{120,125,140}
+\definecolor{darkcream}{RGB}{230,225,205}
+
+% ----------------------------------------------------------
+%  FONT SETUP (Optional but Recommended)
+%  Works best with XeLaTeX or LuaLaTeX
+% ----------------------------------------------------------
+\usepackage{fontspec}
+
+% Main document font (Google fonts — upload to Overleaf)
+% If you don't upload fonts, comment these two lines.
+\setmainfont{SourceSans3}[
+  Path=./,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold
+]
+
+\newfontfamily\headingfont{ScienceGothic}[
+  Path=./,
+]
+
+% Font Awesome for minimal icons
+\usepackage{fontawesome5}
+
+% ----------------------------------------------------------
+%  SECTION STYLE
+% ----------------------------------------------------------
+\usepackage{titlesec}
+
+% Section
+\titleformat{\section}
+  {\Large\headingfont\bfseries\color{navy}}
+  {\thesection}
+  {1em}
+  {\rule{\linewidth}{1pt}\vspace{0.5em}\\}
+
+% Subsection
+\titleformat{\subsection}
+  {\large\headingfont\bfseries\color{teamred}}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+% Subsubsection
+\titleformat{\subsubsection}
+  {\bfseries\color{navy}}
+  {\thesubsubsection}
+  {0.6em}
+  {}
+
+% ----------------------------------------------------------
+%  PAGE STYLE
+% ----------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf{} % clear all
+
+\lhead{\textcolor{navy}{\headingfont \courseTitle}}
+\rhead{\textcolor{teamred}{\thepage}}
+\renewcommand{\headrule}{\color{teamred}\hrule height 1pt}
+
+% ----------------------------------------------------------
+%  HYPERLINK STYLE
+% ----------------------------------------------------------
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = teamred,
+  urlcolor   = navy,
+  citecolor  = accentyellow
+}
+
+% ----------------------------------------------------------
+%  CUSTOM BOX ENVIRONMENTS
+% ----------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Info box
+\newtcolorbox{infobox}{
+  enhanced,
+  breakable,
+  colback   = softwhite,
+  colframe  = navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Warning box
+\newtcolorbox{warningbox}{
+  enhanced,
+  breakable,
+  colback   = accentyellow!30,
+  colframe  = accentyellow!80!navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Highlight box
+\newtcolorbox{highlightbox}{
+  enhanced,
+  breakable,
+  colback   = teamred!10,
+  colframe  = teamred,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% ----------------------------------------------------------
+%  ITEMIZE / ENUMERATE STYLE
+% ----------------------------------------------------------
+\usepackage{enumitem}
+
+\setlist[itemize]{
+  label=\textcolor{teamred}{\large\textbullet},
+  leftmargin=1.2em,
+  itemsep=4pt
+}
+
+\setlist[enumerate]{
+  label=\textcolor{navy}{\arabic*.},
+  leftmargin=1.4em,
+  itemsep=4pt
+}
+
+% ----------------------------------------------------------
+%  TITLE STYLE
+% ----------------------------------------------------------
+\usepackage{titling}
+
+\pretitle{
+  \begin{center}
+  \headingfont\bfseries\LARGE\color{navy}
+}
+\posttitle{
+  \end{center}
+}
+
+\preauthor{
+  \begin{center}
+  \color{teamred}
+}
+\postauthor{
+  \end{center}
+}
+
+% ----------------------------------------------------------
+%  OPTIONAL — SOFT PAGE BACKGROUND
+%  Comment out if you want white pages
+% ----------------------------------------------------------
+\usepackage{pagecolor}
+\pagecolor{cream}
+\color{navy}
+
+% ----------------------------------------------------------
+% CUSTOM COMMANDS FOR TEMPLATE
+% ----------------------------------------------------------
+\newcommand{\courseTitle}{Scheduling with systemd on Linux}
+\newcommand{\courseDate}{28-02-2026}
+\newcommand{\authorName}{Khaled Mahfouz}
+\newcommand{\contactInfo}{\texttt{@khaledmhfz}}
+
+% Minimal icon commands
+\newcommand{\penguinicon}{\faLinux}
+\newcommand{\systemdicon}{\faCogs}
+\newcommand{\serviceicon}{\faPlay}
+\newcommand{\timericon}{\faClock}
+\newcommand{\uniticon}{\faFile}
+\newcommand{\controlicon}{\faSlidersH}
+\newcommand{\warningicon}{\faExclamationTriangle}
+\newcommand{\tipsicon}{\faLightbulb}
+\newcommand{\arrowicon}{\faArrowRight}
+\newcommand{\bookicon}{\faBook}
+\newcommand{\rocketicon}{\faRocket}
+
+% ----------------------------------------------------------
+% END OF THEME
+% ----------------------------------------------------------
+
+\begin{document}
+
+% Title with minimal space
+\begin{center}
+\headingfont\Huge\bfseries\color{navy}
+\systemdicon\ \courseTitle\\[0.5em]
+\Large\color{teamred}
+\courseDate
+\end{center}
+
+\begin{infobox}
+Alright team \faUserTie\ — this is the session where you level up from "I run Linux" to:
+
+\begin{center}
+\large\textbf{"I control what runs on Linux… and when it runs."}
+\end{center}
+\end{infobox}
+
+We're diving into:
+
+\begin{itemize}
+    \item \texttt{systemd} services
+    \item Basic unit files
+    \item \texttt{systemd} timers (modern scheduling)
+\end{itemize}
+
+By the end, you'll:
+
+\begin{itemize}
+    \item Understand how your system boots and manages services
+    \item Create your own service units
+    \item Schedule tasks like a pro (without cron)
+    \item Override and customize services safely
+\end{itemize}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{1 \faInfoCircle\ What is systemd? (And Why You Should Care)}
+
+Before scheduling anything, you need to understand what's running your system.
+
+On modern Debian-based systems:
+
+\begin{itemize}
+    \item \textbf{Debian}
+    \item \textbf{Ubuntu}
+    \item \textbf{Linux Mint}
+\end{itemize}
+
+The init system is:
+
+\subsection*{\faBrain\ \texttt{systemd}}
+
+An \textit{init system} is the first userspace process started by the kernel.
+
+Check it:
+
+\begin{highlightbox}
+\texttt{\$ ps -p 1 -o comm=}
+\end{highlightbox}
+
+You'll see:
+
+\begin{highlightbox}
+\texttt{systemd}
+\end{highlightbox}
+
+\subsection*{\faQuestionCircle\ What Does systemd Do?}
+
+\begin{itemize}
+    \item Starts services during boot
+    \item Manages background processes (daemons)
+    \item Handles logging (via \texttt{journald})
+    \item Mounts filesystems
+    \item Manages network services
+    \item Handles timers (our main topic today)
+\end{itemize}
+
+\begin{infobox}
+If Linux is a city \faCity\\
+\texttt{systemd} is the mayor.
+\end{infobox}
+
+\subsection*{\bookicon\ Helpful Reading}
+
+\begin{itemize}
+    \item \href{https://www.geeksforgeeks.org/linux-unix/linux-systemd-and-its-components/}{\texttt{geeksforgeeks-linux-systemd-and-its-components}}
+    \item \href{https://www.geeksforgeeks.org/linux-unix/an-introduction-to-systemd-and-its-role-in-the-boot-process/}{\texttt{geeksforgeeks-introduction-to-systemd}}
+\end{itemize}
+
+\section*{2 \uniticon\ Understanding Units in systemd}
+
+Everything in systemd is a \textbf{Unit}.
+
+A unit is a configuration file that tells systemd what to manage.
+
+\subsection*{Common Unit Types}
+
+\begin{infobox}
+\begin{tabular}{lll}
+\textbf{Type} & \textbf{Extension} & \textbf{Purpose} \\
+Service & \texttt{.service} & Background services \\
+Timer & \texttt{.timer} & Scheduling \\
+Mount & \texttt{.mount} & Mount points \\
+Target & \texttt{.target} & Group of units \\
+Socket & \texttt{.socket} & Socket activation \\
+\end{tabular}
+\end{infobox}
+
+Example:
+
+\begin{highlightbox}
+\texttt{apache2.service}\\
+\texttt{ssh.service}\\
+\texttt{cron.service}
+\end{highlightbox}
+
+To list all units:
+
+\begin{highlightbox}
+\texttt{\$ systemctl list-units}
+\end{highlightbox}
+
+To list all installed units:
+
+\begin{highlightbox}
+\texttt{\$ systemctl list-unit-files}
+\end{highlightbox}
+
+\section*{3 \faDownload\ Installing Apache (Service Example)}
+
+Let's install something real:
+
+\begin{highlightbox}
+\texttt{\$ sudo apt update}\\
+\texttt{\$ sudo apt install apache2}
+\end{highlightbox}
+
+This installs:
+
+\begin{highlightbox}
+\texttt{apache2.service}
+\end{highlightbox}
+
+Now check its status:
+
+\begin{highlightbox}
+\texttt{\$ systemctl status apache2}
+\end{highlightbox}
+
+You'll see:
+
+\begin{itemize}
+    \item Loaded
+    \item Active
+    \item Main PID
+    \item Logs
+\end{itemize}
+
+\section*{4 \controlicon\ Managing Services with systemctl}
+
+This is daily Linux admin stuff.
+
+\subsection*{\faPlay\ Start a Service}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl start apache2}
+\end{highlightbox}
+
+\subsection*{\faStop\ Stop a Service}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl stop apache2}
+\end{highlightbox}
+
+\subsection*{\faRedo\ Restart}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl restart apache2}
+\end{highlightbox}
+
+\subsection*{\faSync\ Reload vs Restart (Important!)}
+
+\begin{itemize}
+    \item \textbf{\texttt{reload}}
+    \begin{itemize}
+        \item Reloads configuration
+        \item Does NOT stop process
+        \item Keeps connections alive
+    \end{itemize}
+    
+    \item \textbf{\texttt{restart}}
+    \begin{itemize}
+        \item Stops service
+        \item Starts again
+        \item Drops active connections
+    \end{itemize}
+\end{itemize}
+
+Example:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl reload apache2}
+\end{highlightbox}
+
+\subsection*{\faPowerOff\ Enable at Boot}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl enable apache2}
+\end{highlightbox}
+
+This creates a symlink in:
+
+\begin{highlightbox}
+\texttt{/etc/systemd/system/}
+\end{highlightbox}
+
+\subsection*{\faBan\ Disable at Boot}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl disable apache2}
+\end{highlightbox}
+
+\subsection*{\faSkull\ Mask a Service}
+
+Masking = completely block it from starting.
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl mask apache2}
+\end{highlightbox}
+
+Unmask:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl unmask apache2}
+\end{highlightbox}
+
+\begin{infobox}
+\arrowicon\ More explanation: \href{https://www.geeksforgeeks.org/linux-unix/how-to-mask-a-systemd-unit-in-linux/}{\texttt{geeksforgeeks-mask-a-systemd-unit-in-linux}}
+\end{infobox}
+
+\section*{5 \faFolderOpen\ Where Are Unit Files Stored?}
+
+Systemd has priority layers.
+
+\subsection*{\faDatabase\ Main Directories}
+
+\begin{infobox}
+\begin{tabular}{ll}
+\textbf{Directory} & \textbf{Purpose} \\
+\texttt{/usr/lib/systemd/system/} & Default package units \\
+\texttt{/lib/systemd/system/} & (Debian equivalent) \\
+\texttt{/etc/systemd/system/} & Custom \& overrides \\
+\end{tabular}
+\end{infobox}
+
+\subsection*{Priority Order}
+
+Highest priority:
+
+\begin{highlightbox}
+\texttt{/etc/systemd/system/}
+\end{highlightbox}
+
+So if you edit there — it overrides the default.
+
+\section*{6 \faFileCode\ Anatomy of a Service File}
+
+Let's inspect:
+
+\begin{highlightbox}
+\texttt{\$ systemctl cat apache2.service}
+\end{highlightbox}
+
+Typical structure:
+
+\begin{highlightbox}
+\begin{verbatim}
+[Unit]
+Description=...
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/apachectl start
+ExecReload=/usr/sbin/apachectl graceful
+ExecStop=/usr/sbin/apachectl stop
+
+[Install]
+WantedBy=multi-user.target
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{\faList\ [Unit] Section}
+
+Defines metadata and dependencies.
+
+Common options:
+
+\begin{itemize}
+    \item Description
+    \item After=
+    \item Requires=
+\end{itemize}
+
+\subsection*{\faCog\ [Service] Section}
+
+How the service runs.
+
+Important fields:
+
+\begin{infobox}
+\begin{tabular}{ll}
+\textbf{Option} & \textbf{Meaning} \\
+ExecStart & Command to start \\
+ExecStop & Command to stop \\
+Restart & Restart policy \\
+User & Run as user \\
+Type & simple, forking, oneshot \\
+\end{tabular}
+\end{infobox}
+
+\subsection*{\faPlug\ [Install] Section}
+
+Defines how it integrates into boot.
+
+\begin{highlightbox}
+\texttt{WantedBy=multi-user.target}
+\end{highlightbox}
+
+Means: Start in normal multi-user mode.
+
+\section*{7 \faCode\ Creating Your Own Service}
+
+Let's create one.
+
+\subsection*{\faBullseye\ Goal: Run a simple script}
+
+Create script:
+
+\begin{highlightbox}
+\texttt{\$ sudo nano /usr/local/bin/hello.sh}
+\end{highlightbox}
+
+Add:
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+echo "Hello from systemd!" >> /tmp/hello.log
+\end{verbatim}
+\end{highlightbox}
+
+Make executable:
+
+\begin{highlightbox}
+\texttt{\$ sudo chmod +x /usr/local/bin/hello.sh}
+\end{highlightbox}
+
+\subsection*{Create Service File}
+
+\begin{highlightbox}
+\texttt{\$ sudo nano /etc/systemd/system/hello.service}
+\end{highlightbox}
+
+Add:
+
+\begin{highlightbox}
+\begin{verbatim}
+[Unit]
+Description=My Hello Service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/hello.sh
+
+[Install]
+WantedBy=multi-user.target
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{Reload systemd:}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl daemon-reload}
+\end{highlightbox}
+
+\begin{warningbox}
+\warningicon\ This is IMPORTANT anytime you:
+\begin{itemize}
+    \item Create
+    \item Edit
+    \item Delete
+\end{itemize}
+unit files.
+\end{warningbox}
+
+Start service:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl start hello.service}
+\end{highlightbox}
+
+Check result:
+
+\begin{highlightbox}
+\texttt{\$ cat /tmp/hello.log}
+\end{highlightbox}
+
+\begin{infobox}
+Boom \faBolt\\
+You just created a service.
+\end{infobox}
+
+\section*{8 \faEdit\ Editing \& Overriding Units (The Smart Way)}
+
+Never edit files in \texttt{/lib/systemd/system/}.
+
+Instead:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl edit apache2}
+\end{highlightbox}
+
+This creates:
+
+\begin{highlightbox}
+\texttt{/etc/systemd/system/apache2.service.d/override.conf}
+\end{highlightbox}
+
+Add:
+
+\begin{highlightbox}
+\begin{verbatim}
+[Service]
+Restart=always
+\end{verbatim}
+\end{highlightbox}
+
+Save.
+
+Reload daemon:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl daemon-reload}
+\end{highlightbox}
+
+Restart service.
+
+\section*{9 \timericon\ systemd Timers (Modern Scheduling)}
+
+Now we level up.
+
+Timers = replacement for cron.
+
+\subsection*{Why Use systemd Timers Instead of Cron?}
+
+\begin{itemize}
+    \item Integrated with services
+    \item Better logging
+    \item More control
+    \item Dependency aware
+    \item Can use calendar expressions
+\end{itemize}
+
+\begin{infobox}
+\faInfoCircle\ Note that systemd is more complex than Cron and requires systemd to work on your system.
+\end{infobox}
+
+\subsection*{\faClock\ Timer Structure}
+
+A timer requires:
+
+\begin{enumerate}
+    \item A \texttt{.service} file
+    \item A \texttt{.timer} file
+\end{enumerate}
+
+\section*{10 \faEnvelope\ Example: Send Message to All Users}
+
+We'll simulate the example from the referenced video.
+
+\subsection*{Create Script}
+
+\begin{highlightbox}
+\texttt{\$ sudo nano /usr/local/bin/wall-msg.sh}
+\end{highlightbox}
+
+Add:
+
+\begin{highlightbox}
+\begin{verbatim}
+#!/bin/bash
+wall "System reminder: Stay awesome!"
+\end{verbatim}
+\end{highlightbox}
+
+Make executable:
+
+\begin{highlightbox}
+\texttt{\$ sudo chmod +x /usr/local/bin/wall-msg.sh}
+\end{highlightbox}
+
+\subsection*{Create Service File}
+
+\begin{highlightbox}
+\texttt{\$ sudo nano /etc/systemd/system/wall-msg.service}
+\end{highlightbox}
+
+\begin{highlightbox}
+\begin{verbatim}
+[Unit]
+Description=Wall Message Service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/wall-msg.sh
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{Create Timer File}
+
+\begin{highlightbox}
+\texttt{\$ sudo nano /etc/systemd/system/wall-msg.timer}
+\end{highlightbox}
+
+\begin{highlightbox}
+\begin{verbatim}
+[Unit]
+Description=Run wall message every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+\end{verbatim}
+\end{highlightbox}
+
+\subsection*{Reload daemon:}
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl daemon-reload}
+\end{highlightbox}
+
+Enable timer:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl enable wall-msg.timer}
+\end{highlightbox}
+
+Start timer:
+
+\begin{highlightbox}
+\texttt{\$ sudo systemctl start wall-msg.timer}
+\end{highlightbox}
+
+Check timers:
+
+\begin{highlightbox}
+\texttt{\$ systemctl list-timers}
+\end{highlightbox}
+
+\begin{infobox}
+�� You are now scheduling tasks.
+\end{infobox}
+
+\subsection*{\faCalendar\ Understanding OnCalendar}
+
+Examples:
+
+\begin{infobox}
+\begin{tabular}{ll}
+\textbf{Expression} & \textbf{Meaning} \\
+\texttt{daily} & Once per day \\
+\texttt{weekly} & Weekly \\
+\texttt{Mon *-*-* 09:00:00} & Mondays 9AM \\
+\texttt{*-*-01 00:00:00} & First day of month \\
+\end{tabular}
+\end{infobox}
+
+Test calendar expression:
+
+\begin{highlightbox}
+\texttt{\$ systemd-analyze calendar "Mon *-*-* 09:00:00"}
+\end{highlightbox}
+
+\subsection*{\faSlidersH\ Other Timer Options}
+
+\begin{infobox}
+\begin{tabular}{ll}
+\textbf{Option} & \textbf{Meaning} \\
+OnBootSec= & After boot \\
+OnUnitActiveSec= & After last run \\
+Persistent=true & Run missed jobs after reboot \\
+\end{tabular}
+\end{infobox}
+
+\section*{11 \faBalanceScale\ Timer vs Cron Comparison}
+
+\begin{infobox}
+\begin{tabular}{lll}
+\textbf{Feature} & \textbf{Cron} & \textbf{systemd Timer} \\
+Logging & Basic & journalctl \\
+Dependencies & No & Yes \\
+Missed Runs & No & Yes (Persistent) \\
+Integration & Separate & Native \\
+\end{tabular}
+\end{infobox}
+
+\section*{12 \faBug\ Debugging Services \& Timers}
+
+Logs:
+
+\begin{highlightbox}
+\texttt{\$ journalctl -u wall-msg.service}
+\end{highlightbox}
+
+Live logs:
+
+\begin{highlightbox}
+\texttt{\$ journalctl -f}
+\end{highlightbox}
+
+Check failures:
+
+\begin{highlightbox}
+\texttt{\$ systemctl --failed}
+\end{highlightbox}
+
+\section*{13 \faGlobe\ Real World Use Cases}
+
+\begin{itemize}
+    \item Backup scripts
+    \item Log cleanup
+    \item Health checks
+    \item Auto-updates
+    \item Dev server restarts
+    \item IoT tasks
+\end{itemize}
+
+\section*{14 \warningicon\ Common Mistakes}
+
+\begin{warningbox}
+- Forgetting \texttt{daemon-reload}\\
+- Editing \texttt{/lib/systemd/system/} directly\\
+- Wrong file permissions\\
+- Forgetting \texttt{WantedBy=}
+\end{warningbox}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{\faBrain\ Final Mental Model}
+
+\begin{itemize}
+    \item Service = What to run
+    \item Timer = When to run
+    \item Unit file = Configuration blueprint
+    \item systemctl = Control center
+\end{itemize}
+
+\section*{\rocketicon\ You Now Know}
+
+\begin{itemize}
+    \item How systemd works
+    \item How to control services
+    \item How to create units
+    \item How to override safely
+    \item How to schedule with timers
+    \item How to debug issues
+\end{itemize}
+
+\begin{infobox}
+\begin{center}
+You are no longer a Linux user.\\
+\large\textbf{You're becoming a Linux operator.} \rocketicon
+\end{center}
+\end{infobox}
+
+% Updated Footer
+\vspace{\fill}
+\begin{center}
+\color{muted}
+All rights reserved for \texttt{TogetherTeam} [NOT For Commercial Use] !!\\
+contact the author via email \href{mailto:khaledmhfz2004@gmail.com}{\texttt{khaledmhfz2004@gmail.com}}
+\end{center}
+
+\end{document}

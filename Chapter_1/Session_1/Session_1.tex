@@ -1,0 +1,581 @@
+\documentclass[12pt]{article}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% ----------------------------------------------------------
+%  Linux Penguin Theme — Based on Recommended Colors
+% ----------------------------------------------------------
+
+% --- COLOR SETUP ---
+\usepackage{xcolor}
+
+\definecolor{cream}{RGB}{246,242,219}
+\definecolor{teamred}{RGB}{209,57,64}
+\definecolor{navy}{RGB}{40,46,87}
+\definecolor{softwhite}{RGB}{250,250,230}
+\definecolor{accentyellow}{RGB}{240,200,60}
+
+% Extra utility colors
+\definecolor{muted}{RGB}{120,125,140}
+\definecolor{darkcream}{RGB}{230,225,205}
+
+% ----------------------------------------------------------
+%  FONT SETUP (Optional but Recommended)
+%  Works best with XeLaTeX or LuaLaTeX
+% ----------------------------------------------------------
+\usepackage{fontspec}
+
+% Main document font (Google fonts — upload to Overleaf)
+% If you don't upload fonts, comment these two lines.
+\setmainfont{SourceSans3}[
+  Path=./,
+  ItalicFont  = *-Italic,
+  BoldFont    = *-Bold
+]
+
+\newfontfamily\headingfont{ScienceGothic}[
+  Path=./,
+]
+
+% ----------------------------------------------------------
+%  SECTION STYLE
+% ----------------------------------------------------------
+\usepackage{titlesec}
+
+% Section
+\titleformat{\section}
+  {\Large\headingfont\bfseries\color{navy}}
+  {\thesection}
+  {1em}
+  {\rule{\linewidth}{1pt}\vspace{0.5em}\\}
+
+% Subsection
+\titleformat{\subsection}
+  {\large\headingfont\bfseries\color{teamred}}
+  {\thesubsection}
+  {0.8em}
+  {}
+
+% Subsubsection
+\titleformat{\subsubsection}
+  {\bfseries\color{navy}}
+  {\thesubsubsection}
+  {0.6em}
+  {}
+
+% ----------------------------------------------------------
+%  PAGE STYLE
+% ----------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+\fancyhf{} % clear all
+
+\lhead{\textcolor{navy}{\headingfont \courseTitle}}
+\rhead{\textcolor{teamred}{\thepage}}
+\renewcommand{\headrule}{\color{teamred}\hrule height 1pt}
+
+% ----------------------------------------------------------
+%  HYPERLINK STYLE
+% ----------------------------------------------------------
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks = true,
+  linkcolor  = teamred,
+  urlcolor   = navy,
+  citecolor  = accentyellow
+}
+
+% ----------------------------------------------------------
+%  CUSTOM BOX ENVIRONMENTS
+% ----------------------------------------------------------
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Info box
+\newtcolorbox{infobox}{
+  enhanced,
+  breakable,
+  colback   = softwhite,
+  colframe  = navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Warning box
+\newtcolorbox{warningbox}{
+  enhanced,
+  breakable,
+  colback   = accentyellow!30,
+  colframe  = accentyellow!80!navy,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% Highlight box
+\newtcolorbox{highlightbox}{
+  enhanced,
+  breakable,
+  colback   = teamred!10,
+  colframe  = teamred,
+  coltext   = navy,
+  boxrule   = 1pt,
+  arc       = 4pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+}
+
+% ----------------------------------------------------------
+%  ITEMIZE / ENUMERATE STYLE
+% ----------------------------------------------------------
+\usepackage{enumitem}
+
+\setlist[itemize]{
+  label=\textcolor{teamred}{\large\textbullet},
+  leftmargin=1.2em,
+  itemsep=4pt
+}
+
+\setlist[enumerate]{
+  label=\textcolor{navy}{\arabic*.},
+  leftmargin=1.4em,
+  itemsep=4pt
+}
+
+% ----------------------------------------------------------
+%  TITLE STYLE
+% ----------------------------------------------------------
+\usepackage{titling}
+
+\pretitle{
+  \begin{center}
+  \headingfont\bfseries\LARGE\color{navy}
+}
+\posttitle{
+  \end{center}
+}
+
+\preauthor{
+  \begin{center}
+  \color{teamred}
+}
+\postauthor{
+  \end{center}
+}
+
+% ----------------------------------------------------------
+%  OPTIONAL — SOFT PAGE BACKGROUND
+%  Comment out if you want white pages
+% ----------------------------------------------------------
+\usepackage{pagecolor}
+\pagecolor{cream}
+\color{navy}
+
+% ----------------------------------------------------------
+% CUSTOM COMMANDS FOR TEMPLATE
+% ----------------------------------------------------------
+\newcommand{\courseTitle}{Introduction to the Linux Course}
+\newcommand{\courseDate}{23/11/2025}
+
+% ----------------------------------------------------------
+% END OF THEME
+% ----------------------------------------------------------
+
+\begin{document}
+
+% Title with minimal space
+\begin{center}
+\headingfont\Huge\bfseries\color{navy}
+\courseTitle\\[0.5em]
+\Large\color{teamred}
+\courseDate
+\end{center}
+
+\section*{Topics}
+
+\begin{itemize}
+    \item \textbf{Linux history and Linux distros}
+          \\Link: \href{https://www.youtube.com/watch?v=ShcR4Zfc6Dw}{\texttt{https://www.youtube.com/watch?v=ShcR4Zfc6Dw}}
+    
+    \item \textbf{Unix philosophy}
+          \\Link: \href{https://youtu.be/gojeTqXdBH0?si=kg-iP4KEFjLU-Tto}{\texttt{https://youtu.be/gojeTqXdBH0?si=kg-iP4KEFjLU-Tto}}
+    
+    \item \textbf{Kernel vs OS}
+          \\Link: \href{https://youtu.be/IvGdY6luTtU?si=nEcir9iqjmYMa1lo}{\texttt{https://youtu.be/IvGdY6luTtU?si=nEcir9iqjmYMa1lo}}
+    
+    \item \textbf{Free Software Philosophy}
+          \\Link: \href{https://youtu.be/Ag1AKIl_2GM?si=0YDnS2BDSrAAmFX8}{\texttt{https://youtu.be/Ag1AKIl_2GM?si=0YDnS2BDSrAAmFX8}}
+    
+    \item \textbf{Why programmers love Linux}
+          \\Link: \href{https://youtu.be/otDOHt\_Jges?si=4ChY6-xpYbOdbKQ6}{\texttt{https://youtu.be/otDOHt\_Jges?si=4ChY6-xpYbOdbKQ6}}
+    
+    \item \textbf{Pros and cons}
+          \\Link: \href{https://youtu.be/pYfzZRyRzvs?si=4Q5\_H0gJ3JHBodOc}{\texttt{https://youtu.be/pYfzZRyRzvs?si=4Q5\_H0gJ3JHBodOc}}
+\end{itemize}
+
+\vspace{1em}
+\begin{center}
+\color{teamred}\rule{0.8\textwidth}{1pt}
+\end{center}
+
+\section*{Introduction to Linux}
+
+\begin{infobox}
+Welcome to the first step of your Linux journey. Whether you're a developer, cybersecurity student, or someone who just wants to understand how computers \textit{really} work, this course will give you the foundation you need to actually \textbf{use} Linux—not just read about it.
+\end{infobox}
+
+This introduction will help you understand:
+
+\begin{itemize}
+    \item What Linux actually is
+    \item Why it became such a big deal
+    \item How it's different from other operating systems
+    \item Why developers, hackers, and engineers prefer it
+    \item What mindset you should adopt while learning Linux
+    \item How we'll approach the workshop
+\end{itemize}
+
+\begin{warningbox}
+If this is your first time touching Linux: \textbf{perfect}. This course is made for you.
+\end{warningbox}
+
+\section*{1. Why Linux Matters Today}
+
+If you look at the modern world—servers, cloud platforms, supercomputers, phones, routers, IoT, cybersecurity labs, programming environments—Linux is \textit{everywhere}. It's the invisible engine running most of the technologies you interact with daily.
+
+A few facts:
+
+\begin{itemize}
+    \item \textbf{100\%} of the world's top 500 supercomputers run Linux.
+    \item \textbf{Most web servers} use Linux (Apache, Nginx).
+    \item \textbf{Android}, the most widely-used mobile OS, is built on the Linux kernel.
+    \item \textbf{Cybersecurity distributions} (Kali, Parrot) are Linux-based.
+    \item Developers choose Linux for transparency, speed, customizability, and control.
+\end{itemize}
+
+So even if you've never installed Linux on your laptop, you've definitely used it indirectly.
+
+\section*{2. Understanding Linux: What It Really Is}
+
+One of the biggest misconceptions is thinking Linux is "that thing that replaces Windows." Linux is not a program. It's not a GUI. It's not even an operating system by itself.
+
+\subsection*{Linux = the kernel}
+
+The kernel is the core program that:
+
+\begin{itemize}
+    \item Talks to hardware
+    \item Manages memory
+    \item Schedules processes
+    \item Handles permissions
+    \item Controls I/O
+\end{itemize}
+
+Everything else—the desktop, apps, package manager, and utilities—comes from the broader free-software ecosystem called \textbf{GNU}.
+
+Together:
+\textbf{GNU tools + Linux kernel = GNU/Linux (a complete OS).}
+
+This separation is important because Linux teaches you something deeper than using an OS—it teaches you \textit{how systems work}.
+
+\section*{3. Quick Overview of the UNIX Philosophy}
+
+Linux inherits its design principles from Unix. This philosophy will shape how you think during the whole workshop:
+
+\subsection*{The UNIX Philosophy}
+
+\begin{enumerate}
+    \item \textbf{Write programs that do one thing, and do it well.}
+    \item \textbf{Write programs to work together.}
+    \item \textbf{Write programs to handle text, because text is a universal interface.}
+\end{enumerate}
+
+This leads to:
+
+\begin{itemize}
+    \item Tools that are small and powerful
+    \item Commands that do simple tasks
+    \item The magic happens when you combine them using pipes (`|`)
+\end{itemize}
+
+It's why a Linux power-user is unstoppable—every small tool becomes a Lego block, and you can build anything from those blocks.
+
+\section*{4. Linux History (The Simple Version)}
+
+Let's keep it practical.
+
+\subsection*{1969 – Unix born}
+AT&T created Unix. Clean, elegant, powerful.
+
+\subsection*{1983 – GNU Project launched}
+Richard Stallman began building a free Unix-like system. GNU had everything—compilers, libraries, tools—\textit{except a kernel.}
+
+\subsection*{1991 – Linus Torvalds writes the Linux Kernel}
+As a personal hobby project. He released it under a free license, allowing anyone to study, modify, and contribute.
+
+\subsection*{1992 – GNU + Linux merged}
+This created the first fully free operating system.
+
+\subsection*{1990s–2000s – Linux takes over servers}
+Why? Stability, control, security, no licensing fees.
+
+\subsection*{2010s–2020s – Linux becomes everywhere}
+Cloud, containers, mobile, embedded systems, DevOps… The world quietly standardized on Linux.
+
+\begin{highlightbox}
+That's why learning Linux today is a \textbf{career skill}, not just a personal preference.
+\end{highlightbox}
+
+\section*{5. Linux Distributions (Distros)}
+
+If Linux is the engine, a \textbf{distro} is the full car.
+
+Different distros = different combinations of:
+
+\begin{itemize}
+    \item Package managers
+    \item Desktop environments
+    \item Default tools
+    \item Philosophy
+    \item Target audience
+\end{itemize}
+
+\subsection*{Beginner-friendly distros}
+\begin{itemize}
+    \item Ubuntu
+    \item Linux Mint
+    \item MX Linux
+\end{itemize}
+
+\subsection*{Power-user distros}
+\begin{itemize}
+    \item Arch Linux
+    \item Gentoo
+    \item Void Linux
+\end{itemize}
+
+\subsection*{Enterprise distros}
+\begin{itemize}
+    \item Red Hat Enterprise Linux
+    \item SUSE Linux Enterprise
+\end{itemize}
+
+\subsection*{Security distros}
+\begin{itemize}
+    \item Kali Linux
+    \item Parrot OS
+\end{itemize}
+
+\begin{infobox}
+Throughout the workshop, we'll use a distro that is: Stable, Easy to install, Common across many environments (Usually Ubuntu or Mint—you'll get confirmation before the workshop.)
+\end{infobox}
+
+\section*{6. Kernel vs Operating System}
+
+This is where newcomers usually get confused.
+
+\subsection*{Kernel}
+\begin{itemize}
+    \item The lowest-level component
+    \item Manages memory, processes, scheduling
+    \item Talks to CPU, RAM, disks
+    \item Loads drivers
+    \item Handles system calls
+\end{itemize}
+
+\subsection*{Operating System}
+\begin{itemize}
+    \item Kernel
+    \item Plus userland tools (GNU utilities)
+    \item Plus services
+    \item Plus package managers
+    \item Plus desktop environments
+    \item Plus apps
+\end{itemize}
+
+Linux is the \textit{kernel}. GNU/Linux is the \textit{operating system}.
+
+This distinction matters because in this course you will interact with the kernel indirectly using tools like:
+
+\begin{itemize}
+    \item \texttt{top}, \texttt{ps}, \texttt{dmesg}
+    \item \texttt{/proc} filesystem
+    \item System calls through C programs
+    \item Permissions and user management
+\end{itemize}
+
+This duality is key to becoming a real system administrator or developer.
+
+\section*{7. The Free Software Philosophy (Why Linux Exists)}
+
+Linux exists because of the free software movement. Free software is about \textit{freedom}, not price.
+
+\subsection*{The Four Essential Freedoms}
+\begin{enumerate}
+    \item \textbf{Freedom 0:} Run the program for any purpose
+    \item \textbf{Freedom 1:} Study the source code and modify it
+    \item \textbf{Freedom 2:} Distribute copies
+    \item \textbf{Freedom 3:} Distribute modified versions
+\end{enumerate}
+
+If a program denies any of these freedoms, it becomes \textbf{proprietary}, which means:
+
+\begin{itemize}
+    \item You can't see how it works
+    \item You can't fix it
+    \item You depend on the vendor
+    \item You lose control over your own computer
+\end{itemize}
+
+Linux was built to solve this.
+
+During the workshop, you'll see the impact of this philosophy:
+
+\begin{itemize}
+    \item Software you can fully audit
+    \item Tools you can modify
+    \item Community-built contributions
+    \item Transparency at every layer
+\end{itemize}
+
+This is why cybersecurity professionals prefer Linux—you can see \textit{everything} happening in the system.
+
+\section*{8. Why Programmers Love Linux}
+
+Software developers love Linux for reasons that will become obvious once you start using it:
+
+\subsection*{1. Everything is a file}
+Devices, sockets, processes, IPC… all represented as files. Simplifies development massively.
+
+\subsection*{2. Powerful terminal environment}
+You can automate anything.
+
+\subsection*{3. Package managers}
+Install complete development stacks in seconds.
+
+\subsection*{4. DevOps and cloud-native tools}
+Docker, Kubernetes, CI pipelines—all built on Linux.
+
+\subsection*{5. Open-source ecosystem}
+Learn from real-world code. Fix things. Build tools.
+
+\subsection*{6. High performance and stability}
+Perfect for servers and embedded systems.
+
+\subsection*{7. Customizability}
+Modify your environment to match exactly how you think and work.
+
+\begin{infobox}
+This course will help you feel comfortable enough that Linux becomes your main development environment.
+\end{infobox}
+
+\section*{9. Pros and Cons of Linux}
+
+\subsection*{Pros}
+\begin{itemize}
+    \item Powerful CLI
+    \item Free and open source
+    \item Fast, lightweight
+    \item Secure and stable
+    \item Full control over your system
+    \item Great for programming
+    \item Great for networking
+    \item Massive community support
+\end{itemize}
+
+\subsection*{Cons}
+\begin{itemize}
+    \item Some hardware drivers might be missing
+    \item Gaming is improving but still imperfect
+    \item Adobe apps not officially available
+    \item Certain distros can be difficult to use
+    \item Requires learning mindset, not point-and-click
+\end{itemize}
+
+But as a developer, engineer, or cybersecurity student, the \textit{pros} outweigh the cons by a huge margin.
+
+\section*{10. How to Think Like a Linux User}
+
+To succeed in this workshop:
+
+\subsection*{Adopt these habits:}
+\begin{itemize}
+    \item \textbf{Be curious} — try commands, explore folders.
+    \item \textbf{Read error messages} — Linux errors are usually helpful.
+    \item \textbf{Use man pages} — every command has documentation.
+    \item \textbf{Experiment safely} — break things in virtual machines.
+    \item \textbf{Think in small tools} — pipes, filters, text processing.
+    \item \textbf{Love the terminal} — it's your real power.
+\end{itemize}
+
+Linux rewards people who explore.
+
+\section*{11. What You'll Learn in This Course}
+
+This introduction sets the ground for the entire course. By the end of the workshop, you will:
+
+\subsection*{System Skills}
+\begin{itemize}
+    \item Install and manage Linux
+    \item Understand filesystems
+    \item Work confidently in the terminal
+    \item Manage users, processes, permissions
+    \item Control systemd services
+    \item Understand the kernel's role
+\end{itemize}
+
+\subsection*{Networking Skills}
+\begin{itemize}
+    \item Configure network interfaces
+    \item Use diagnostic tools (ping, traceroute, curl)
+    \item Manage firewall rules
+\end{itemize}
+
+\subsection*{Programming and Automation}
+\begin{itemize}
+    \item Shell scripting
+    \item Using package managers
+    \item Working with logs
+    \item Troubleshooting
+\end{itemize}
+
+\subsection*{Security Awareness}
+\begin{itemize}
+    \item Permissions
+    \item Privilege escalation basics
+    \item Monitoring system behavior
+\end{itemize}
+
+\begin{highlightbox}
+You'll not just use Linux—you'll \textbf{understand} Linux.
+\end{highlightbox}
+
+\section*{Useful Resources}
+
+\subsection*{YouTube Channels}
+\begin{itemize}
+    \item anaHr — \href{https://www.youtube.com/@anaHr}{\texttt{https://www.youtube.com/@anaHr}}
+    \item mohammad besar — \href{https://www.youtube.com/@mmbesar}{\texttt{https://www.youtube.com/@mmbesar}}
+    \item alwaqqad — \href{https://www.youtube.com/@alwaqad}{\texttt{https://www.youtube.com/@alwaqad}}
+    \item sudostart — \href{https://www.youtube.com/@Sudo\_Start}{\texttt{https://www.youtube.com/@Sudo\_Start}}
+    \item linuxtopia — \href{https://www.youtube.com/@linuxtopia}{\texttt{https://www.youtube.com/@linuxtopia}}
+    \item  abdulmogeeb alhameed — \href{https://www.youtube.com/@abdulmogeeb}{\texttt{https://www.youtube.com/@abdulmogeeb}}
+\end{itemize}
+
+\subsection*{Books}
+\begin{itemize}
+    \item \textbf{The Art Of UNIX Programming} — \textit{Eric Raymond}
+\end{itemize}
+
+% Footer
+\vspace{\fill}
+\begin{center}
+\color{muted}
+All rights reserved for \texttt{TogetherTeam} [NOT For Commercial Use] !!\\
+contact the author via email \href{mailto:khaledmhfz2004@gmail.com}{\texttt{khaledmhfz2004@gmail.com}}
+\end{center}
+\end{document}
