@@ -7,12 +7,8 @@ docker run --rm -v "$(pwd):/data" -u $(id -u):$(id -g) pandoc/extra \
   --syntax-highlighting idiomatic \
   --pdf-engine=xelatex \
   --number-sections \
-  -V documentclass=book \
   -V classoption=oneside \
-  -V top-level-division=chapter \
-  -V lang=en \
-  -V mainfont="DejaVu Sans" \
-  -V monofont="DejaVu Sans Mono"
+  -V lang=en
 
 ## // Full Docs can be found at :
 ## https://github.com/Wandmalfarbe/pandoc-latex-template

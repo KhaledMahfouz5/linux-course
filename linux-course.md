@@ -156,7 +156,7 @@ This is why cybersecurity professionals prefer Linux .. you can see *everything*
 
 #### 7) Why Robotics Engineers Choose Linux
 
-> 📖 **See Session 6 §4-§5** for deep dive into permissions, root access, and safe privilege usage.
+> → **See Session 6 §4-§5** for deep dive into permissions, root access, and safe privilege usage.
 
 - Strong CLI tooling for automation and debugging
 - Better compatibility with robotics stacks (ROS ecosystem)
@@ -265,7 +265,7 @@ Linux rewards people who explore.
 
 #### 1) Choosing Your Linux Distribution
 
-> 📖 **See Session 1 §8** for detailed distro categories (beginner, power-user, enterprise, security) and selection criteria.
+> → **See Session 1 §8** for detailed distro categories (beginner, power-user, enterprise, security) and selection criteria.
 
 Before installing Linux, you must pick the right **distro** (distribution). Think of distros like different flavors of the same operating system—they all share the Linux kernel but differ in user interface, package managers, performance, and philosophy.
 
@@ -409,7 +409,7 @@ sudo apt update && sudo apt upgrade -y && flatpak update -y && sudo snap refresh
 
 #### 5) Pi Interfaces (Theoretical)
 
-> 📖 **See Session 1 §10** for the full Raspberry Pi ecosystem overview (GPIO, Camera, I2C, SPI, UART, SD-card, SSH patterns).
+> → **See Session 1 §10** for the full Raspberry Pi ecosystem overview (GPIO, Camera, I2C, SPI, UART, SD-card, SSH patterns).
 
 - **Camera:** image/video input for CV pipelines
 - **I2C:** low-speed bus for many sensors
@@ -548,7 +548,7 @@ touch newfile.txt
 sleep 5
 ```
 
-**rm – Remove (⚠ Dangerous but essential):**
+**rm – Remove ([!] Dangerous but essential):**
 ```bash
 rm file.txt
 rm -r folder/
@@ -628,7 +628,7 @@ Students should be comfortable editing files both in terminal and GUI contexts.
 
 #### 9) Help Tools
 
-> 📖 **See Session 1 §11** for the mindset behind using documentation and self-learning in Linux.
+> → **See Session 1 §11** for the mindset behind using documentation and self-learning in Linux.
 
 Linux has multiple built-in help resources.
 
@@ -654,7 +654,7 @@ In Linux:
 - Hardware
 - Network interfaces
 
-👉 **Everything is a file**
+→ **Everything is a file**
 
 **`/dev/` (device files):**
 ```bash
@@ -786,7 +786,7 @@ sed 's/old/new/g' file                      # Replace ALL occurrences
 sed 's/linux/Linux/' notes.txt
 sed '/error/d' logs.txt                     # Delete lines with "error"
 sed -n '/INFO/p' logs.txt                  # Print only matching lines
-sed -i 's/foo/bar/g' file.txt              # ⚠ Edit IN-PLACE (BE CAREFUL!)
+sed -i 's/foo/bar/g' file.txt              # [!] Edit IN-PLACE (BE CAREFUL!)
 ```
 
 **Cool examples:**
@@ -966,7 +966,7 @@ python3 -m http.server 8000
 ```
 Now anyone on your network can access `http://YOUR_IP:8000`
 
-> ⚠ Warning: `http.server` is not recommended for production. It only implements basic security checks.
+> [!] Warning: `http.server` is not recommended for production. It only implements basic security checks.
 
 **Node.js:**
 ```bash
@@ -1029,14 +1029,14 @@ Account for CPU, RAM, thermal limits, and storage constraints before deployment.
 
 #### 10) Update System & Repositories
 
-> 📖 **See Session 2 §4** for the full post-install checklist including updates, codecs, Flatpak, Snap, and backups.
+> → **See Session 2 §4** for the full post-install checklist including updates, codecs, Flatpak, Snap, and backups.
 
 ```bash
 sudo nano /etc/apt/sources.list    # Edit sources
 sudo apt update && sudo apt upgrade
 ```
 
-> ⚠ **Kali Repositories Warning:** Don't mix Kali repos with Ubuntu casually. You *will* break things. Safe use case: **specific tools only**. Use pinning if you *must*.
+> [!] **Kali Repositories Warning:** Don't mix Kali repos with Ubuntu casually. You *will* break things. Safe use case: **specific tools only**. Use pinning if you *must*.
 
 ---
 
@@ -1052,7 +1052,7 @@ sudo apt update && sudo apt upgrade
 
 #### 1) Filesystem Hierarchy in Robotics Context
 
-> 📖 **See Session 3** for hands-on navigation practice (`cd`, `ls`, `pwd`, paths). This section focuses on the *purpose* of each directory.
+> → **See Session 3** for hands-on navigation practice (`cd`, `ls`, `pwd`, paths). This section focuses on the *purpose* of each directory.
 
 Linux doesn't use drive letters like Windows (`C:\`, `D:\`). Instead, **everything starts at one place**: `/` (the root).
 
@@ -1061,7 +1061,7 @@ Linux doesn't use drive letters like Windows (`C:\`, `D:\`). Instead, **everythi
 
 **`/home` — Where Humans Live**  
 This is where **users live**. Inside your home directory: Documents, Downloads, Config files, SSH keys, Hidden dot files.
-> 📌 **Best Practice:** If you're learning Linux, live in `/home`
+> • **Best Practice:** If you're learning Linux, live in `/home`
 
 **`/etc` — Configuration Central**  
 Contains system configuration files, user settings, service configs, network configs.
@@ -1071,8 +1071,8 @@ Contains system configuration files, user settings, service configs, network con
 /etc/hosts
 /etc/sudoers
 ```
-⚠ Editing files here can break login, networking, or lock you out completely.  
-> 📌 **Rule:** `/etc` = configuration, not programs
+[!] Editing files here can break login, networking, or lock you out completely.  
+> • **Rule:** `/etc` = configuration, not programs
 
 **`/var` — Variable Data (Stuff That Changes)**  
 Logs, caches, spools, databases.
@@ -1099,7 +1099,7 @@ Confusing name—this is **not user home directories**. Contains installed progr
 
 #### 2) "Everything Is a File" (Linux Philosophy)
 
-> 📖 **See Session 3 §10** for the full explanation with `/dev/`, `/proc/`, and `/sys/` examples.
+> → **See Session 3 §10** for the full explanation with `/dev/`, `/proc/`, and `/sys/` examples.
 
 This is where Linux becomes *cool*. In Linux, files, directories, devices, hardware, and network interfaces are all represented as files.
 
@@ -1124,7 +1124,7 @@ This design is WHY Linux is scriptable, automatable, and runs the internet.
 
 #### 3) Dotfiles (Hidden Power)
 
-> 📖 **See Session 3 §12** where `ls -la` first introduces hidden files. This section goes deeper.
+> → **See Session 3 §12** where `ls -la` first introduces hidden files. This section goes deeper.
 
 Files that start with a dot `.` are **hidden**.
 
@@ -1138,7 +1138,7 @@ Files that start with a dot `.` are **hidden**.
 They usually store shell configs, app preferences, and user settings. List them: `ls -a`
 
 Why hide them? Prevent clutter and accidental deletion.  
-> 📌 **Important:** Deleting dot files can reset your environment or break tools.
+> • **Important:** Deleting dot files can reset your environment or break tools.
 
 **Dotfiles (`.bashrc`, `.profile`):** Used to customize shell behavior, aliases, environment variables, and startup logic.
 
@@ -1189,7 +1189,7 @@ chmod 755 script.sh    # Owner: rwx, Group: r-x, Others: r-x
 chmod +x script.sh     # Make executable
 ```
 
-> 📌 You will see `755` and `644` everywhere.
+> • You will see `755` and `644` everywhere.
 
 **Changing Ownership:**
 ```bash
@@ -1198,7 +1198,7 @@ chown user:group file
 sudo chown root:root config.conf
 ```
 
-⚠ Wrong ownership = broken apps
+[!] Wrong ownership = broken apps
 
 **Typical groups for hardware access:** `dialout`, `gpio`, `video`. Correct group membership often resolves "permission denied" with serial/camera devices.
 
@@ -1213,14 +1213,14 @@ sudo chown root:root config.conf
 sudo command
 ```
 Executes command as root, logs actions, requires password.  
-> 📌 **Best practice:** Use `sudo`, not permanent root login
+> • **Best practice:** Use `sudo`, not permanent root login
 
 **`su` — Switch User:**
 ```bash
 su
 su username
 ```
-Switches shell to another user. ⚠ Dangerous if misused.
+Switches shell to another user. [!] Dangerous if misused.
 
 **`/etc/sudoers` — Who Can Use sudo:**  
 DO NOT edit directly. Always use:
@@ -1230,13 +1230,13 @@ sudo visudo
 Wrong syntax here → no sudo → bad day.
 
 **Common Beginner Mistakes:**
-- ❌ Running everything with sudo (bad for security)
-- ❌ `chmod 777` everything (everyone can do everything—bad for security & interviews 😅)
-- ❌ Editing system files without backup (`sudo cp config.conf config.conf.bak`—always!)
-- ❌ Deleting random stuff in `/etc` or `/usr`
-- ❌ Not reading error messages (Linux tells you what failed and why)
+- [X] Running everything with sudo (bad for security)
+- [X] `chmod 777` everything (everyone can do everything—bad for security & interviews :-))
+- [X] Editing system files without backup (`sudo cp config.conf config.conf.bak`—always!)
+- [X] Deleting random stuff in `/etc` or `/usr`
+- [X] Not reading error messages (Linux tells you what failed and why)
 
-> 📌 Use sudo **only when required**. Permissions are not obstacles—they are **guardrails**.
+> • Use sudo **only when required**. Permissions are not obstacles—they are **guardrails**.
 
 ---
 
@@ -1260,14 +1260,14 @@ Limitations: Same filesystem only, can't link directories.
 ln -s target linkname
 ln -s /var/log/syslog syslog_link
 ```
-If target is deleted → ❌ Link breaks  
-> 📌 Most commonly used type.
+If target is deleted → [X] Link breaks  
+> • Most commonly used type.
 
 ---
 
 #### 7) Shell Aliases
 
-> 📖 **See Session 1 §11** for the mindset behind customization and efficiency.
+> → **See Session 1 §11** for the mindset behind customization and efficiency.
 
 Aliases save time—like macros for your shell. Speed up common workflows with carefully chosen aliases.
 
@@ -1277,7 +1277,7 @@ alias gs='git status'
 echo "alias ll='ls -lah'" >> ~/.bashrc
 ```
 
-Add to `~/.bashrc` or `~/.zshrc` and `source ~/.bashrc` to reload. You'll thank yourself later when typing gets lazy 😊
+Add to `~/.bashrc` or `~/.zshrc` and `source ~/.bashrc` to reload. You'll thank yourself later when typing gets lazy :)
 
 ---
 
@@ -1289,7 +1289,7 @@ Long robotics sessions benefit from readable fonts and reduced visual fatigue.
 - GNOME Tweaks for themes
 - Flatpak themes from Flathub
 
-Fonts + themes = aesthetic ~100% more hipster points 😎
+Fonts + themes = aesthetic ~100% more hipster points B-)
 
 ---
 
@@ -1301,8 +1301,8 @@ Understand how simulated hardware appears in `/dev` and how tooling discovers it
 
 #### 10) Install Common Software
 
-> 📖 **See Session 3 §7** for detailed package manager coverage (`apt`, `dnf`, `yum`, `pip`, `snap`).  
-> 📖 **See Session 2 §4** for Flatpak and Snap setup details.
+> → **See Session 3 §7** for detailed package manager coverage (`apt`, `dnf`, `yum`, `pip`, `snap`).  
+> → **See Session 2 §4** for Flatpak and Snap setup details.
 
 **Quick starter pack for Ubuntu:**
 ```bash
@@ -1333,7 +1333,7 @@ Every program you run becomes a *process*—an instance of a running program wit
 
 #### 2) `htop` — Interactive Process Viewer
 
-💡 `htop` is like `top`, but *way more human-friendly*: color, scrolling, arrow navigation, signal menus, and killer shortcuts.
+[TIP] `htop` is like `top`, but *way more human-friendly*: color, scrolling, arrow navigation, signal menus, and killer shortcuts.
 
 **Why `htop`?**
 - Shows CPU, RAM, threads in real-time
@@ -1348,7 +1348,7 @@ htop
 ```
 
 **Inside `htop`:**
-- 🔼/🔽 — move
+- ↑/↓ — move
 - F9 — kill selected process
 - F3 — search/filter
 - F5 — tree view (parent/child structure)
@@ -1373,8 +1373,8 @@ pkill firefox
 pkill -u someuser
 ```
 
-🧠 Tip: `kill` works on PIDs, `pkill` works on *names*.  
-> ⚠ Use `kill` sparingly—force-killing can corrupt data if the program is mid-write.
+[NOTE] Tip: `kill` works on PIDs, `pkill` works on *names*.  
+> [!] Use `kill` sparingly—force-killing can corrupt data if the program is mid-write.
 
 ---
 
@@ -1389,7 +1389,7 @@ ps aux | grep firefox     # Find Firefox
 ps -ef | grep python      # Find Python instances
 ```
 
-⚡ Pro tip: wrap your grep to *not* match itself (e.g., `grep "[f]irefox"`), because normal grep often shows its *own* process.
+[!] Pro tip: wrap your grep to *not* match itself (e.g., `grep "[f]irefox"`), because normal grep often shows its *own* process.
 
 ---
 
@@ -1432,7 +1432,7 @@ rm temp.log || echo "Could not delete temp.log"
 cmd1 ; cmd2 ; cmd3
 ```
 
-📌 Perfect for chaining updates, scripts, and error handling. Practice chaining—it's a *game changer* for automation and scripting.
+• Perfect for chaining updates, scripts, and error handling. Practice chaining—it's a *game changer* for automation and scripting.
 
 ---
 
@@ -1484,7 +1484,7 @@ ps -p 1 -o comm=    # Should show "systemd"
 - Manages network services
 - Handles timers (our main topic today)
 
-> If Linux is a city 🏙, `systemd` is the mayor.
+> If Linux is a city □, `systemd` is the mayor.
 
 ---
 
@@ -1607,7 +1607,7 @@ Reload systemd (IMPORTANT anytime you create/edit/delete unit files):
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl start hello.service
-cat /tmp/hello.log    # Boom 💥
+cat /tmp/hello.log    # Boom [!]
 ```
 
 ---
@@ -1710,7 +1710,7 @@ Activate:
 sudo systemctl daemon-reload
 sudo systemctl enable wall-msg.timer
 sudo systemctl start wall-msg.timer
-systemctl list-timers    # Check timers 🔥
+systemctl list-timers    # Check timers [!]
 ```
 
 ---
@@ -1791,10 +1791,10 @@ systemctl --failed                # Check failures
 - IoT tasks
 
 **Common Mistakes:**
-- ❌ Forgetting `daemon-reload`
-- ❌ Editing `/lib/systemd/system/` directly
-- ❌ Wrong file permissions
-- ❌ Forgetting `WantedBy=`
+- [X] Forgetting `daemon-reload`
+- [X] Editing `/lib/systemd/system/` directly
+- [X] Wrong file permissions
+- [X] Forgetting `WantedBy=`
 
 ---
 
@@ -1804,7 +1804,7 @@ systemctl --failed                # Check failures
 - Unit file = Configuration blueprint
 - systemctl = Control center
 
-> You are no longer a Linux user. You're becoming a Linux operator. 🚀
+> You are no longer a Linux user. You're becoming a Linux operator. →
 
 ---
 
@@ -1853,7 +1853,7 @@ sdb
 ```
 
 **Shows:** Disk names, partitions, mount points, size, type.  
-🔥 Use this before and after plugging a USB.
+[!] Use this before and after plugging a USB.
 
 **`blkid` — UUID Finder:**
 ```bash
@@ -1885,7 +1885,7 @@ sudo umount /mnt/mydrive
 sudo umount /dev/sdb1
 ```
 
-⚠ If busy error:
+[!] If busy error:
 ```bash
 lsof | grep sdb1    # Find what's using it
 ```
@@ -1914,7 +1914,7 @@ UUID=1a2b3c4d-xxxx-xxxx-xxxx-xxxxxxxxxxxx  /mnt/mydrive  ext4  defaults  0  2
 | Dump | usually 0 |
 | fsck order | usually 2 |
 
-**🧪 Test Before Reboot:**
+**[LAB] Test Before Reboot:**
 ```bash
 sudo mount -a    # If no errors → safe to reboot. If error → FIX IT before rebooting.
 ```
@@ -1943,7 +1943,7 @@ Swap:          2.0G   0B     2.0G
 - **available** → real usable memory
 - **buff/cache** → Linux using RAM smartly
 
-⚠ Linux uses RAM aggressively. That's GOOD. Unused RAM = wasted RAM.
+[!] Linux uses RAM aggressively. That's GOOD. Unused RAM = wasted RAM.
 
 **Real-time view:**
 ```bash
@@ -2388,7 +2388,7 @@ rsync -avz /src/ user@host:/dest/                # Remote sync
 rsync -av logs/ user@robot-host:/tmp/logs/
 ```
 
-> Learn the difference trailing slash makes—it's the "slash of power" 🗡.
+> Learn the difference trailing slash makes—it's the "slash of power" vs.
 
 ---
 
@@ -2501,41 +2501,6 @@ ls output/images
 
 ---
 
-## Course Final Project
-
-Congratulations! You've made it through the course. Now it's time to practice what you've learned.
-
-### Build Your Setup
-
-**At home, complete the following:**
-
-1. **Install Linux**
-   - Any distribution you choose (Arch, Debian, Fedora, etc.)
-   - Bare metal or VM (bare metal preferred for full experience)
-
-2. **Rice Your Desktop**
-   - Create a customized, personalized desktop environment
-   - Desktop Environments allowed: GNOME (heavily themed), KDE Plasma, XFCE
-   - Window Managers allowed: i3, bspwm, Awesome, Hyprland, Qtile, Sway, or any other
-
-3. **Document Your Journey**
-   - Take screenshots of your progress
-   - Keep your dotfiles in a Git repository
-   - Write a short README explaining your choices
-
-4. **Share With The Group**
-   - Post final screenshots to the group
-   - Share your dotfiles repository link
-   - Explain one challenging part and how you solved it
-
-**Evaluation:**
-- Functionality (does it work for daily use?)
-- Aesthetics (is it visually cohesive?)
-- Technical complexity (did you challenge yourself?)
-- Documentation (can others learn from your setup?)
-
----
-
 ## Contact the Author
 
 - **Email:** khaledmhfz2004@gmail.com
@@ -2547,6 +2512,4 @@ Congratulations! You've made it through the course. Now it's time to practice wh
 
 All rights reserved for **hamakRobotTeam** [NOT For Commercial Use]!!
 
----
-
-> *"The world quietly standardized on Linux. Now it's your turn."* 🐧✨
+DONE !! thanks Allah.
