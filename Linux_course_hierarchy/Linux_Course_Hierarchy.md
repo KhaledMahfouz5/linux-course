@@ -3,9 +3,10 @@
 
 > **Course Purpose:** This Linux course serves as a foundation for AI and Robotics development, specifically tailored for Raspberry Pi and ROS (Robot Operating System) applications.
 > **Hardware Note:** No physical Raspberry Pi required! Physical Pi is optional for advanced exploration.
+> **GitHub Repository:** https://github.com/KhaledMahfouz5/linux-course
 > **Requirements** 
 - You Have to know the basics of programming (variables , conditions ,loops , functions , ..etc).
-- You Should Have Internet Access To your machine for some sessions .. (you will be told before the session).
+- You Should have internet connection to be able to search the web and install packages when needed.
 - You Must Have At least (30-50)GB free disk space .
 - You Should have a sticky note or any tool for anything to take notes .
 
@@ -154,6 +155,7 @@
 
 > **Requirements:** 20GB+ free disk space, stable internet connection
 > **Note:** Focuses on Buildroot; Yocto covered conceptually for comparison
+> **Tutorial reference:** https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy
 
 * Overview of embedded Linux build systems:
   - **Buildroot**: Simple, fast, ideal for beginners and most projects
@@ -186,3 +188,13 @@
 * (Optional) Install Termux on mobile and explore remote server management from your phone
 * Build a custom embedded Linux system for Raspberry Pi using Buildroot with Python, SSH, and custom configuration
 
+---
+
+#### **Contact the Author**
+
+- Email: khaledmhfz2004@gmail.com
+- GitHub: https://github.com/KhaledMahfouz5/linux-course
+
+#### **Copyright**
+
+All rights reserved for **hamakRobotTeam** [NOT For Commercial Use]!!
