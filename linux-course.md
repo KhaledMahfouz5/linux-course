@@ -548,7 +548,7 @@ touch newfile.txt
 sleep 5
 ```
 
-**rm – Remove (⚠️ Dangerous but essential):**
+**rm – Remove (⚠ Dangerous but essential):**
 ```bash
 rm file.txt
 rm -r folder/
@@ -786,7 +786,7 @@ sed 's/old/new/g' file                      # Replace ALL occurrences
 sed 's/linux/Linux/' notes.txt
 sed '/error/d' logs.txt                     # Delete lines with "error"
 sed -n '/INFO/p' logs.txt                  # Print only matching lines
-sed -i 's/foo/bar/g' file.txt              # ⚠️ Edit IN-PLACE (BE CAREFUL!)
+sed -i 's/foo/bar/g' file.txt              # ⚠ Edit IN-PLACE (BE CAREFUL!)
 ```
 
 **Cool examples:**
@@ -966,7 +966,7 @@ python3 -m http.server 8000
 ```
 Now anyone on your network can access `http://YOUR_IP:8000`
 
-> ⚠️ Warning: `http.server` is not recommended for production. It only implements basic security checks.
+> ⚠ Warning: `http.server` is not recommended for production. It only implements basic security checks.
 
 **Node.js:**
 ```bash
@@ -1036,7 +1036,7 @@ sudo nano /etc/apt/sources.list    # Edit sources
 sudo apt update && sudo apt upgrade
 ```
 
-> ⚠️ **Kali Repositories Warning:** Don't mix Kali repos with Ubuntu casually. You *will* break things. Safe use case: **specific tools only**. Use pinning if you *must*.
+> ⚠ **Kali Repositories Warning:** Don't mix Kali repos with Ubuntu casually. You *will* break things. Safe use case: **specific tools only**. Use pinning if you *must*.
 
 ---
 
@@ -1071,7 +1071,7 @@ Contains system configuration files, user settings, service configs, network con
 /etc/hosts
 /etc/sudoers
 ```
-⚠️ Editing files here can break login, networking, or lock you out completely.  
+⚠ Editing files here can break login, networking, or lock you out completely.  
 > 📌 **Rule:** `/etc` = configuration, not programs
 
 **`/var` — Variable Data (Stuff That Changes)**  
@@ -1198,7 +1198,7 @@ chown user:group file
 sudo chown root:root config.conf
 ```
 
-⚠️ Wrong ownership = broken apps
+⚠ Wrong ownership = broken apps
 
 **Typical groups for hardware access:** `dialout`, `gpio`, `video`. Correct group membership often resolves "permission denied" with serial/camera devices.
 
@@ -1220,7 +1220,7 @@ Executes command as root, logs actions, requires password.
 su
 su username
 ```
-Switches shell to another user. ⚠️ Dangerous if misused.
+Switches shell to another user. ⚠ Dangerous if misused.
 
 **`/etc/sudoers` — Who Can Use sudo:**  
 DO NOT edit directly. Always use:
@@ -1374,7 +1374,7 @@ pkill -u someuser
 ```
 
 🧠 Tip: `kill` works on PIDs, `pkill` works on *names*.  
-> ⚠️ Use `kill` sparingly—force-killing can corrupt data if the program is mid-write.
+> ⚠ Use `kill` sparingly—force-killing can corrupt data if the program is mid-write.
 
 ---
 
@@ -1484,7 +1484,7 @@ ps -p 1 -o comm=    # Should show "systemd"
 - Manages network services
 - Handles timers (our main topic today)
 
-> If Linux is a city 🏙️, `systemd` is the mayor.
+> If Linux is a city 🏙, `systemd` is the mayor.
 
 ---
 
@@ -1885,7 +1885,7 @@ sudo umount /mnt/mydrive
 sudo umount /dev/sdb1
 ```
 
-⚠️ If busy error:
+⚠ If busy error:
 ```bash
 lsof | grep sdb1    # Find what's using it
 ```
@@ -1943,7 +1943,7 @@ Swap:          2.0G   0B     2.0G
 - **available** → real usable memory
 - **buff/cache** → Linux using RAM smartly
 
-⚠️ Linux uses RAM aggressively. That's GOOD. Unused RAM = wasted RAM.
+⚠ Linux uses RAM aggressively. That's GOOD. Unused RAM = wasted RAM.
 
 **Real-time view:**
 ```bash
@@ -2388,7 +2388,7 @@ rsync -avz /src/ user@host:/dest/                # Remote sync
 rsync -av logs/ user@robot-host:/tmp/logs/
 ```
 
-> Learn the difference trailing slash makes—it's the "slash of power" 🗡️.
+> Learn the difference trailing slash makes—it's the "slash of power" 🗡.
 
 ---
 
