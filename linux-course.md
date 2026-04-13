@@ -1,3 +1,16 @@
+---
+header-includes: |
+  \usepackage{hyperref}
+  \hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,
+    urlcolor=blue,
+    citecolor=blue,
+    pdfborder={0 0 0}
+  }
+---
+
 # Linux Course
 
 ## For AI & Robotics Applications (Raspberry Pi + ROS)
@@ -251,6 +264,28 @@ Linux rewards people who explore.
 
 ---
 
+#### Useful Links — Session 1
+
+**Video Introductions:**
+- [Linux History & Distros](https://www.youtube.com/watch?v=ShcR4Zfc6Dw)
+- [Unix Philosophy](https://youtu.be/gojeTqXdBH0?si=kg-iP4KEFjLU-Tto)
+- [Kernel vs OS](https://youtu.be/IvGdY6luTtU?si=nEcir9iqjmYMa1lo)
+- [Free Software Philosophy](https://youtu.be/Ag1AKIl_2GM?si=0YDnS2BDSrAAmFX8)
+- [Why Programmers Love Linux](https://youtu.be/otDOHt_Jges?si=4ChY6-xpYbOdbKQ6)
+- [Pros and Cons](https://youtu.be/pYfzZRyRzvs?si=4Q5_H0gJ3JHBodOc)
+
+**Recommended Arabic YouTube Channels:**
+- [anaHr](https://www.youtube.com/@anaHr)
+- [mohammad besar](https://www.youtube.com/@mmbesar)
+- [Al-Waqqad](https://www.youtube.com/@alwaqad)
+- [sudostart](https://www.youtube.com/@Sudo_Start)
+- [linuxtopia](https://www.youtube.com/@linuxtopia)
+- [Abdulmojeeb Al-Hameed](https://www.youtube.com/@abdulmogeeb)
+
+**Book:** _The Art of UNIX Programming_ — Eric Raymond
+
+---
+
 ### Session 2: Installation & Embedded Setup
 
 > **Before class:** Install VirtualBox/VMware. Optional: QEMU for Pi emulation.
@@ -419,6 +454,9 @@ sudo apt update && sudo apt upgrade -y && flatpak update -y && sudo snap refresh
 ---
 
 #### Practice
+
+Run these commands to verify your SSH and firewall setup:
+
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y openssh-server ufw
@@ -427,6 +465,19 @@ sudo ufw allow OpenSSH
 sudo ufw enable
 ip a
 ```
+
+---
+
+#### Useful Links — Session 2
+
+**Video Tutorials:**
+- [Choosing Your Distro](https://youtu.be/8yVlJEzq2eg?si=SWcgh_Bw51Li3lv6)
+- [Install Linux Step-by-Step](https://www.youtube.com/watch?v=C-a5IamFIuM)
+- [Dual-Boot with Windows](https://youtu.be/XevGfO_vQJQ?si=OBqaM8UlUeH1wjdQ)
+- [VirtualBox VM Setup](https://youtu.be/wX75Z-4MEoM?si=raCzHOzYJy-GZi9S)
+
+**Written Guides:**
+- [Ubuntu 24.04 Post-Install Guide](https://mmbesar.github.io/Tutorials/Ubuntu-24.04-Post/)
 
 ---
 
@@ -874,6 +925,16 @@ grep -i "imu" topics.txt | sort | uniq -c
 
 ---
 
+#### Useful Links — Session 4
+
+**Video Tutorials:**
+- [grep](https://youtu.be/N05sWPgj-44?si=RqN-cKCBSae4bvK7)
+- [sed](https://youtu.be/EACe7aiGczw?si=q8Hyf9d1VgsO-uj2)
+- [awk](https://youtu.be/9YOZmI-zWok?si=Larx5zKGgMMSrsn-)
+- [find](https://youtu.be/BZ5gsFiIKOQ?si=WEDUXPu6DCi2anNL)
+
+---
+
 ### Session 5: Development Environment for AI & Robotics
 
 > **Verify installed:** `python3`, `python3-venv`, `git`, `cmake`, `build-essential`
@@ -1313,6 +1374,60 @@ sudo apt install \
 
 ---
 
+#### Useful Links — Session 6
+
+**Package Management:**
+- [APT docs (Debian Wiki)](https://wiki.debian.org/Apt)
+- [APT Howto (Ubuntu Community)](https://help.ubuntu.com/community/AptGet/Howto)
+- [Debian SourcesList](https://wiki.debian.org/SourcesList)
+- [Ubuntu Repositories](https://help.ubuntu.com/community/Repositories)
+- [Kali Repositories docs](https://www.kali.org/docs/general-use/kali-linux-sources-list-repositories/)
+- [Adding Kali repos to Debian (YouTube)](https://youtu.be/YI1Q3R0TEYs?si=TO3KfOz4nq0sSIVw)
+
+**Build from Source:**
+- [suckless st](https://suckless.org/st/)
+- [suckless dmenu](https://suckless.org/dmenu/)
+- [GCC docs](https://gcc.gnu.org/onlinedocs/)
+- [GDB docs](https://www.gnu.org/software/gdb/documentation/)
+- [GNU Make manual](https://www.gnu.org/software/make/manual/)
+- [avr-libc](https://www.nongnu.org/avr-libc/)
+
+**Web Development:**
+- [Python http.server docs](https://docs.python.org/3/library/http.server.html)
+- [npm serve](https://www.npmjs.com/package/serve)
+- [PHP Manual](https://www.php.net/manual/en/)
+- [XAMPP download](https://www.apachefriends.org/index.html)
+- [XAMPP FAQ (Linux)](https://www.apachefriends.org/faq_linux.html)
+
+**Node.js & React:**
+- [Node.js docs](https://nodejs.org/en/docs)
+- [React docs](https://react.dev/learn)
+
+**Java:**
+- [OpenJDK](https://openjdk.org/)
+- [Oracle Java Tutorial](https://docs.oracle.com/javase/tutorial/)
+
+**Python:**
+- [Python venv tutorial](https://docs.python.org/3/tutorial/venv.html)
+- [pip docs](https://pip.pypa.io/en/stable/)
+
+**Apps & IDEs:**
+- [Google Chrome](https://www.google.com/chrome/)
+- [VS Code](https://code.visualstudio.com/)
+- [VS Code Linux Setup](https://code.visualstudio.com/docs/setup/linux)
+- [Arduino](https://docs.arduino.cc/)
+
+**Containers:**
+- [Docker install docs](https://docs.docker.com/engine/install/ubuntu/)
+- [Docker tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/HS-Docker/)
+- [Distrobox docs](https://distrobox.it/)
+
+**AppImage:**
+- [AppImage docs](https://docs.appimage.org/)
+- [AppImage tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/appimages/)
+
+---
+
 ### Session 7: Process Monitoring & Robotics System Management
 
 > **Verify `htop` is installed.**
@@ -1454,6 +1569,23 @@ Track simulator CPU/RAM impact and tune settings to maintain responsiveness.
 
 ---
 
+#### Useful Links — Session 7
+
+**Process Management:**
+- [htop tutorial (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/)
+- [Manage processes with ps, kill, pkill (How-To Geek)](https://www.howtogeek.com/how-to-manage-linux-processes-using-ps-kill-and-pkill/)
+- [Viewing and Monitoring Processes (Ubuntu Community)](https://discourse.ubuntu.com/t/viewing-and-monitoring-processes-in-linux/26024)
+
+**Job Control & Commands:**
+- [Bash job control (DigitalOcean)](https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes)
+- [Chaining Commands (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/chaining-commands-in-linux/)
+
+**General References:**
+- [Ubuntu CLI for Beginners](https://ubuntu.com/tutorials/command-line-for-beginners)
+- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
+
+---
+
 ## Chapter 3: System Management, Scripting & Networking
 
 ### Session 8: Automation with systemd & Cron
@@ -1542,6 +1674,8 @@ systemctl status apache2           # Check status
 ---
 
 #### 5) Anatomy of a Service File
+
+Inspect a service file structure:
 
 ```bash
 systemctl cat apache2.service
@@ -1773,6 +1907,8 @@ crontab -e      # Edit cron jobs
 
 #### 13) Debugging Services & Timers
 
+Check service logs and failures:
+
 ```bash
 journalctl -u wall-msg.service    # Logs for specific service
 journalctl -f                     # Live logs
@@ -1805,6 +1941,15 @@ systemctl --failed                # Check failures
 - systemctl = Control center
 
 > You are no longer a Linux user. You're becoming a Linux operator. →
+
+---
+
+#### Useful Links — Session 8
+
+**systemd Fundamentals:**
+- [Linux systemd and its components (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/linux-systemd-and-its-components/)
+- [Introduction to systemd (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/an-introduction-to-systemd-and-its-role-in-the-boot-process/)
+- [How to mask a systemd unit (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/how-to-mask-a-systemd-unit-in-linux/)
 
 ---
 
@@ -2048,6 +2193,8 @@ If system won't boot:
 
 #### 12) Useful Extra Commands
 
+Additional disk and memory utilities:
+
 ```bash
 df -h                 # Disk usage
 du -sh *              # Folder sizes
@@ -2057,6 +2204,9 @@ mount | grep sdb      # See mount points
 ---
 
 #### Practice
+
+Verify your disk and memory configuration:
+
 ```bash
 lsblk
 blkid
@@ -2076,6 +2226,16 @@ df -h
 5. Install zram and compare swap usage
 
 > **Final Advice:** Disk and memory management is not optional knowledge. It's what separates "Linux user" from "Linux operator". Break things in a VM. Test everything with `mount -a`. Never reboot blindly after editing fstab. You're building serious Linux skills now.
+
+---
+
+#### Useful Links — Session 9
+
+**Disk & Storage Tutorials:**
+- [Adding 2nd drive tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/2nd-drive/)
+- [RAM, SWAP, ZRAM tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/RAM-SWAP-ZRAM/)
+- [Disk management video guide](https://www.youtube.com/watch?v=yWuHI7uoftY)
+- [Swap & ZRAM video guide](https://youtu.be/CPvJvY79vEw)
 
 ---
 
@@ -2410,6 +2570,28 @@ Use keys for secure, passwordless automation across robot fleets.
 
 ---
 
+#### Useful Links — Session 10
+
+**Bash Scripting:**
+- [Bash scripting tutorial (YouTube)](https://youtu.be/tK9Oc6AEnR4?si=y3M0s1AIVfqtzCJB)
+- [BashGuide](https://mywiki.wooledge.org/BashGuide)
+- [ShellCheck — lint your scripts](https://www.shellcheck.net/)
+- [ExplainShell — understand complex commands](https://explainshell.com/)
+
+**Networking Tools:**
+- [curl documentation](https://curl.se/docs/)
+- [GNU Wget Manual](https://www.gnu.org/software/wget/manual/wget.html)
+- [aria2 manual](https://aria2.github.io/manual/en/html/)
+- [OpenSSH Manual](https://www.openssh.com/manual.html)
+
+**Man Pages:**
+- [ping](https://linux.die.net/man/8/ping)
+- [ip](https://man7.org/linux/man-pages/man8/ip.8.html)
+- [ifconfig](https://linux.die.net/man/8/ifconfig)
+- [scp](https://man7.org/linux/man-pages/man1/scp.1.html)
+
+---
+
 ### Session 11: Building Embedded Linux Systems with Buildroot
 
 > **Requirements:** 20 GB+ free storage, stable internet  
@@ -2443,6 +2625,8 @@ Pipeline:
 
 #### 3) Configuration Basics
 
+Start with a baseline, then customize:
+
 ```bash
 make defconfig          # Baseline setup
 make menuconfig         # Interactive customization
@@ -2453,6 +2637,8 @@ make menuconfig         # Interactive customization
 ---
 
 #### 4) First Build and Outputs
+
+Run the build and inspect the output:
 
 ```bash
 make                    # Build everything
@@ -2485,6 +2671,46 @@ make menuconfig
 make
 ls output/images
 ```
+
+---
+
+#### Useful Links — Session 11
+
+**Buildroot:**
+- [Buildroot tutorial video](https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy)
+
+**Arch Wiki:**
+- [Arch Wiki — the ultimate Linux reference](https://wiki.archlinux.org/)
+
+---
+
+#### Useful Links — Cool Stuff & Extras
+
+**Multimedia:**
+- [FFmpeg tutorial (It's FOSS)](https://itsfoss.com/ffmpeg/)
+- [FFmpeg docs](https://ffmpeg.org/ffmpeg.html)
+
+**FOSS Alternatives:**
+- [Top 10 FOSS Apps (Neowin)](https://www.neowin.net/guides/top-10-foss-apps-to-make-your-linux-experience-more-enjoyable/)
+- [AlternativeTo.net](https://alternativeto.net/)
+
+**Windows Apps/Games on Linux:**
+- [Bottles + Wine (YouTube)](https://youtu.be/xGbQZt96q54?si=FgQJ__YMpISs7L1c)
+- [Lutris (YouTube)](https://youtu.be/JXHvGjiJJG0?si=1fI81xIr7zichNDy)
+
+**Sync & Backup:**
+- [DigitalOcean rsync tutorial](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories)
+- [rsync backup tutorial (YouTube)](https://youtu.be/GqSxR93xK6E?si=c2TvpU8R-53SXDty)
+
+**Ricing & Customization:**
+- [Ricing inspiration (YouTube)](https://youtu.be/z1-yuolwrVs?si=3IKioFlYz9L8vkNS)
+- [Perfect Ubuntu Guide (GitHub)](https://github.com/mikeroyal/Perfect-Ubuntu-Guide)
+- [Best Arabic Font in Linux (mmbesar)](https://mmbesar.github.io/Tutorials/Best-Arabic-Font-in-Linux/)
+- [Linux Utilities (GitHub Tinram)](https://github.com/Tinram/Linux-Utilities)
+- [12 GREAT CLI programs (YouTube)](https://youtu.be/nCS4BtJ34-o?si=T6gagbT5k71H5BNE)
+
+**Shell & Scripting Resources:**
+- [Shell scripting course (Learn By Example)](https://learnbyexample.github.io/scripting_course/Linux_curated_resources.html)
 
 ---
 
