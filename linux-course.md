@@ -1,5 +1,12 @@
 ---
+header-left: "Hamak AI and Robot Team Linux Course"
+header-center: ""
+header-right: ""
+footer-left: ""
+footer-center: '`Contact the author : khaledmhfz2004@gmail.com\\All rights reserved for hamakRobotTeam [NOT For Commercial Use]!!`{=latex}'
+footer-right: " "
 header-includes: |
+  \usepackage{fontawesome5}
   \usepackage{hyperref}
   \hypersetup{
     colorlinks=true,
@@ -9,6 +16,11 @@ header-includes: |
     citecolor=blue,
     pdfborder={0 0 0}
   }
+  \newcommand{\usefullink}[2]{%
+    \par\vspace{0.5ex}%
+    \href{#1}{\textcolor{blue}{\underline{\faLink\quad #2}}}%
+    \par\vspace{0.5ex}%
+  }
 ---
 
 # Linux Course
@@ -17,7 +29,9 @@ header-includes: |
 
 This course is a practical Linux foundation for AI and robotics learners. It is designed for development on Linux machines and VMs, with Raspberry Pi concepts integrated across sessions.
 
-**GitHub repository:** https://github.com/KhaledMahfouz5/linux-course
+**GitHub repository:**
+
+\usefullink{https://github.com/KhaledMahfouz5/linux-course}{https://github.com/KhaledMahfouz5/linux-course}
 
 **Course structure:** 3 chapters, 11 sessions  
 **Session duration:** 60-90 minutes each  
@@ -267,20 +281,32 @@ Linux rewards people who explore.
 #### Useful Links — Session 1
 
 **Video Introductions:**
-- [Linux History & Distros](https://www.youtube.com/watch?v=ShcR4Zfc6Dw)
-- [Unix Philosophy](https://youtu.be/gojeTqXdBH0?si=kg-iP4KEFjLU-Tto)
-- [Kernel vs OS](https://youtu.be/IvGdY6luTtU?si=nEcir9iqjmYMa1lo)
-- [Free Software Philosophy](https://youtu.be/Ag1AKIl_2GM?si=0YDnS2BDSrAAmFX8)
-- [Why Programmers Love Linux](https://youtu.be/otDOHt_Jges?si=4ChY6-xpYbOdbKQ6)
-- [Pros and Cons](https://youtu.be/pYfzZRyRzvs?si=4Q5_H0gJ3JHBodOc)
+
+\usefullink{https://www.youtube.com/watch?v=ShcR4Zfc6Dw}{Linux History \& Distros}
+
+\usefullink{https://youtu.be/gojeTqXdBH0?si=kg-iP4KEFjLU-Tto}{Unix Philosophy}
+
+\usefullink{https://youtu.be/IvGdY6luTtU?si=nEcir9iqjmYMa1lo}{Kernel vs OS}
+
+\usefullink{https://youtu.be/Ag1AKIl_2GM?si=0YDnS2BDSrAAmFX8}{Free Software Philosophy}
+
+\usefullink{https://youtu.be/otDOHt\_Jges?si=4ChY6-xpYbOdbKQ6}{Why Programmers Love Linux}
+
+\usefullink{https://youtu.be/pYfzZRyRzvs?si=4Q5\_H0gJ3JHBodOc}{Pros and Cons}
 
 **Recommended Arabic YouTube Channels:**
-- [anaHr](https://www.youtube.com/@anaHr)
-- [mohammad besar](https://www.youtube.com/@mmbesar)
-- [Al-Waqqad](https://www.youtube.com/@alwaqad)
-- [sudostart](https://www.youtube.com/@Sudo_Start)
-- [linuxtopia](https://www.youtube.com/@linuxtopia)
-- [Abdulmojeeb Al-Hameed](https://www.youtube.com/@abdulmogeeb)
+
+\usefullink{https://www.youtube.com/@anaHr}{anaHr}
+
+\usefullink{https://www.youtube.com/@mmbesar}{mohammad besar}
+
+\usefullink{https://www.youtube.com/@alwaqad}{Al-Waqqad}
+
+\usefullink{https://www.youtube.com/@Sudo\_Start}{sudostart}
+
+\usefullink{https://www.youtube.com/@linuxtopia}{linuxtopia}
+
+\usefullink{https://www.youtube.com/@abdulmogeeb}{Abdulmojeeb Al-Hameed}
 
 **Book:** _The Art of UNIX Programming_ — Eric Raymond
 
@@ -471,13 +497,18 @@ ip a
 #### Useful Links — Session 2
 
 **Video Tutorials:**
-- [Choosing Your Distro](https://youtu.be/8yVlJEzq2eg?si=SWcgh_Bw51Li3lv6)
-- [Install Linux Step-by-Step](https://www.youtube.com/watch?v=C-a5IamFIuM)
-- [Dual-Boot with Windows](https://youtu.be/XevGfO_vQJQ?si=OBqaM8UlUeH1wjdQ)
-- [VirtualBox VM Setup](https://youtu.be/wX75Z-4MEoM?si=raCzHOzYJy-GZi9S)
+
+\usefullink{https://youtu.be/8yVlJEzq2eg?si=SWcgh\_Bw51Li3lv6}{Choosing Your Distro}
+
+\usefullink{https://www.youtube.com/watch?v=C-a5IamFIuM}{Install Linux Step-by-Step}
+
+\usefullink{https://youtu.be/XevGfO\_vQJQ?si=OBqaM8UlUeH1wjdQ}{Dual-Boot with Windows}
+
+\usefullink{https://youtu.be/wX75Z-4MEoM?si=raCzHOzYJy-GZi9S}{VirtualBox VM Setup}
 
 **Written Guides:**
-- [Ubuntu 24.04 Post-Install Guide](https://mmbesar.github.io/Tutorials/Ubuntu-24.04-Post/)
+
+\usefullink{https://mmbesar.github.io/Tutorials/Ubuntu-24.04-Post/}{Ubuntu 24.04 Post-Install Guide}
 
 ---
 
@@ -599,7 +630,7 @@ touch newfile.txt
 sleep 5
 ```
 
-**rm – Remove ([!] Dangerous but essential):**
+**rm – Remove (\faIcon{exclamation-triangle} Dangerous but essential):**
 ```bash
 rm file.txt
 rm -r folder/
@@ -837,7 +868,7 @@ sed 's/old/new/g' file                      # Replace ALL occurrences
 sed 's/linux/Linux/' notes.txt
 sed '/error/d' logs.txt                     # Delete lines with "error"
 sed -n '/INFO/p' logs.txt                  # Print only matching lines
-sed -i 's/foo/bar/g' file.txt              # [!] Edit IN-PLACE (BE CAREFUL!)
+sed -i 's/foo/bar/g' file.txt              # \faIcon{exclamation-triangle} Edit IN-PLACE (BE CAREFUL!)
 ```
 
 **Cool examples:**
@@ -928,10 +959,14 @@ grep -i "imu" topics.txt | sort | uniq -c
 #### Useful Links — Session 4
 
 **Video Tutorials:**
-- [grep](https://youtu.be/N05sWPgj-44?si=RqN-cKCBSae4bvK7)
-- [sed](https://youtu.be/EACe7aiGczw?si=q8Hyf9d1VgsO-uj2)
-- [awk](https://youtu.be/9YOZmI-zWok?si=Larx5zKGgMMSrsn-)
-- [find](https://youtu.be/BZ5gsFiIKOQ?si=WEDUXPu6DCi2anNL)
+
+\usefullink{https://youtu.be/N05sWPgj-44?si=RqN-cKCBSae4bvK7}{grep}
+
+\usefullink{https://youtu.be/EACe7aiGczw?si=q8Hyf9d1VgsO-uj2}{sed}
+
+\usefullink{https://youtu.be/9YOZmI-zWok?si=Larx5zKGgMMSrsn-}{awk}
+
+\usefullink{https://youtu.be/BZ5gsFiIKOQ?si=WEDUXPu6DCi2anNL}{find}
 
 ---
 
@@ -1027,7 +1062,7 @@ python3 -m http.server 8000
 ```
 Now anyone on your network can access `http://YOUR_IP:8000`
 
-> [!] Warning: `http.server` is not recommended for production. It only implements basic security checks.
+> \faIcon{exclamation-triangle} Warning: `http.server` is not recommended for production. It only implements basic security checks.
 
 **Node.js:**
 ```bash
@@ -1054,7 +1089,7 @@ php -S localhost:8000
 VS Code with Python/C++/ROS extensions for integrated linting, debugging, and navigation.
 
 **Install:**
-- VS Code: https://code.visualstudio.com/
+- VS Code: \usefullink{https://code.visualstudio.com/}{https://code.visualstudio.com/}
 - Browsers: `sudo apt install -y firefox`
 - Arduino IDE: `sudo apt install -y arduino`
 
@@ -1097,7 +1132,7 @@ sudo nano /etc/apt/sources.list    # Edit sources
 sudo apt update && sudo apt upgrade
 ```
 
-> [!] **Kali Repositories Warning:** Don't mix Kali repos with Ubuntu casually. You *will* break things. Safe use case: **specific tools only**. Use pinning if you *must*.
+> \faIcon{exclamation-triangle} **Kali Repositories Warning:** Don't mix Kali repos with Ubuntu casually. You *will* break things. Safe use case: **specific tools only**. Use pinning if you *must*.
 
 ---
 
@@ -1132,7 +1167,7 @@ Contains system configuration files, user settings, service configs, network con
 /etc/hosts
 /etc/sudoers
 ```
-[!] Editing files here can break login, networking, or lock you out completely.  
+\faIcon{exclamation-triangle} Editing files here can break login, networking, or lock you out completely.  
 > • **Rule:** `/etc` = configuration, not programs
 
 **`/var` — Variable Data (Stuff That Changes)**  
@@ -1259,7 +1294,7 @@ chown user:group file
 sudo chown root:root config.conf
 ```
 
-[!] Wrong ownership = broken apps
+\faIcon{exclamation-triangle} Wrong ownership = broken apps
 
 **Typical groups for hardware access:** `dialout`, `gpio`, `video`. Correct group membership often resolves "permission denied" with serial/camera devices.
 
@@ -1281,7 +1316,7 @@ Executes command as root, logs actions, requires password.
 su
 su username
 ```
-Switches shell to another user. [!] Dangerous if misused.
+Switches shell to another user. \faIcon{exclamation-triangle} Dangerous if misused.
 
 **`/etc/sudoers` — Who Can Use sudo:**  
 DO NOT edit directly. Always use:
@@ -1291,11 +1326,11 @@ sudo visudo
 Wrong syntax here → no sudo → bad day.
 
 **Common Beginner Mistakes:**
-- [X] Running everything with sudo (bad for security)
-- [X] `chmod 777` everything (everyone can do everything—bad for security & interviews :-))
-- [X] Editing system files without backup (`sudo cp config.conf config.conf.bak`—always!)
-- [X] Deleting random stuff in `/etc` or `/usr`
-- [X] Not reading error messages (Linux tells you what failed and why)
+- \faTimesCircle Running everything with sudo (bad for security)
+- \faTimesCircle `chmod 777` everything (everyone can do everything—bad for security & interviews :-))
+- \faTimesCircle Editing system files without backup (`sudo cp config.conf config.conf.bak`—always!)
+- \faTimesCircle Deleting random stuff in `/etc` or `/usr`
+- \faTimesCircle Not reading error messages (Linux tells you what failed and why)
 
 > • Use sudo **only when required**. Permissions are not obstacles—they are **guardrails**.
 
@@ -1321,7 +1356,7 @@ Limitations: Same filesystem only, can't link directories.
 ln -s target linkname
 ln -s /var/log/syslog syslog_link
 ```
-If target is deleted → [X] Link breaks  
+If target is deleted → \faTimesCircle Link breaks  
 > • Most commonly used type.
 
 ---
@@ -1377,54 +1412,86 @@ sudo apt install \
 #### Useful Links — Session 6
 
 **Package Management:**
-- [APT docs (Debian Wiki)](https://wiki.debian.org/Apt)
-- [APT Howto (Ubuntu Community)](https://help.ubuntu.com/community/AptGet/Howto)
-- [Debian SourcesList](https://wiki.debian.org/SourcesList)
-- [Ubuntu Repositories](https://help.ubuntu.com/community/Repositories)
-- [Kali Repositories docs](https://www.kali.org/docs/general-use/kali-linux-sources-list-repositories/)
-- [Adding Kali repos to Debian (YouTube)](https://youtu.be/YI1Q3R0TEYs?si=TO3KfOz4nq0sSIVw)
+
+\usefullink{https://wiki.debian.org/Apt}{APT docs (Debian Wiki)}
+
+\usefullink{https://help.ubuntu.com/community/AptGet/Howto}{APT Howto (Ubuntu Community)}
+
+\usefullink{https://wiki.debian.org/SourcesList}{Debian SourcesList}
+
+\usefullink{https://help.ubuntu.com/community/Repositories}{Ubuntu Repositories}
+
+\usefullink{https://www.kali.org/docs/general-use/kali-linux-sources-list-repositories/}{Kali Repositories docs}
+
+\usefullink{https://youtu.be/YI1Q3R0TEYs?si=TO3KfOz4nq0sSIVw}{Adding Kali repos to Debian (YouTube)}
 
 **Build from Source:**
-- [suckless st](https://suckless.org/st/)
-- [suckless dmenu](https://suckless.org/dmenu/)
-- [GCC docs](https://gcc.gnu.org/onlinedocs/)
-- [GDB docs](https://www.gnu.org/software/gdb/documentation/)
-- [GNU Make manual](https://www.gnu.org/software/make/manual/)
-- [avr-libc](https://www.nongnu.org/avr-libc/)
+
+\usefullink{https://suckless.org/st/}{suckless st}
+
+\usefullink{https://suckless.org/dmenu/}{suckless dmenu}
+
+\usefullink{https://gcc.gnu.org/onlinedocs/}{GCC docs}
+
+\usefullink{https://www.gnu.org/software/gdb/documentation/}{GDB docs}
+
+\usefullink{https://www.gnu.org/software/make/manual/}{GNU Make manual}
+
+\usefullink{https://www.nongnu.org/avr-libc/}{avr-libc}
 
 **Web Development:**
-- [Python http.server docs](https://docs.python.org/3/library/http.server.html)
-- [npm serve](https://www.npmjs.com/package/serve)
-- [PHP Manual](https://www.php.net/manual/en/)
-- [XAMPP download](https://www.apachefriends.org/index.html)
-- [XAMPP FAQ (Linux)](https://www.apachefriends.org/faq_linux.html)
 
-**Node.js & React:**
-- [Node.js docs](https://nodejs.org/en/docs)
-- [React docs](https://react.dev/learn)
+\usefullink{https://docs.python.org/3/library/http.server.html}{Python http.server docs}
+
+\usefullink{https://www.npmjs.com/package/serve}{npm serve}
+
+\usefullink{https://www.php.net/manual/en/}{PHP Manual}
+
+\usefullink{https://www.apachefriends.org/index.html}{XAMPP download}
+
+\usefullink{https://www.apachefriends.org/faq\_linux.html}{XAMPP FAQ (Linux)}
+
+**Node.js \& React:**
+
+\usefullink{https://nodejs.org/en/docs}{Node.js docs}
+
+\usefullink{https://react.dev/learn}{React docs}
 
 **Java:**
-- [OpenJDK](https://openjdk.org/)
-- [Oracle Java Tutorial](https://docs.oracle.com/javase/tutorial/)
+
+\usefullink{https://openjdk.org/}{OpenJDK}
+
+\usefullink{https://docs.oracle.com/javase/tutorial/}{Oracle Java Tutorial}
 
 **Python:**
-- [Python venv tutorial](https://docs.python.org/3/tutorial/venv.html)
-- [pip docs](https://pip.pypa.io/en/stable/)
 
-**Apps & IDEs:**
-- [Google Chrome](https://www.google.com/chrome/)
-- [VS Code](https://code.visualstudio.com/)
-- [VS Code Linux Setup](https://code.visualstudio.com/docs/setup/linux)
-- [Arduino](https://docs.arduino.cc/)
+\usefullink{https://docs.python.org/3/tutorial/venv.html}{Python venv tutorial}
+
+\usefullink{https://pip.pypa.io/en/stable/}{pip docs}
+
+**Apps \& IDEs:**
+
+\usefullink{https://www.google.com/chrome/}{Google Chrome}
+
+\usefullink{https://code.visualstudio.com/}{VS Code}
+
+\usefullink{https://code.visualstudio.com/docs/setup/linux}{VS Code Linux Setup}
+
+\usefullink{https://docs.arduino.cc/}{Arduino}
 
 **Containers:**
-- [Docker install docs](https://docs.docker.com/engine/install/ubuntu/)
-- [Docker tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/HS-Docker/)
-- [Distrobox docs](https://distrobox.it/)
+
+\usefullink{https://docs.docker.com/engine/install/ubuntu/}{Docker install docs}
+
+\usefullink{https://mmbesar.github.io/Tutorials/HS-Docker/}{Docker tutorial (mmbesar)}
+
+\usefullink{https://distrobox.it/}{Distrobox docs}
 
 **AppImage:**
-- [AppImage docs](https://docs.appimage.org/)
-- [AppImage tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/appimages/)
+
+\usefullink{https://docs.appimage.org/}{AppImage docs}
+
+\usefullink{https://mmbesar.github.io/Tutorials/appimages/}{AppImage tutorial (mmbesar)}
 
 ---
 
@@ -1448,7 +1515,7 @@ Every program you run becomes a *process*—an instance of a running program wit
 
 #### 2) `htop` — Interactive Process Viewer
 
-[TIP] `htop` is like `top`, but *way more human-friendly*: color, scrolling, arrow navigation, signal menus, and killer shortcuts.
+\faLightbulb `htop` is like `top`, but *way more human-friendly*: color, scrolling, arrow navigation, signal menus, and killer shortcuts.
 
 **Why `htop`?**
 - Shows CPU, RAM, threads in real-time
@@ -1489,7 +1556,7 @@ pkill -u someuser
 ```
 
 [NOTE] Tip: `kill` works on PIDs, `pkill` works on *names*.  
-> [!] Use `kill` sparingly—force-killing can corrupt data if the program is mid-write.
+> \faIcon{exclamation-triangle} Use `kill` sparingly—force-killing can corrupt data if the program is mid-write.
 
 ---
 
@@ -1504,7 +1571,7 @@ ps aux | grep firefox     # Find Firefox
 ps -ef | grep python      # Find Python instances
 ```
 
-[!] Pro tip: wrap your grep to *not* match itself (e.g., `grep "[f]irefox"`), because normal grep often shows its *own* process.
+\faIcon{exclamation-triangle} Pro tip: wrap your grep to *not* match itself (e.g., `grep "[f]irefox"`), because normal grep often shows its *own* process.
 
 ---
 
@@ -1572,17 +1639,24 @@ Track simulator CPU/RAM impact and tune settings to maintain responsiveness.
 #### Useful Links — Session 7
 
 **Process Management:**
-- [htop tutorial (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/)
-- [Manage processes with ps, kill, pkill (How-To Geek)](https://www.howtogeek.com/how-to-manage-linux-processes-using-ps-kill-and-pkill/)
-- [Viewing and Monitoring Processes (Ubuntu Community)](https://discourse.ubuntu.com/t/viewing-and-monitoring-processes-in-linux/26024)
 
-**Job Control & Commands:**
-- [Bash job control (DigitalOcean)](https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes)
-- [Chaining Commands (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/chaining-commands-in-linux/)
+\usefullink{https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/}{htop tutorial (GeeksforGeeks)}
+
+\usefullink{https://www.howtogeek.com/how-to-manage-linux-processes-using-ps-kill-and-pkill/}{Manage processes with ps, kill, pkill (How-To Geek)}
+
+\usefullink{https://discourse.ubuntu.com/t/viewing-and-monitoring-processes-in-linux/26024}{Viewing and Monitoring Processes (Ubuntu Community)}
+
+**Job Control \& Commands:**
+
+\usefullink{https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes}{Bash job control (DigitalOcean)}
+
+\usefullink{https://www.geeksforgeeks.org/linux-unix/chaining-commands-in-linux/}{Chaining Commands (GeeksforGeeks)}
 
 **General References:**
-- [Ubuntu CLI for Beginners](https://ubuntu.com/tutorials/command-line-for-beginners)
-- [Bash Reference Manual](https://www.gnu.org/software/bash/manual/)
+
+\usefullink{https://ubuntu.com/tutorials/command-line-for-beginners}{Ubuntu CLI for Beginners}
+
+\usefullink{https://www.gnu.org/software/bash/manual/}{Bash Reference Manual}
 
 ---
 
@@ -1741,7 +1815,7 @@ Reload systemd (IMPORTANT anytime you create/edit/delete unit files):
 ```bash
 sudo systemctl daemon-reload
 sudo systemctl start hello.service
-cat /tmp/hello.log    # Boom [!]
+cat /tmp/hello.log    # Boom \faIcon{exclamation-triangle}
 ```
 
 ---
@@ -1844,7 +1918,7 @@ Activate:
 sudo systemctl daemon-reload
 sudo systemctl enable wall-msg.timer
 sudo systemctl start wall-msg.timer
-systemctl list-timers    # Check timers [!]
+systemctl list-timers    # Check timers \faIcon{exclamation-triangle}
 ```
 
 ---
@@ -1927,10 +2001,10 @@ systemctl --failed                # Check failures
 - IoT tasks
 
 **Common Mistakes:**
-- [X] Forgetting `daemon-reload`
-- [X] Editing `/lib/systemd/system/` directly
-- [X] Wrong file permissions
-- [X] Forgetting `WantedBy=`
+- \faTimesCircle Forgetting `daemon-reload`
+- \faTimesCircle Editing `/lib/systemd/system/` directly
+- \faTimesCircle Wrong file permissions
+- \faTimesCircle Forgetting `WantedBy=`
 
 ---
 
@@ -1947,9 +2021,12 @@ systemctl --failed                # Check failures
 #### Useful Links — Session 8
 
 **systemd Fundamentals:**
-- [Linux systemd and its components (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/linux-systemd-and-its-components/)
-- [Introduction to systemd (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/an-introduction-to-systemd-and-its-role-in-the-boot-process/)
-- [How to mask a systemd unit (GeeksforGeeks)](https://www.geeksforgeeks.org/linux-unix/how-to-mask-a-systemd-unit-in-linux/)
+
+\usefullink{https://www.geeksforgeeks.org/linux-unix/linux-systemd-and-its-components/}{Linux systemd and its components (GeeksforGeeks)}
+
+\usefullink{https://www.geeksforgeeks.org/linux-unix/an-introduction-to-systemd-and-its-role-in-the-boot-process/}{Introduction to systemd (GeeksforGeeks)}
+
+\usefullink{https://www.geeksforgeeks.org/linux-unix/how-to-mask-a-systemd-unit-in-linux/}{How to mask a systemd unit (GeeksforGeeks)}
 
 ---
 
@@ -1998,7 +2075,7 @@ sdb
 ```
 
 **Shows:** Disk names, partitions, mount points, size, type.  
-[!] Use this before and after plugging a USB.
+\faIcon{exclamation-triangle} Use this before and after plugging a USB.
 
 **`blkid` — UUID Finder:**
 ```bash
@@ -2030,7 +2107,7 @@ sudo umount /mnt/mydrive
 sudo umount /dev/sdb1
 ```
 
-[!] If busy error:
+\faIcon{exclamation-triangle} If busy error:
 ```bash
 lsof | grep sdb1    # Find what's using it
 ```
@@ -2088,7 +2165,7 @@ Swap:          2.0G   0B     2.0G
 - **available** → real usable memory
 - **buff/cache** → Linux using RAM smartly
 
-[!] Linux uses RAM aggressively. That's GOOD. Unused RAM = wasted RAM.
+\faIcon{exclamation-triangle} Linux uses RAM aggressively. That's GOOD. Unused RAM = wasted RAM.
 
 **Real-time view:**
 ```bash
@@ -2231,11 +2308,15 @@ df -h
 
 #### Useful Links — Session 9
 
-**Disk & Storage Tutorials:**
-- [Adding 2nd drive tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/2nd-drive/)
-- [RAM, SWAP, ZRAM tutorial (mmbesar)](https://mmbesar.github.io/Tutorials/RAM-SWAP-ZRAM/)
-- [Disk management video guide](https://www.youtube.com/watch?v=yWuHI7uoftY)
-- [Swap & ZRAM video guide](https://youtu.be/CPvJvY79vEw)
+**Disk \& Storage Tutorials:**
+
+\usefullink{https://mmbesar.github.io/Tutorials/2nd-drive/}{Adding 2nd drive tutorial (mmbesar)}
+
+\usefullink{https://mmbesar.github.io/Tutorials/RAM-SWAP-ZRAM/}{RAM, SWAP, ZRAM tutorial (mmbesar)}
+
+\usefullink{https://www.youtube.com/watch?v=yWuHI7uoftY}{Disk management video guide}
+
+\usefullink{https://youtu.be/CPvJvY79vEw}{Swap \& ZRAM video guide}
 
 ---
 
@@ -2573,29 +2654,41 @@ Use keys for secure, passwordless automation across robot fleets.
 #### Useful Links — Session 10
 
 **Bash Scripting:**
-- [Bash scripting tutorial (YouTube)](https://youtu.be/tK9Oc6AEnR4?si=y3M0s1AIVfqtzCJB)
-- [BashGuide](https://mywiki.wooledge.org/BashGuide)
-- [ShellCheck — lint your scripts](https://www.shellcheck.net/)
-- [ExplainShell — understand complex commands](https://explainshell.com/)
+
+\usefullink{https://youtu.be/tK9Oc6AEnR4?si=y3M0s1AIVfqtzCJB}{Bash scripting tutorial (YouTube)}
+
+\usefullink{https://mywiki.wooledge.org/BashGuide}{BashGuide}
+
+\usefullink{https://www.shellcheck.net/}{ShellCheck — lint your scripts}
+
+\usefullink{https://explainshell.com/}{ExplainShell — understand complex commands}
 
 **Networking Tools:**
-- [curl documentation](https://curl.se/docs/)
-- [GNU Wget Manual](https://www.gnu.org/software/wget/manual/wget.html)
-- [aria2 manual](https://aria2.github.io/manual/en/html/)
-- [OpenSSH Manual](https://www.openssh.com/manual.html)
+
+\usefullink{https://curl.se/docs/}{curl documentation}
+
+\usefullink{https://www.gnu.org/software/wget/manual/wget.html}{GNU Wget Manual}
+
+\usefullink{https://aria2.github.io/manual/en/html/}{aria2 manual}
+
+\usefullink{https://www.openssh.com/manual.html}{OpenSSH Manual}
 
 **Man Pages:**
-- [ping](https://linux.die.net/man/8/ping)
-- [ip](https://man7.org/linux/man-pages/man8/ip.8.html)
-- [ifconfig](https://linux.die.net/man/8/ifconfig)
-- [scp](https://man7.org/linux/man-pages/man1/scp.1.html)
+
+\usefullink{https://linux.die.net/man/8/ping}{ping}
+
+\usefullink{https://man7.org/linux/man-pages/man8/ip.8.html}{ip}
+
+\usefullink{https://linux.die.net/man/8/ifconfig}{ifconfig}
+
+\usefullink{https://man7.org/linux/man-pages/man1/scp.1.html}{scp}
 
 ---
 
 ### Session 11: Building Embedded Linux Systems with Buildroot
 
 > **Requirements:** 20 GB+ free storage, stable internet  
-> **Tutorial reference:** https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy
+> **Tutorial reference:** \usefullink{https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy}{https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy}
 
 #### Learning outcomes
 - Explain Buildroot vs Yocto tradeoffs
@@ -2677,40 +2770,56 @@ ls output/images
 #### Useful Links — Session 11
 
 **Buildroot:**
-- [Buildroot tutorial video](https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy)
+
+\usefullink{https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy}{Buildroot tutorial video}
 
 **Arch Wiki:**
-- [Arch Wiki — the ultimate Linux reference](https://wiki.archlinux.org/)
+
+\usefullink{https://wiki.archlinux.org/}{Arch Wiki — the ultimate Linux reference}
 
 ---
 
 #### Useful Links — Cool Stuff & Extras
 
 **Multimedia:**
-- [FFmpeg tutorial (It's FOSS)](https://itsfoss.com/ffmpeg/)
-- [FFmpeg docs](https://ffmpeg.org/ffmpeg.html)
+
+\usefullink{https://itsfoss.com/ffmpeg/}{FFmpeg tutorial (It's FOSS)}
+
+\usefullink{https://ffmpeg.org/ffmpeg.html}{FFmpeg docs}
 
 **FOSS Alternatives:**
-- [Top 10 FOSS Apps (Neowin)](https://www.neowin.net/guides/top-10-foss-apps-to-make-your-linux-experience-more-enjoyable/)
-- [AlternativeTo.net](https://alternativeto.net/)
+
+\usefullink{https://www.neowin.net/guides/top-10-foss-apps-to-make-your-linux-experience-more-enjoyable/}{Top 10 FOSS Apps (Neowin)}
+
+\usefullink{https://alternativeto.net/}{AlternativeTo.net}
 
 **Windows Apps/Games on Linux:**
-- [Bottles + Wine (YouTube)](https://youtu.be/xGbQZt96q54?si=FgQJ__YMpISs7L1c)
-- [Lutris (YouTube)](https://youtu.be/JXHvGjiJJG0?si=1fI81xIr7zichNDy)
 
-**Sync & Backup:**
-- [DigitalOcean rsync tutorial](https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories)
-- [rsync backup tutorial (YouTube)](https://youtu.be/GqSxR93xK6E?si=c2TvpU8R-53SXDty)
+\usefullink{https://youtu.be/xGbQZt96q54?si=FgQJ\_\_YMpISs7L1c}{Bottles + Wine (YouTube)}
 
-**Ricing & Customization:**
-- [Ricing inspiration (YouTube)](https://youtu.be/z1-yuolwrVs?si=3IKioFlYz9L8vkNS)
-- [Perfect Ubuntu Guide (GitHub)](https://github.com/mikeroyal/Perfect-Ubuntu-Guide)
-- [Best Arabic Font in Linux (mmbesar)](https://mmbesar.github.io/Tutorials/Best-Arabic-Font-in-Linux/)
-- [Linux Utilities (GitHub Tinram)](https://github.com/Tinram/Linux-Utilities)
-- [12 GREAT CLI programs (YouTube)](https://youtu.be/nCS4BtJ34-o?si=T6gagbT5k71H5BNE)
+\usefullink{https://youtu.be/JXHvGgiJJG0?si=1fI81xIr7zichNDy}{Lutris (YouTube)}
 
-**Shell & Scripting Resources:**
-- [Shell scripting course (Learn By Example)](https://learnbyexample.github.io/scripting_course/Linux_curated_resources.html)
+**Sync \& Backup:**
+
+\usefullink{https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories}{DigitalOcean rsync tutorial}
+
+\usefullink{https://youtu.be/GqSxR93xK6E?si=c2TvpU8R-53SXDty}{rsync backup tutorial (YouTube)}
+
+**Ricing \& Customization:**
+
+\usefullink{https://youtu.be/z1-yuolwrVs?si=3IKioFlYz9L8vkNS}{Ricing inspiration (YouTube)}
+
+\usefullink{https://github.com/mikeroyal/Perfect-Ubuntu-Guide}{Perfect Ubuntu Guide (GitHub)}
+
+\usefullink{https://mmbesar.github.io/Tutorials/Best-Arabic-Font-in-Linux/}{Best Arabic Font in Linux (mmbesar)}
+
+\usefullink{https://github.com/Tinram/Linux-Utilities}{Linux Utilities (GitHub Tinram)}
+
+\usefullink{https://youtu.be/nCS4BtJ34-o?si=T6gagbT5k71H5BNE}{12 GREAT CLI programs (YouTube)}
+
+**Shell \& Scripting Resources:**
+
+\usefullink{https://learnbyexample.github.io/scripting\_course/Linux\_curated\_resources.html}{Shell scripting course (Learn By Example)}
 
 ---
 
@@ -2724,18 +2833,5 @@ ls output/images
 6. **Custom Buildroot Image:** Build and document a custom Buildroot image with Python + SSH.
 7. **Info Script:** Write a bash script that fetches currency rates, prayer times, or weather forecast using APIs with colored output and error handling.
 8. **Rice Your Desktop:** Create a customized desktop environment with documented dotfiles on Git.
-
----
-
-## Contact the Author
-
-- **Email:** khaledmhfz2004@gmail.com
-- **GitHub:** https://github.com/KhaledMahfouz5/linux-course
-
----
-
-## Copyright
-
-All rights reserved for **hamakRobotTeam** [NOT For Commercial Use]!!
 
 DONE !! thanks Allah.

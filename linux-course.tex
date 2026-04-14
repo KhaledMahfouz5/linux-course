@@ -1,0 +1,4487 @@
+%%
+% Copyright (c) 2017 - 2025, Pascal Wagler;
+% Copyright (c) 2014 - 2025, John MacFarlane
+%
+% All rights reserved.
+%
+% Redistribution and use in source and binary forms, with or without
+% modification, are permitted provided that the following conditions
+% are met:
+%
+% - Redistributions of source code must retain the above copyright
+% notice, this list of conditions and the following disclaimer.
+%
+% - Redistributions in binary form must reproduce the above copyright
+% notice, this list of conditions and the following disclaimer in the
+% documentation and/or other materials provided with the distribution.
+%
+% - Neither the name of John MacFarlane nor the names of other
+% contributors may be used to endorse or promote products derived
+% from this software without specific prior written permission.
+%
+% THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+% "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+% LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+% FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+% COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+% INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+% BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+% LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+% CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+% LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+% ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+% POSSIBILITY OF SUCH DAMAGE.
+%%
+
+%%
+% This is the Eisvogel pandoc LaTeX template.
+%
+% For usage information and examples visit the official GitHub page:
+% https://github.com/Wandmalfarbe/pandoc-latex-template
+%%
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names,table}{xcolor}
+\documentclass[
+  english,
+  paper=a4,
+  oneside  ,captions=tableheading
+]{scrartcl}
+\usepackage{xcolor}
+\usepackage[margin=2.5cm,includehead=true,includefoot=true,centering,]{geometry}
+\usepackage{amsmath,amssymb}
+
+% add backlinks to footnote references, cf. https://tex.stackexchange.com/questions/302266/make-footnote-clickable-both-ways
+\usepackage{footnotebackref}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+
+% Use setspace anyway because we change the default line spacing.
+% The spacing is changed early to affect the titlepage and the TOC.
+\usepackage{setspace}
+\setstretch{1.2}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% Workaround/bugfix from jannick0.
+% See https://github.com/jgm/pandoc/issues/4302#issuecomment-360669013)
+% or https://github.com/Wandmalfarbe/pandoc-latex-template/issues/2
+%
+% Redefine the verbatim environment 'Highlighting' to break long lines (with
+% the help of fvextra). Redefinition is necessary because it is unlikely that
+% pandoc includes fvextra in the default template.
+\usepackage{fvextra}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,fontsize=\small,commandchars=\\\{\}}
+
+\usepackage{longtable,booktabs,array}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\ifLuaTeX
+\usepackage[bidi=basic,shorthands=off]{babel}
+\else
+\usepackage[bidi=default,shorthands=off]{babel}
+\fi
+\ifLuaTeX
+  \usepackage{selnolig} % disable illegal ligatures
+\fi
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{fontawesome5}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  filecolor=blue,
+  urlcolor=blue,
+  citecolor=blue,
+  pdfborder={0 0 0}
+}
+\newcommand{\usefullink}[2]{%
+  \par\vspace{0.5ex}%
+  \href{#1}{\textcolor{blue}{\underline{\faLink\quad #2}}}%
+  \par\vspace{0.5ex}%
+}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\definecolor{default-linkcolor}{HTML}{A50000}
+\definecolor{default-filecolor}{HTML}{A50000}
+\definecolor{default-citecolor}{HTML}{4077C0}
+\definecolor{default-urlcolor}{HTML}{4077C0}
+
+\hypersetup{
+  pdflang={en},
+  hidelinks,
+  breaklinks=true,
+  pdfcreator={LaTeX via pandoc with the Eisvogel template}}
+
+\author{}
+\date{}
+
+
+%
+% for the background color of the title page
+%
+
+%
+% break urls
+%
+\PassOptionsToPackage{hyphens}{url}
+
+%
+% When using babel or polyglossia with biblatex, loading csquotes is recommended
+% to ensure that quoted texts are typeset according to the rules of your main language.
+%
+\usepackage{csquotes}
+
+%
+% captions
+%
+\definecolor{caption-color}{HTML}{777777}
+\usepackage[font={stretch=1.2}, textfont={color=caption-color}, position=top, skip=4mm, labelfont=bf, singlelinecheck=false, justification=raggedright]{caption}
+\setcapindent{0em}
+
+%
+% blockquote
+%
+\definecolor{blockquote-border}{RGB}{221,221,221}
+\definecolor{blockquote-text}{RGB}{119,119,119}
+\usepackage{mdframed}
+\newmdenv[rightline=false,bottomline=false,topline=false,linewidth=3pt,linecolor=blockquote-border,skipabove=\parskip]{customblockquote}
+\renewenvironment{quote}{\begin{customblockquote}\list{}{\rightmargin=0em\leftmargin=0em}%
+\item\relax\color{blockquote-text}\ignorespaces}{\unskip\unskip\endlist\end{customblockquote}}
+
+%
+% Source Sans Pro as the default font family
+% Source Code Pro for monospace text
+%
+% 'default' option sets the default
+% font family to Source Sans Pro, not \sfdefault.
+%
+% Note that the font has been officially renamed to `Source Sans 3`, and
+% the version provided by the `sourcesanspro` package is slightly outdated.
+% You can install the newer version locally and use it, for example, with
+% `mainfont: "Source Sans 3"` in the YAML metadata (requires XeTeX or LuaTeX).
+%
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+  \else % if not pdftex
+    \usepackage[default]{sourcesanspro}
+  \usepackage{sourcecodepro}
+
+  % XeLaTeX specific adjustments for straight quotes: https://tex.stackexchange.com/a/354887
+  % This issue is already fixed (see https://github.com/silkeh/latex-sourcecodepro/pull/5) but the
+  % fix is still unreleased.
+  % TODO: Remove this workaround when the new version of sourcecodepro is released on CTAN.
+  \ifxetex
+    \makeatletter
+    \defaultfontfeatures[\ttfamily]
+      { Numbers   = \sourcecodepro@figurestyle,
+        Scale     = \SourceCodePro@scale,
+        Extension = .otf }
+    \setmonofont
+      [ UprightFont    = *-\sourcecodepro@regstyle,
+        ItalicFont     = *-\sourcecodepro@regstyle It,
+        BoldFont       = *-\sourcecodepro@boldstyle,
+        BoldItalicFont = *-\sourcecodepro@boldstyle It ]
+      {SourceCodePro}
+    \makeatother
+  \fi
+  \fi
+
+%
+% heading color
+%
+\definecolor{heading-color}{RGB}{40,40,40}
+% By default, the KOMA-Script classes will typeset sectioning headings in
+% sans-serif. Use the normal body font for headings.
+\addtokomafont{disposition}{\normalfont\color{heading-color}\bfseries}
+
+%
+% variables for title, author and date
+%
+\usepackage{titling}
+\title{}
+\author{}
+\date{}
+
+%
+% tables
+%
+
+\definecolor{table-row-color}{HTML}{F5F5F5}
+\definecolor{table-rule-color}{HTML}{999999}
+
+%\arrayrulecolor{black!40}
+\arrayrulecolor{table-rule-color}     % color of \toprule, \midrule, \bottomrule
+\setlength\heavyrulewidth{0.3ex}      % thickness of \toprule, \bottomrule
+\renewcommand{\arraystretch}{1.3}     % spacing (padding)
+
+
+%
+% remove paragraph indentation
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+
+%
+%
+% Listings
+%
+%
+
+
+%
+% header and footer
+%
+\usepackage[headsepline,footsepline]{scrlayer-scrpage}
+
+\newpairofpagestyles{eisvogel-header-footer}{
+  \clearpairofpagestyles
+  \ihead*{}
+  \chead*{}
+  \ohead*{}
+  \ifoot*{}
+  \cfoot*{}
+  \ofoot*{\thepage}
+  \addtokomafont{pageheadfoot}{\upshape}
+}
+\pagestyle{eisvogel-header-footer}
+
+
+
+%
+% Define watermark
+%
+
+\begin{document}
+
+
+
+
+\section{Linux Course}\label{linux-course}
+
+\subsection{For AI \& Robotics Applications (Raspberry Pi +
+ROS)}\label{for-ai-robotics-applications-raspberry-pi-ros}
+
+This course is a practical Linux foundation for AI and robotics
+learners. It is designed for development on Linux machines and VMs, with
+Raspberry Pi concepts integrated across sessions.
+
+\textbf{GitHub repository:}
+https://github.com/KhaledMahfouz5/linux-course
+
+\textbf{Course structure:} 3 chapters, 11 sessions\\
+\textbf{Session duration:} 60-90 minutes each\\
+\textbf{Hardware note:} Physical Raspberry Pi is optional
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Requirements}\label{requirements}
+
+\begin{itemize}
+\tightlist
+\item
+  Basic programming knowledge (variables, conditions, loops, functions)
+\item
+  Internet connection for searching the web and installing packages
+  (most of the time you do not need a huge bandwidth)
+\item
+  30-50 GB free storage
+\item
+  A note-taking method during class
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Chapter 1: Introduction, Installation, and Embedded Linux
+Basics}\label{chapter-1-introduction-installation-and-embedded-linux-basics}
+
+\subsubsection{Session 1: Linux for Robotics \&
+AI}\label{session-1-linux-for-robotics-ai}
+
+\begin{quote}
+\textbf{Before class:} Watch the linked videos for context. Come
+curious.
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes}
+
+By the end of this session, students should be able to: - Explain why
+Linux dominates robotics and AI workflows - Distinguish between the
+kernel and a full operating system - Choose suitable Linux distributions
+for robotics learning and deployment - Understand the Unix philosophy
+and free software movement - Evaluate Linux strengths/limitations for
+embedded and AI use-cases - Understand the Raspberry Pi ecosystem at a
+conceptual level
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Why Linux Matters Today}\label{why-linux-matters-today}
+
+If you look at the modern world---servers, cloud platforms,
+supercomputers, phones, routers, IoT, cybersecurity labs, programming
+environments---Linux is \emph{everywhere}. It's the invisible engine
+running most of the technologies you interact with daily.
+
+A few facts: - \textbf{100\%} of the world's top 500 supercomputers run
+Linux - \textbf{Most web servers} use Linux (Apache, Nginx) -
+\textbf{Android}, the most widely-used mobile OS, is built on the Linux
+kernel - \textbf{Cybersecurity distributions} (Kali, Parrot) are
+Linux-based - Developers choose Linux for transparency, speed,
+customizability, and control
+
+So even if you've never installed Linux on your laptop, you've
+definitely used it indirectly.
+
+For robotics and AI, this matters because the same OS family runs: -
+Development laptops - Edge devices (Pi/Jetson-like boards) - CI/CD
+pipelines - Data and model-serving infrastructure
+
+Linux gives one consistent operational model from prototype to
+deployment.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Understanding Linux: What It Really
+Is}\label{understanding-linux-what-it-really-is}
+
+One of the biggest misconceptions is thinking Linux is ``that thing that
+replaces Windows.'' Linux is not a program. It's not a GUI. It's not
+even an operating system by itself.
+
+\textbf{Linux = the kernel}
+
+The kernel is the core program that: - Talks to hardware - Manages
+memory - Schedules processes - Handles permissions - Controls I/O
+
+Everything else---the desktop, apps, package manager, and
+utilities---comes from the broader free-software ecosystem called
+\textbf{GNU}.
+
+Together:\\
+\textbf{GNU tools + Linux kernel = GNU/Linux (a complete OS)}
+
+This separation is important because Linux teaches you something deeper
+than using an OS---it teaches you \emph{how systems work}.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Kernel vs OS (embedded
+perspective)}\label{kernel-vs-os-embedded-perspective}
+
+\textbf{Kernel} = low-level core that manages CPU, memory, processes,
+devices, and system calls.\\
+\textbf{Operating system} = kernel + userland tools + services + package
+system + optional desktop.
+
+Embedded systems usually optimize the userland while relying on the same
+Linux kernel principles: - Hardware abstraction through drivers -
+Process isolation - Permission model - Filesystem-based device
+interfaces
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) The Unix Philosophy}\label{the-unix-philosophy}
+
+Linux inherits its design principles from Unix. This philosophy will
+shape how you think during the whole course:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Write programs that do one thing, and do it well}
+\item
+  \textbf{Write programs to work together}
+\item
+  \textbf{Write programs to handle text, because text is a universal
+  interface}
+\end{enumerate}
+
+This leads to: - Tools that are small and powerful - Commands that do
+simple tasks - The magic happens when you combine them using pipes
+(\texttt{\textbar{}})
+
+It's why a Linux power-user is unstoppable---every small tool becomes a
+Lego block, and you can build anything from those blocks.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Linux History (The Simple
+Version)}\label{linux-history-the-simple-version}
+
+Let's keep it practical.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{1969} -- Unix born. AT\&T created Unix. Clean, elegant,
+  powerful.
+\item
+  \textbf{1983} -- GNU Project launched. Richard Stallman began building
+  a free Unix-like system. GNU had everything---compilers, libraries,
+  tools---\emph{except a kernel}.
+\item
+  \textbf{1991} -- Linus Torvalds writes the Linux Kernel. As a personal
+  hobby project. He released it under a free license, allowing anyone to
+  study, modify, and contribute.
+\item
+  \textbf{1992} -- GNU + Linux merged. This created the first fully free
+  operating system.
+\item
+  \textbf{1990s--2000s} -- Linux takes over servers. Why? Stability,
+  control, security, no licensing fees.
+\item
+  \textbf{2010s--2020s} -- Linux becomes everywhere. Cloud, containers,
+  mobile, embedded systems, DevOps\ldots{} The world quietly
+  standardized on Linux.
+\end{itemize}
+
+That's why learning Linux today is a \textbf{career skill}, not just a
+personal preference.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) The Free Software Philosophy (Why Linux
+Exists)}\label{the-free-software-philosophy-why-linux-exists}
+
+Linux exists because of the free software movement. Free software is
+about \emph{freedom}, not price.
+
+\textbf{The Four Essential Freedoms:} 1. \textbf{Freedom 0:} Run the
+program for any purpose 2. \textbf{Freedom 1:} Study the source code and
+modify it 3. \textbf{Freedom 2:} Distribute copies 4. \textbf{Freedom
+3:} Distribute modified versions
+
+If a program denies any of these freedoms, it becomes
+\textbf{proprietary}, which means: - You can't see how it works - You
+can't fix it - You depend on the vendor - You lose control over your own
+computer
+
+Linux was built to solve this. During this course, you'll see the impact
+of this philosophy: - Software you can fully audit - Tools you can
+modify - Community-built contributions - Transparency at every layer
+
+This is why cybersecurity professionals prefer Linux .. you can see
+\emph{everything} happening in the system.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) Why Robotics Engineers Choose
+Linux}\label{why-robotics-engineers-choose-linux}
+
+\begin{quote}
+→ \textbf{See Session 6 §4-§5} for deep dive into permissions, root
+access, and safe privilege usage.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Strong CLI tooling for automation and debugging
+\item
+  Better compatibility with robotics stacks (ROS ecosystem)
+\item
+  Native package and build tooling for C/C++/Python workflows
+\item
+  Reliable remote management over SSH
+\item
+  Easy scripting for repetitive hardware/software tasks
+\item
+  Everything is a file---devices, sockets, processes, IPC\ldots{} all
+  represented as files. Simplifies development massively
+\item
+  Powerful terminal environment---you can automate anything
+\item
+  Package managers---install complete development stacks in seconds
+\item
+  DevOps and cloud-native tools---Docker, Kubernetes, CI pipelines---all
+  built on Linux
+\item
+  High performance and stability---perfect for servers and embedded
+  systems
+\item
+  Customizability---modify your environment to match exactly how you
+  think and work
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{8) Linux Distributions for
+Robotics}\label{linux-distributions-for-robotics}
+
+If Linux is the engine, a \textbf{distro} is the full car.
+
+\textbf{Ubuntu:} most common ROS learning path, huge documentation, easy
+onboarding\\
+\textbf{Debian:} very stable and lightweight, strong base for long-term
+systems\\
+\textbf{Raspberry Pi OS (Raspbian):} Pi-focused integration and
+educational accessibility
+
+Selection criteria: - Stability and long-term support - Package
+availability - Hardware support - Team familiarity
+
+\textbf{Beginner-friendly:} Ubuntu, Linux Mint, MX Linux\\
+\textbf{Power-user:} Arch Linux, Gentoo, Void Linux\\
+\textbf{Enterprise:} Red Hat Enterprise Linux, SUSE Linux Enterprise\\
+\textbf{Security:} Kali Linux, Parrot OS
+
+\begin{quote}
+\textbf{Recommendation:} For this course, use desktop Ubuntu or Debian
+for easiest package support and lab consistency. Avoid Arch-based
+systems as your first Linux unless you're ready for deeper learning.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Pros and Cons of Linux in
+Robotics/AI}\label{pros-and-cons-of-linux-in-roboticsai}
+
+\textbf{Pros:} - High control and transparency - Excellent automation
+capabilities - Strong networking and remote tooling - Efficient on
+modest hardware - Powerful CLI - Free and open source - Fast,
+lightweight - Secure and stable - Full control over your system - Great
+for programming and networking - Massive community support
+
+\textbf{Cons:} - Higher learning curve for beginners - Some
+device/vendor tooling may be Windows-first - Some hardware drivers might
+be missing - Gaming is improving but still imperfect - Requires
+operational discipline (permissions, services, system config) - Requires
+learning mindset, not point-and-click
+
+But as a developer, engineer, or cybersecurity student, the \emph{pros}
+outweigh the cons by a huge margin.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{10) Raspberry Pi Ecosystem Overview
+(Conceptual)}\label{raspberry-pi-ecosystem-overview-conceptual}
+
+Key idea: Raspberry Pi is a compact Linux computer often used for
+sensing, control, and edge inference.
+
+Ecosystem concepts: - GPIO for digital I/O - Camera and CSI-based vision
+capture - I2C/SPI/UART buses for sensors/actuators - SD-card based
+storage and boot - SSH-first/headless management patterns
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{11) How to Think Like a Linux
+User}\label{how-to-think-like-a-linux-user}
+
+To succeed in this course:
+
+\textbf{Adopt these habits:} - \textbf{Be curious} --- try commands,
+explore folders - \textbf{Read error messages} --- Linux errors are
+usually helpful - \textbf{Use man pages} --- every command has
+documentation - \textbf{Experiment safely} --- break things in virtual
+machines - \textbf{Think in small tools} --- pipes, filters, text
+processing - \textbf{Love the terminal} --- it's your real power
+
+Linux rewards people who explore.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 1}\label{useful-links-session-1}
+
+\textbf{Video Introductions:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/watch?v=ShcR4Zfc6Dw}{\textcolor{blue}{\underline{\faLink\quad Linux History \& Distros}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/gojeTqXdBH0?si=kg-iP4KEFjLU-Tto}{\textcolor{blue}{\underline{\faLink\quad Unix Philosophy}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/IvGdY6luTtU?si=nEcir9iqjmYMa1lo}{\textcolor{blue}{\underline{\faLink\quad Kernel vs OS}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/Ag1AKIl_2GM?si=0YDnS2BDSrAAmFX8}{\textcolor{blue}{\underline{\faLink\quad Free Software Philosophy}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/otDOHt\_Jges?si=4ChY6-xpYbOdbKQ6}{\textcolor{blue}{\underline{\faLink\quad Why Programmers Love Linux}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/pYfzZRyRzvs?si=4Q5\_H0gJ3JHBodOc}{\textcolor{blue}{\underline{\faLink\quad Pros and Cons}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Recommended Arabic YouTube Channels:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/@anaHr}{\textcolor{blue}{\underline{\faLink\quad anaHr}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/@mmbesar}{\textcolor{blue}{\underline{\faLink\quad mohammad besar}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/@alwaqad}{\textcolor{blue}{\underline{\faLink\quad Al-Waqqad}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/@Sudo\_Start}{\textcolor{blue}{\underline{\faLink\quad sudostart}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/@linuxtopia}{\textcolor{blue}{\underline{\faLink\quad linuxtopia}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/@abdulmogeeb}{\textcolor{blue}{\underline{\faLink\quad Abdulmojeeb Al-Hameed}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Book:} \emph{The Art of UNIX Programming} --- Eric Raymond
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 2: Installation \& Embedded
+Setup}\label{session-2-installation-embedded-setup}
+
+\begin{quote}
+\textbf{Before class:} Install VirtualBox/VMware. Optional: QEMU for Pi
+emulation.
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Install Linux via VM or dual boot safely
+\item
+  Understand headless setup basics (SSH/WiFi/static IP)
+\item
+  Perform post-install essentials for reliable daily use
+\item
+  Explain the role of Camera/I2C/SPI/UART in Pi-based systems
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Choosing Your Linux
+Distribution}\label{choosing-your-linux-distribution}
+
+\begin{quote}
+→ \textbf{See Session 1 §8} for detailed distro categories (beginner,
+power-user, enterprise, security) and selection criteria.
+\end{quote}
+
+Before installing Linux, you must pick the right \textbf{distro}
+(distribution). Think of distros like different flavors of the same
+operating system---they all share the Linux kernel but differ in user
+interface, package managers, performance, and philosophy.
+
+\textbf{What You Should Look For:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Requirement
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What it means
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Good Choices
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Ease of use} & Beginner-friendly UI, simple updates & Ubuntu,
+Linux Mint, Pop!\_OS \\
+\textbf{Stability} & Fewer issues \& long-term support & Ubuntu LTS,
+Debian \\
+\textbf{Performance} & Works well on older hardware & Xubuntu, Linux
+Lite \\
+\textbf{Security} & Good by default, strong community & Fedora,
+Ubuntu \\
+\textbf{Software availability} & Access to apps \& drivers & Ubuntu,
+Fedora \\
+\end{longtable}
+}
+
+\textbf{Quick Tips:} - If your PC is older than \textbf{10 years}, pick
+\textbf{Xubuntu}, \textbf{Linux Mint XFCE}, \textbf{LMDE},
+\textbf{MX-Linux}, or \textbf{Zorin OS} - If you're into
+\textbf{gaming}, choose **Pop!\_OS** or \textbf{Nobara OS} - If you want
+a macOS-like UI, choose \textbf{elementaryOS}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Primary Setup: Full Linux Installation (Dual Boot or
+VM)}\label{primary-setup-full-linux-installation-dual-boot-or-vm}
+
+\textbf{Before You Install -- VERY Important:}
+
+\textbf{A. Backup Your Files}\\
+The installer will delete the Windows partition if you're switching
+fully. Backup all files from Desktop, Documents, Pictures, Music,
+Videos. Move them to D:~(or another partition), external HDD, or USB
+stick.
+
+\textbf{B. Check Your Boot Mode}\\
+Open Start → type \textbf{System Information} → look for \textbf{UEFI}
+(modern, secure boot) or \textbf{Legacy BIOS} (older systems). This
+affects partitioning and bootloader behavior.
+
+\textbf{C. Create a Bootable USB}\\
+Recommended tool: \textbf{Ventoy}---supports multiple ISOs on the same
+flash drive, very beginner-friendly.
+
+\textbf{Try Ubuntu Before Installing:}\\
+Boot from the USB and choose ``Try Ubuntu'' (Live Mode). Test Wi-Fi,
+Bluetooth, sound, display, keyboard, touchpad. If everything works →
+safe to install.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{VM Path (Recommended for Beginners):} - Low risk, fast reset,
+easy snapshots - Good for command practice and repeatable labs
+
+\textbf{Recommended VirtualBox Settings:} - EFI: Choose What Gives You
+The Best Experience . - CPU: 2-4 cpu cores . - Display: 128 MB VRAM -
+Network: NAT (Easy For Beginners) - RAM: 4-6 GB allocated
+
+\textbf{Installing Guest Additions:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install build{-}essential dkms linux{-}headers{-}}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}r}\VariableTok{)}
+\FunctionTok{sudo}\NormalTok{ sh /media/username/VBox}\PreprocessorTok{*}\NormalTok{/VBoxLinuxAdditions.run}
+\end{Highlighting}
+\end{Shaded}
+
+This enables auto-resize display, clipboard sharing, drag \& drop, and
+better performance.
+
+\textbf{Dual-Boot Path (Optional):} - Better native performance -
+Requires careful partitioning and backup discipline - Choose ``Something
+Else (Manual Partitioning)'' .. DO NOT choose ``Erase disk'' or
+``Install alongside Windows''
+
+\textbf{Recommended Partition Layout:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Partition
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Size
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Filesystem
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Mountpoint
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Notes
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{EFI/System} & 512--1024 MB & FAT32 & \texttt{/boot/efi} & Needed
+only for UEFI \\
+\textbf{ROOT} & 40--100 GB+ & EXT4 & \texttt{/} & Main system \\
+\textbf{SWAP} & Optional (2--4 GB) & swap & swap & Only if RAM
+\textless{} 8GB \\
+\textbf{Data} & Keep & NTFS & \texttt{/mnt/data1} & Do \emph{not}
+format \\
+\end{longtable}
+}
+
+\begin{quote}
+\textbf{Beginner's Tip:} Don't create a separate \texttt{/home}
+partition. You can add it later when you're more experienced.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Headless Setup Concepts}\label{headless-setup-concepts}
+
+Headless means ``manage without monitor/keyboard on target device.''
+
+Core concepts: - SSH service enabled on boot - Network reachability
+(WiFi/Ethernet) - Static IP plan for stable robot addressing
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) Post-Install Essentials}\label{post-install-essentials}
+
+\textbf{Update System:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update }\KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ apt upgrade }\AttributeTok{{-}y}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Install Ubuntu Restricted Extras (codecs for MP3, MP4, MOV,
+Fonts):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install ubuntu{-}restricted{-}extras}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Add Flatpak + Flathub:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install flatpak}
+\ExtensionTok{flatpak}\NormalTok{ remote{-}add }\AttributeTok{{-}{-}if{-}not{-}exists}\NormalTok{ flathub https://flathub.org/repo/flathub.flatpakrepo}
+\FunctionTok{sudo}\NormalTok{ apt install gnome{-}software gnome{-}software{-}plugin{-}flatpak}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{AppImage Support:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install libfuse2}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{GNOME Extensions \& Tweaks:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install chrome{-}gnome{-}shell gnome{-}shell{-}extension{-}manager gnome{-}tweaks}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Minimize on Click:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{gsettings}\NormalTok{ set org.gnome.shell.extensions.dash{-}to{-}dock click{-}action }\StringTok{\textquotesingle{}focus{-}minimize{-}or{-}appspread\textquotesingle{}}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Enable New Document Menu:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{touch}\NormalTok{ \textasciitilde{}/Templates/new}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{System Backups:} - \textbf{Timeshift} (System Snapshots):
+\texttt{sudo\ apt\ install\ timeshift} - \textbf{Déjà Dup} (User files
+backup): Built into Ubuntu
+
+\textbf{Essential Security:} - Install drivers and core tooling - Enable
+SSH server - Configure firewall baseline - Create backup/snapshot
+routine
+
+\textbf{Final System Update:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update }\KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ apt upgrade }\AttributeTok{{-}y} \KeywordTok{\&\&} \ExtensionTok{flatpak}\NormalTok{ update }\AttributeTok{{-}y} \KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ snap refresh}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Pi Interfaces
+(Theoretical)}\label{pi-interfaces-theoretical}
+
+\begin{quote}
+→ \textbf{See Session 1 §10} for the full Raspberry Pi ecosystem
+overview (GPIO, Camera, I2C, SPI, UART, SD-card, SSH patterns).
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Camera:} image/video input for CV pipelines
+\item
+  \textbf{I2C:} low-speed bus for many sensors
+\item
+  \textbf{SPI:} higher-speed peripheral communication
+\item
+  \textbf{UART:} serial communication for diagnostics/controllers
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Practice}\label{practice}
+
+Run these commands to verify your SSH and firewall setup:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update }\KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ apt upgrade }\AttributeTok{{-}y}
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ openssh{-}server ufw}
+\FunctionTok{sudo}\NormalTok{ systemctl enable }\AttributeTok{{-}{-}now}\NormalTok{ ssh}
+\FunctionTok{sudo}\NormalTok{ ufw allow OpenSSH}
+\FunctionTok{sudo}\NormalTok{ ufw enable}
+\ExtensionTok{ip}\NormalTok{ a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 2}\label{useful-links-session-2}
+
+\textbf{Video Tutorials:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/8yVlJEzq2eg?si=SWcgh\_Bw51Li3lv6}{\textcolor{blue}{\underline{\faLink\quad Choosing Your Distro}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/watch?v=C-a5IamFIuM}{\textcolor{blue}{\underline{\faLink\quad Install Linux Step-by-Step}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/XevGfO\_vQJQ?si=OBqaM8UlUeH1wjdQ}{\textcolor{blue}{\underline{\faLink\quad Dual-Boot with Windows}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/wX75Z-4MEoM?si=raCzHOzYJy-GZi9S}{\textcolor{blue}{\underline{\faLink\quad VirtualBox VM Setup}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Written Guides:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mmbesar.github.io/Tutorials/Ubuntu-24.04-Post/}{\textcolor{blue}{\underline{\faLink\quad Ubuntu 24.04 Post-Install Guide}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 3: Linux Basics for
+Robotics}\label{session-3-linux-basics-for-robotics}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-2}
+
+\begin{itemize}
+\tightlist
+\item
+  Navigate Linux confidently
+\item
+  Use core command-line tools for daily robotics development
+\item
+  Understand path usage for ROS workspaces
+\item
+  Explore device/hardware-facing paths (\texttt{/dev}, \texttt{/sys})
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Introduction to the Linux Command
+Line}\label{introduction-to-the-linux-command-line}
+
+The Linux command line (often called the \textbf{terminal},
+\textbf{shell}, or \textbf{CLI}) is a text-based interface that allows
+you to interact with your system quickly and efficiently. While
+graphical interfaces (GUIs) are great for daily tasks, the command line
+provides:
+
+\begin{itemize}
+\tightlist
+\item
+  Faster automation
+\item
+  Power-user flexibility
+\item
+  Access to advanced tools
+\item
+  A universal interface across all distros
+\end{itemize}
+
+Most distributions ship with \textbf{bash} as the default shell, though
+others (zsh, fish) also exist.
+
+To open a terminal: - \textbf{Ubuntu / Debian}:
+\texttt{Ctrl\ +\ Alt\ +\ T} - \textbf{Fedora}: Activities → Terminal -
+\textbf{Any distro}: Search ``Terminal''
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) System Information and Hardware
+Detection}\label{system-information-and-hardware-detection}
+
+Linux provides several commands to check system details:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{uname} \AttributeTok{{-}a}        \CommentTok{\# All system info}
+\FunctionTok{uname} \AttributeTok{{-}r}        \CommentTok{\# Kernel version}
+\FunctionTok{uname} \AttributeTok{{-}m}        \CommentTok{\# Architecture}
+\ExtensionTok{hostnamectl}     \CommentTok{\# OS name, kernel, hardware}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{inxi} (advanced---may need installation):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update}
+\FunctionTok{sudo}\NormalTok{ apt install inxi}
+\ExtensionTok{inxi} \AttributeTok{{-}F}         \CommentTok{\# CPU, GPU, RAM, kernel, drivers}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{lsb\_release} (Debian-based):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{lsb\_release} \AttributeTok{{-}a}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Shell Variables and Environment
+Configuration}\label{shell-variables-and-environment-configuration}
+
+The shell stores data (variables) temporarily during your session.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{echo} \VariableTok{$HOME}      \CommentTok{\# Home directory}
+\BuiltInTok{echo} \VariableTok{$USER}      \CommentTok{\# Current user}
+\BuiltInTok{echo} \VariableTok{$PATH}      \CommentTok{\# Executable search paths}
+
+\VariableTok{NAME}\OperatorTok{=}\StringTok{"Khaled"}   \CommentTok{\# Create variable}
+\BuiltInTok{echo} \VariableTok{$NAME}
+
+\BuiltInTok{export} \VariableTok{EDITOR}\OperatorTok{=}\NormalTok{nano   }\CommentTok{\# Export (available to programs)}
+
+\FunctionTok{printenv}        \CommentTok{\# List all variables}
+\end{Highlighting}
+\end{Shaded}
+
+Environment variables define runtime behavior for tools and scripts.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) File System Navigation}\label{file-system-navigation}
+
+Every Linux filesystem starts from the \textbf{root (\texttt{/})}
+directory.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{pwd}             \CommentTok{\# Print working directory}
+\FunctionTok{ls}              \CommentTok{\# List files}
+\FunctionTok{ls} \AttributeTok{{-}l}           \CommentTok{\# Long format}
+\FunctionTok{ls} \AttributeTok{{-}la}          \CommentTok{\# Include hidden files}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{cd -- Change Directory:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ /home        }\CommentTok{\# Absolute path}
+\BuiltInTok{cd}\NormalTok{ Documents    }\CommentTok{\# Relative path}
+\BuiltInTok{cd}\NormalTok{ ..           }\CommentTok{\# Parent directory}
+\BuiltInTok{cd}\NormalTok{ \textasciitilde{}            }\CommentTok{\# Home directory}
+\BuiltInTok{cd} \AttributeTok{{-}}            \CommentTok{\# Previous directory}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Shortcuts:} - \texttt{.} → current directory - \texttt{..} →
+parent directory - \texttt{\textasciitilde{}} → home directory -
+\texttt{-} → previous directory
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Essential Commands}\label{essential-commands}
+
+\texttt{ls}, \texttt{cd}, \texttt{pwd}, \texttt{cat}, \texttt{mkdir},
+\texttt{cp}, \texttt{mv}, \texttt{rm}, \texttt{echo}, \texttt{uname},
+\texttt{inxi} are the baseline daily toolkit.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mkdir} \AttributeTok{{-}p}\NormalTok{ robotics\_ws/src}
+\BuiltInTok{cd}\NormalTok{ robotics\_ws}
+\BuiltInTok{pwd}
+\BuiltInTok{echo} \StringTok{"session3"} \OperatorTok{\textgreater{}}\NormalTok{ notes.txt}
+\FunctionTok{cat}\NormalTok{ notes.txt}
+\FunctionTok{cp}\NormalTok{ notes.txt notes.bak}
+\FunctionTok{mv}\NormalTok{ notes.bak archive.txt}
+\FunctionTok{touch}\NormalTok{ newfile.txt}
+\FunctionTok{sleep}\NormalTok{ 5}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{rm -- Remove (\faExclamationCircle Dangerous but essential):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rm}\NormalTok{ file.txt}
+\FunctionTok{rm} \AttributeTok{{-}r}\NormalTok{ folder/}
+\FunctionTok{rm} \AttributeTok{{-}rf}\NormalTok{ folder/    }\CommentTok{\# VERY DANGEROUS {-} use with care!}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Paths: Relative vs
+Absolute}\label{paths-relative-vs-absolute}
+
+Robotics workspaces fail often because of path mistakes.
+
+\textbf{Absolute Paths} start from the root \texttt{/}:
+
+\begin{verbatim}
+/home/khaled/projects/code.py
+\end{verbatim}
+
+\textbf{Relative Paths} start from your current location:
+
+\begin{verbatim}
+../images/photo.png
+./run.sh
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Absolute:} starts from \texttt{/} (stable in scripts)
+\item
+  \textbf{Relative:} from current directory (fast interactive use)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{7) Package Managers: \texttt{apt},
+\texttt{pip},
+\texttt{snap}}{7) Package Managers: apt, pip, snap}}\label{package-managers-apt-pip-snap}
+
+\textbf{apt -- Debian, Ubuntu, Linux Mint:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update             }\CommentTok{\# Update repositories}
+\FunctionTok{sudo}\NormalTok{ apt install gedit      }\CommentTok{\# Install package}
+\FunctionTok{sudo}\NormalTok{ apt remove gedit       }\CommentTok{\# Remove package}
+\FunctionTok{sudo}\NormalTok{ apt upgrade            }\CommentTok{\# Upgrade system}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{dnf -- Fedora, RHEL 8+:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ dnf install nano}
+\FunctionTok{sudo}\NormalTok{ dnf remove nano}
+\FunctionTok{sudo}\NormalTok{ dnf update}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{yum -- Older RHEL/CentOS:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ yum install nano}
+\FunctionTok{sudo}\NormalTok{ yum update}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{apt} for system packages
+\item
+  \texttt{pip} for Python packages
+\item
+  \texttt{snap} for bundled apps/tooling where appropriate
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{8) Editors: \texttt{nano}, \texttt{gedit},
+\texttt{vim}
+Basics}{8) Editors: nano, gedit, vim Basics}}\label{editors-nano-gedit-vim-basics}
+
+\textbf{nano (Terminal Editor):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nano}\NormalTok{ file.txt}
+\end{Highlighting}
+\end{Shaded}
+
+Controls: - Save: \textbf{Ctrl + S} - Exit: \textbf{Ctrl + X} - Search:
+\textbf{Ctrl + W}
+
+\textbf{gedit (GUI Editor):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{gedit}\NormalTok{ notes.txt }\KeywordTok{\&}    \CommentTok{\# \& lets the terminal continue}
+\end{Highlighting}
+\end{Shaded}
+
+Students should be comfortable editing files both in terminal and GUI
+contexts.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Help Tools}\label{help-tools}
+
+\begin{quote}
+→ \textbf{See Session 1 §11} for the mindset behind using documentation
+and self-learning in Linux.
+\end{quote}
+
+Linux has multiple built-in help resources.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{man}\NormalTok{ ls              }\CommentTok{\# Manual pages}
+\FunctionTok{man}\NormalTok{ tar}
+\ExtensionTok{info}\NormalTok{ coreutils      }\CommentTok{\# Info documentation}
+\ExtensionTok{tldr}\NormalTok{ ls             }\CommentTok{\# Simplified examples (install first)}
+\FunctionTok{ls} \AttributeTok{{-}{-}help}           \CommentTok{\# Quick help}
+\FunctionTok{apropos}\NormalTok{ network     }\CommentTok{\# Search commands by description}
+\end{Highlighting}
+\end{Shaded}
+
+Use \texttt{man}, \texttt{info}, \texttt{tldr}, \texttt{-\/-help}, and
+\texttt{apropos} to self-debug and self-learn.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{10) Robotics Context: \texttt{/dev/} and
+\texttt{/sys/}}{10) Robotics Context: /dev/ and /sys/}}\label{robotics-context-dev-and-sys}
+
+In Linux: - Files - Directories - Devices - Hardware - Network
+interfaces
+
+→ \textbf{Everything is a file}
+
+\textbf{\texttt{/dev/} (device files):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/dev/sda}          \CommentTok{\# Hard drive}
+\ExtensionTok{/dev/null}         \CommentTok{\# Black hole (silence output)}
+\ExtensionTok{/dev/tty}          \CommentTok{\# Current terminal}
+\ExtensionTok{/dev/random}       \CommentTok{\# Random number generator}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{\texttt{/sys/} and \texttt{/proc/} (kernel-exposed
+hardware/state metadata):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/proc/cpuinfo}          \CommentTok{\# CPU info}
+\ExtensionTok{/proc/uptime}           \CommentTok{\# System uptime}
+\ExtensionTok{/proc/net/tcp}          \CommentTok{\# TCP connections}
+\ExtensionTok{/sys/class/net/eth0/address}           \CommentTok{\# Network MAC address}
+\ExtensionTok{/sys/class/backlight/brightness}       \CommentTok{\# Screen brightness}
+\ExtensionTok{/sys/class/power\_supply/BAT0/capacity} \CommentTok{\# Battery level}
+\end{Highlighting}
+\end{Shaded}
+
+Want hardware info? \texttt{cat\ /proc/cpuinfo}\\
+Want to silence output? \texttt{command\ \textgreater{}\ /dev/null}
+
+This design is WHY Linux is scriptable, automatable, and runs the
+internet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{11) Explore Virtual Hardware Seen by
+VM}\label{explore-virtual-hardware-seen-by-vm}
+
+Inspect which virtual disks, network interfaces, and pseudo-devices
+appear.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{12) Archiving: \texttt{tar},
+\texttt{zip}}{12) Archiving: tar, zip}}\label{archiving-tar-zip}
+
+Archive projects and logs for sharing, reproducibility, and backups.
+
+\textbf{tar (most common):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{tar} \AttributeTok{{-}cvf}\NormalTok{ archive.tar folder/           }\CommentTok{\# Create}
+\FunctionTok{tar} \AttributeTok{{-}xvf}\NormalTok{ archive.tar                   }\CommentTok{\# Extract}
+\FunctionTok{tar} \AttributeTok{{-}czvf}\NormalTok{ archive.tar.gz folder/       }\CommentTok{\# Compressed (gzip)}
+\FunctionTok{tar} \AttributeTok{{-}xzvf}\NormalTok{ archive.tar.gz               }\CommentTok{\# Extract compressed}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{zip:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{zip} \AttributeTok{{-}r}\NormalTok{ robotics\_ws.zip robotics\_ws}
+\FunctionTok{unzip}\NormalTok{ archive.zip}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{7z (7-Zip):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install p7zip{-}full}
+\ExtensionTok{7z}\NormalTok{ a archive.7z folder/}
+\ExtensionTok{7z}\NormalTok{ x archive.7z}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Bonus Useful Commands}\label{bonus-useful-commands}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{clear} -- clears the terminal
+\item
+  \texttt{history} -- shows previous commands
+\item
+  \texttt{head} / \texttt{tail} -- preview files
+  (\texttt{tail\ -f\ log.txt} for live logs)
+\item
+  \texttt{less} -- view files with navigation
+\item
+  \texttt{grep} -- search text
+\item
+  \texttt{whoami} -- current user
+\item
+  \texttt{df\ -h} -- disk usage
+\item
+  \texttt{du\ -sh\ folder/} -- folder size
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Practice Exercises}\label{practice-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a directory structure: \texttt{projects/python/basics}
+\item
+  Create three files inside \texttt{basics}
+\item
+  Write your name into \texttt{info.txt} using \texttt{echo}
+\item
+  Compress the folder using tar and zip
+\item
+  Install \texttt{tldr} and test 5 commands
+\item
+  View your system kernel version and CPU info using two methods
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Chapter 2: Programming, Development Tools \& ROS
+Foundation}\label{chapter-2-programming-development-tools-ros-foundation}
+
+\subsubsection{Session 4: Text Manipulation \& Log
+Analysis}\label{session-4-text-manipulation-log-analysis}
+
+\begin{quote}
+Welcome to one of the most \emph{useful and exciting} sessions in your
+Linux journey. In this session, we learn how Linux becomes a
+\textbf{superpower} when working with text, logs, automation, scripting,
+and filtering.
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-3}
+
+\begin{itemize}
+\tightlist
+\item
+  Filter and transform large text/log outputs efficiently
+\item
+  Extract structured fields from sensor logs
+\item
+  Locate files quickly in large ROS-style directories
+\item
+  Chain commands with pipes/redirection
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{1) \texttt{grep} --- The Search Engine of the
+Terminal}{1) grep --- The Search Engine of the Terminal}}\label{grep-the-search-engine-of-the-terminal}
+
+\texttt{grep} stands for \textbf{Global Regular Expression Print}. In
+simple words: \textbf{grep searches for text inside files or command
+output.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grep} \StringTok{"error"}\NormalTok{ /var/log/syslog                }\CommentTok{\# Find lines with "error"}
+\FunctionTok{grep} \AttributeTok{{-}i} \StringTok{"linux"}\NormalTok{ notes.txt                   }\CommentTok{\# Ignore case}
+\FunctionTok{grep} \AttributeTok{{-}r} \StringTok{"password"}\NormalTok{ /etc                     }\CommentTok{\# Recursive search}
+\FunctionTok{grep} \AttributeTok{{-}n} \StringTok{"TODO"}\NormalTok{ project.py                   }\CommentTok{\# Show line numbers}
+\FunctionTok{grep} \AttributeTok{{-}v} \StringTok{"DEBUG"}\NormalTok{ logs.txt                    }\CommentTok{\# Invert match (NOT containing)}
+\FunctionTok{grep} \AttributeTok{{-}E} \StringTok{"cat|dog"}\NormalTok{ animals.txt               }\CommentTok{\# Extended regex (OR)}
+\FunctionTok{grep} \AttributeTok{{-}i} \StringTok{"error"}\NormalTok{ robot.log}
+\FunctionTok{grep} \AttributeTok{{-}nE} \StringTok{"warn|fail|timeout"}\NormalTok{ robot.log}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Practical examples:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls} \KeywordTok{|} \FunctionTok{grep} \StringTok{".pdf"}                            \CommentTok{\# Find PDF files}
+\FunctionTok{grep} \StringTok{"failed"} \PreprocessorTok{*}\NormalTok{.log                         }\CommentTok{\# Search in multiple logs}
+\FunctionTok{grep} \AttributeTok{{-}E} \StringTok{"[0{-}9]+\textbackslash{}.[0{-}9]+\textbackslash{}.[0{-}9]+\textbackslash{}.[0{-}9]+"}\NormalTok{ nginx.log  }\CommentTok{\# Find IP addresses}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{2) \texttt{sed} --- The Stream
+Editor}{2) sed --- The Stream Editor}}\label{sed-the-stream-editor}
+
+\texttt{sed} is a \textbf{text transformer}. You can use it to replace
+words, delete lines, insert text, extract text, and edit files
+\emph{without opening them}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/old/new/\textquotesingle{}}\NormalTok{ file                       }\CommentTok{\# Replace first occurrence per line}
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/old/new/g\textquotesingle{}}\NormalTok{ file                      }\CommentTok{\# Replace ALL occurrences}
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/linux/Linux/\textquotesingle{}}\NormalTok{ notes.txt}
+\FunctionTok{sed} \StringTok{\textquotesingle{}/error/d\textquotesingle{}}\NormalTok{ logs.txt                     }\CommentTok{\# Delete lines with "error"}
+\FunctionTok{sed} \AttributeTok{{-}n} \StringTok{\textquotesingle{}/INFO/p\textquotesingle{}}\NormalTok{ logs.txt                  }\CommentTok{\# Print only matching lines}
+\FunctionTok{sed} \AttributeTok{{-}i} \StringTok{\textquotesingle{}s/foo/bar/g\textquotesingle{}}\NormalTok{ file.txt              }\CommentTok{\# \textbackslash{}faExclamationCircle Edit IN{-}PLACE (BE CAREFUL!)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Cool examples:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/ //g\textquotesingle{}}\NormalTok{ text.txt                       }\CommentTok{\# Remove all spaces}
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/  */ /g\textquotesingle{}}                             \CommentTok{\# Multiple spaces to one}
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/\^{}/[INFO] /\textquotesingle{}}\NormalTok{ file.txt                }\CommentTok{\# Add prefix to each line}
+\FunctionTok{sed} \StringTok{\textquotesingle{}s/WARN/WARNING/g\textquotesingle{}}\NormalTok{ robot.log }\OperatorTok{\textgreater{}}\NormalTok{ robot\_clean.log}
+\FunctionTok{sed} \AttributeTok{{-}n} \StringTok{\textquotesingle{}/camera/p\textquotesingle{}}\NormalTok{ robot.log}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{3) \texttt{awk} --- The Text Processor
+King}{3) awk --- The Text Processor King}}\label{awk-the-text-processor-king}
+
+\texttt{awk} is a \textbf{programming language} hidden inside a terminal
+command. Perfect for extracting columns, summing numbers, processing CSV
+files, and analyzing logs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{awk} \StringTok{\textquotesingle{}\{print $1\}\textquotesingle{}}\NormalTok{ file.txt                   }\CommentTok{\# Print first column}
+\FunctionTok{awk} \StringTok{\textquotesingle{}\{print $2\}\textquotesingle{}}\NormalTok{ data.txt                   }\CommentTok{\# Print second column}
+\FunctionTok{awk} \StringTok{\textquotesingle{}$2 \textgreater{} 50\textquotesingle{}}\NormalTok{ data.txt                      }\CommentTok{\# Lines where 2nd field \textgreater{} 50}
+\FunctionTok{awk} \StringTok{\textquotesingle{}\{sum += $3\} END \{print sum\}\textquotesingle{}}\NormalTok{ sales.txt }\CommentTok{\# Sum column 3}
+\FunctionTok{awk} \AttributeTok{{-}F}\StringTok{\textquotesingle{},\textquotesingle{}} \StringTok{\textquotesingle{}\{print $1, $3\}\textquotesingle{}}\NormalTok{ sensor.csv       }\CommentTok{\# CSV with comma delimiter}
+\FunctionTok{awk} \StringTok{\textquotesingle{}$2 \textgreater{} 50 \{print $0\}\textquotesingle{}}\NormalTok{ telemetry.txt}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Example---given line \texttt{Alice\ 23\ Student}:} -
+\texttt{\$1} = Alice - \texttt{\$2} = 23 - \texttt{\$3} = Student
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{4) \texttt{find} --- The Ultimate Search
+Tool}{4) find --- The Ultimate Search Tool}}\label{find-the-ultimate-search-tool}
+
+\texttt{find} searches your filesystem \textbf{recursively} for files,
+directories, sizes, permissions, names, types---everything. Essential in
+nested workspaces and mixed code/config trees.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{find}\NormalTok{ . }\AttributeTok{{-}name} \StringTok{"*.txt"}                        \CommentTok{\# Search by name}
+\FunctionTok{find}\NormalTok{ /home }\AttributeTok{{-}iname} \StringTok{"linux"}                   \CommentTok{\# Case{-}insensitive}
+\FunctionTok{find}\NormalTok{ . }\AttributeTok{{-}type}\NormalTok{ d }\AttributeTok{{-}name} \StringTok{"src"}                  \CommentTok{\# Directories only}
+\FunctionTok{find}\NormalTok{ . }\AttributeTok{{-}size}\NormalTok{ +1M                            }\CommentTok{\# By size}
+\FunctionTok{find}\NormalTok{ / }\AttributeTok{{-}perm}\NormalTok{ 777                            }\CommentTok{\# By permissions}
+\FunctionTok{find}\NormalTok{ . ! }\AttributeTok{{-}name} \StringTok{"*.txt"}                      \CommentTok{\# Exclude pattern}
+\FunctionTok{find}\NormalTok{ \textasciitilde{}/robotics\_ws }\AttributeTok{{-}name} \StringTok{"*.launch"}
+\FunctionTok{find}\NormalTok{ \textasciitilde{}/robotics\_ws }\AttributeTok{{-}type}\NormalTok{ f }\AttributeTok{{-}name} \StringTok{"*.py"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Pipes and Redirections}\label{pipes-and-redirections}
+
+\textbf{Pipes (\texttt{\textbar{}})} send the output of one command into
+another. Think of it as plugging commands together like LEGO pieces.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls} \KeywordTok{|} \FunctionTok{grep} \StringTok{".txt"}                            \CommentTok{\# Filter listing}
+\FunctionTok{ls} \KeywordTok{|} \FunctionTok{grep} \StringTok{".py"} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}                     \CommentTok{\# Count Python files}
+\FunctionTok{du} \AttributeTok{{-}ah} \KeywordTok{|} \FunctionTok{sort} \AttributeTok{{-}h} \KeywordTok{|} \FunctionTok{tail}                     \CommentTok{\# Top 10 largest files}
+\FunctionTok{cat}\NormalTok{ text.txt }\KeywordTok{|} \FunctionTok{tr} \StringTok{\textquotesingle{} \textquotesingle{}} \StringTok{\textquotesingle{}\textbackslash{}n\textquotesingle{}} \KeywordTok{|} \FunctionTok{sort} \KeywordTok{|} \FunctionTok{uniq}   \CommentTok{\# Unique words}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Redirections:} - \texttt{\textbar{}} passes output between
+commands - \texttt{\textgreater{}} overwrite output file -
+\texttt{\textgreater{}\textgreater{}} append output file -
+\texttt{\textless{}} feed file as input
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{echo} \StringTok{"Hello"} \OperatorTok{\textgreater{}}\NormalTok{ file.txt                     }\CommentTok{\# Write to file}
+\BuiltInTok{echo} \StringTok{"World"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ file.txt                    }\CommentTok{\# Append to file}
+\FunctionTok{ls} \OperatorTok{\textgreater{}}\NormalTok{ list.txt                               }\CommentTok{\# Redirect output}
+\FunctionTok{wc} \AttributeTok{{-}l} \OperatorTok{\textless{}}\NormalTok{ notes.txt                           }\CommentTok{\# Input from file}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Practical Robotics
+Application}\label{practical-robotics-application}
+
+Filter ROS-like outputs, isolate anomalies, and summarize key fields for
+debugging.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{ robot.log }\KeywordTok{|} \FunctionTok{grep} \StringTok{"camera"} \KeywordTok{|} \FunctionTok{awk} \StringTok{\textquotesingle{}\{print $1,$2,$NF\}\textquotesingle{}}
+\FunctionTok{grep} \AttributeTok{{-}i} \StringTok{"imu"}\NormalTok{ topics.txt }\KeywordTok{|} \FunctionTok{sort} \KeywordTok{|} \FunctionTok{uniq} \AttributeTok{{-}c}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 4}\label{useful-links-session-4}
+
+\textbf{Video Tutorials:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/N05sWPgj-44?si=RqN-cKCBSae4bvK7}{\textcolor{blue}{\underline{\faLink\quad grep}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/EACe7aiGczw?si=q8Hyf9d1VgsO-uj2}{\textcolor{blue}{\underline{\faLink\quad sed}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/9YOZmI-zWok?si=Larx5zKGgMMSrsn-}{\textcolor{blue}{\underline{\faLink\quad awk}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/BZ5gsFiIKOQ?si=WEDUXPu6DCi2anNL}{\textcolor{blue}{\underline{\faLink\quad find}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 5: Development Environment for AI \&
+Robotics}\label{session-5-development-environment-for-ai-robotics}
+
+\begin{quote}
+\textbf{Verify installed:} \texttt{python3}, \texttt{python3-venv},
+\texttt{git}, \texttt{cmake}, \texttt{build-essential}
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-4}
+
+\begin{itemize}
+\tightlist
+\item
+  Set up isolated Python development environments
+\item
+  Install and manage AI/vision packages
+\item
+  Understand source-build basics
+\item
+  Use team Git workflows
+\item
+  Prepare editor + Docker-based development flow
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Mindset \& Setup}\label{mindset-setup}
+
+Linux for software dev is about \textbf{three ideas}: 1. Everything is a
+tool 2. The terminal is your superpower 3. You \emph{own} your system
+
+\textbf{Update first. Always:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update }\KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ apt upgrade }\AttributeTok{{-}y}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Install the essentials:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ build{-}essential curl wget git software{-}properties{-}common}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{2) Python Setup (\texttt{venv},
+\texttt{pip})}{2) Python Setup (venv, pip)}}\label{python-setup-venv-pip}
+
+Use virtual environments to avoid global dependency conflicts.
+\textbf{DO THIS.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ python3 python3{-}pip python3{-}venv}
+\ExtensionTok{python3} \AttributeTok{{-}m}\NormalTok{ venv .venv}
+\BuiltInTok{source}\NormalTok{ .venv/bin/activate}
+\ExtensionTok{pip}\NormalTok{ install }\AttributeTok{{-}{-}upgrade}\NormalTok{ pip}
+\ExtensionTok{pip}\NormalTok{ install requests bs4}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) AI/ML Framework
+Installation}\label{aiml-framework-installation}
+
+Start with OpenCV and expand to TensorFlow/PyTorch according to hardware
+and project scope.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pip}\NormalTok{ install opencv{-}python}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) Compile from Source (Makefiles/Build
+Systems)}\label{compile-from-source-makefilesbuild-systems}
+
+Understand compile-link pipeline and why build systems are central in
+robotics C/C++ codebases.
+
+\textbf{C/C++ Compilers \& Debugging:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ gcc g++ gdb}
+\FunctionTok{gcc}\NormalTok{ main.c }\AttributeTok{{-}o}\NormalTok{ main         }\CommentTok{\# Compile}
+\FunctionTok{gdb}\NormalTok{ ./main                 }\CommentTok{\# Debug}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Makefile basics:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{all:}
+\ErrorTok{    }\NormalTok{gcc main.c {-}o main}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make}                       \CommentTok{\# Run Makefile}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Git Workflow for Robotics
+Teams}\label{git-workflow-for-robotics-teams}
+
+Branch, commit, push, and review with reproducible history and rollback
+capability.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Web Development \& Servers}\label{web-development-servers}
+
+\textbf{Simple HTTP server (classic):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{python3} \AttributeTok{{-}m}\NormalTok{ http.server 8000}
+\end{Highlighting}
+\end{Shaded}
+
+Now anyone on your network can access \texttt{http://YOUR\_IP:8000}
+
+\begin{quote}
+\faExclamationCircle Warning: \texttt{http.server} is not recommended
+for production. It only implements basic security checks.
+\end{quote}
+
+\textbf{Node.js:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install nvm (Node Version Manager)}
+\ExtensionTok{curl} \AttributeTok{{-}o{-}}\NormalTok{ https://raw.githubusercontent.com/nvm{-}sh/nvm/v0.40.3/install.sh }\KeywordTok{|} \FunctionTok{bash}
+\ExtensionTok{\textbackslash{}.} \StringTok{"}\VariableTok{$HOME}\StringTok{/.nvm/nvm.sh"}
+\ExtensionTok{nvm}\NormalTok{ install 24}
+
+\CommentTok{\# Verify}
+\ExtensionTok{node} \AttributeTok{{-}v}
+\ExtensionTok{npm} \AttributeTok{{-}v}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{PHP:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ php php{-}cli php{-}mysql}
+\ExtensionTok{php} \AttributeTok{{-}S}\NormalTok{ localhost:8000}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) IDE Setup}\label{ide-setup}
+
+VS Code with Python/C++/ROS extensions for integrated linting,
+debugging, and navigation.
+
+\textbf{Install:} - VS Code: https://code.visualstudio.com/ - Browsers:
+\texttt{sudo\ apt\ install\ -y\ firefox} - Arduino IDE:
+\texttt{sudo\ apt\ install\ -y\ arduino}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{8) Docker for Containerized
+Workflows}\label{docker-for-containerized-workflows}
+
+Use containers for reproducible environments in model serving and
+simulation pipelines.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ docker.io}
+\FunctionTok{sudo}\NormalTok{ usermod }\AttributeTok{{-}aG}\NormalTok{ docker }\VariableTok{$USER}
+\ExtensionTok{newgrp}\NormalTok{ docker}
+\ExtensionTok{docker}\NormalTok{ run hello{-}world}
+\ExtensionTok{docker}\NormalTok{ run }\AttributeTok{{-}it}\NormalTok{ ubuntu bash}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Distrobox (Run Any Distro Safely):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install }\AttributeTok{{-}y}\NormalTok{ podman}
+\ExtensionTok{distrobox}\NormalTok{ create }\AttributeTok{{-}n}\NormalTok{ arch }\AttributeTok{{-}{-}image}\NormalTok{ archlinux:latest}
+\ExtensionTok{distrobox}\NormalTok{ enter arch}
+\end{Highlighting}
+\end{Shaded}
+
+Now you're in another distro. No VM. No pain.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Resource Optimization for Embedded
+Targets}\label{resource-optimization-for-embedded-targets}
+
+Account for CPU, RAM, thermal limits, and storage constraints before
+deployment.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{10) Update System \&
+Repositories}\label{update-system-repositories}
+
+\begin{quote}
+→ \textbf{See Session 2 §4} for the full post-install checklist
+including updates, codecs, Flatpak, Snap, and backups.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /etc/apt/sources.list    }\CommentTok{\# Edit sources}
+\FunctionTok{sudo}\NormalTok{ apt update }\KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ apt upgrade}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\faExclamationCircle **Kali Repositories Warning:\textbf{ Don't mix Kali
+repos with Ubuntu casually. You \emph{will} break things. Safe use case:
+}specific tools only**. Use pinning if you \emph{must}.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 6: System Configuration \& Tools for
+Robotics}\label{session-6-system-configuration-tools-for-robotics}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-5}
+
+\begin{itemize}
+\tightlist
+\item
+  Navigate Linux filesystem with robotics context
+\item
+  Manage permissions for hardware/device access
+\item
+  Configure shell environment and productivity shortcuts
+\item
+  Understand links and safe privilege usage
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Filesystem Hierarchy in Robotics
+Context}\label{filesystem-hierarchy-in-robotics-context}
+
+\begin{quote}
+→ \textbf{See Session 3} for hands-on navigation practice (\texttt{cd},
+\texttt{ls}, \texttt{pwd}, paths). This section focuses on the
+\emph{purpose} of each directory.
+\end{quote}
+
+Linux doesn't use drive letters like Windows
+(\texttt{C:\textbackslash{}}, \texttt{D:\textbackslash{}}). Instead,
+\textbf{everything starts at one place}: \texttt{/} (the root).
+
+\textbf{\texttt{/} --- The Root of Everything}\\
+\texttt{/} is the top of the file system tree. You \textbf{do not
+casually mess around in \texttt{/}}.
+
+\textbf{\texttt{/home} --- Where Humans Live}\\
+This is where \textbf{users live}. Inside your home directory:
+Documents, Downloads, Config files, SSH keys, Hidden dot files.
+\textgreater{} • \textbf{Best Practice:} If you're learning Linux, live
+in \texttt{/home}
+
+\textbf{\texttt{/etc} --- Configuration Central}\\
+Contains system configuration files, user settings, service configs,
+network configs.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/etc/passwd}
+\ExtensionTok{/etc/shadow}
+\ExtensionTok{/etc/hosts}
+\ExtensionTok{/etc/sudoers}
+\end{Highlighting}
+\end{Shaded}
+
+\faExclamationCircle Editing files here can break login, networking, or
+lock you out completely.\\
+\textgreater{} • \textbf{Rule:} \texttt{/etc} = configuration, not
+programs
+
+\textbf{\texttt{/var} --- Variable Data (Stuff That Changes)}\\
+Logs, caches, spools, databases.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/var/log}
+\ExtensionTok{/var/log/syslog}
+\ExtensionTok{/var/log/auth.log}
+\end{Highlighting}
+\end{Shaded}
+
+If a system is acting weird → \textbf{Check \texttt{/var/log} or related
+logs}
+
+\textbf{\texttt{/usr} --- User Programs (Not Users)}\\
+Confusing name---this is \textbf{not user home directories}. Contains
+installed programs, libraries, shared resources.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/usr/bin}
+\ExtensionTok{/usr/lib}
+\ExtensionTok{/usr/share}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{\texttt{/dev/} --- Hardware/Device Nodes} (serial, camera,
+input)\\
+\textbf{\texttt{/sys/class/gpio/} --- GPIO representation} (conceptual
+Pi mapping)\\
+\textbf{\texttt{/opt/ros/} --- ROS installation location}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) ``Everything Is a File'' (Linux
+Philosophy)}\label{everything-is-a-file-linux-philosophy}
+
+\begin{quote}
+→ \textbf{See Session 3 §10} for the full explanation with
+\texttt{/dev/}, \texttt{/proc/}, and \texttt{/sys/} examples.
+\end{quote}
+
+This is where Linux becomes \emph{cool}. In Linux, files, directories,
+devices, hardware, and network interfaces are all represented as files.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{/dev/sda}          \CommentTok{\# Hard drive}
+\ExtensionTok{/dev/null}         \CommentTok{\# Black hole}
+\ExtensionTok{/proc/cpuinfo}     \CommentTok{\# CPU info}
+\ExtensionTok{/dev/tty}          \CommentTok{\# Current terminal}
+\ExtensionTok{/dev/random}       \CommentTok{\# Random number generator}
+\ExtensionTok{/dev/urandom}      \CommentTok{\# Faster random numbers}
+\ExtensionTok{/proc/uptime}      \CommentTok{\# System uptime}
+\ExtensionTok{/proc/net/tcp}     \CommentTok{\# TCP connections}
+\ExtensionTok{/sys/class/net/eth0/address}         \CommentTok{\# Network MAC}
+\ExtensionTok{/sys/class/backlight/brightness}     \CommentTok{\# Screen brightness}
+\ExtensionTok{/sys/class/power\_supply/BAT0/capacity} \CommentTok{\# Battery level}
+\ExtensionTok{/dev/loop0}        \CommentTok{\# Loopback device (mount files as disks)}
+\end{Highlighting}
+\end{Shaded}
+
+This design is WHY Linux is scriptable, automatable, and runs the
+internet.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Dotfiles (Hidden Power)}\label{dotfiles-hidden-power}
+
+\begin{quote}
+→ \textbf{See Session 3 §12} where \texttt{ls\ -la} first introduces
+hidden files. This section goes deeper.
+\end{quote}
+
+Files that start with a dot \texttt{.} are \textbf{hidden}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{.bashrc}
+\ExtensionTok{.profile}
+\ExtensionTok{.gitconfig}
+\ExtensionTok{.ssh/}
+\end{Highlighting}
+\end{Shaded}
+
+They usually store shell configs, app preferences, and user settings.
+List them: \texttt{ls\ -a}
+
+Why hide them? Prevent clutter and accidental deletion.\\
+\textgreater{} • \textbf{Important:} Deleting dot files can reset your
+environment or break tools.
+
+\textbf{Dotfiles (\texttt{.bashrc}, \texttt{.profile}):} Used to
+customize shell behavior, aliases, environment variables, and startup
+logic.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) Permissions and Groups for Hardware
+Access}\label{permissions-and-groups-for-hardware-access}
+
+\textbf{Why This Matters (Seriously):}\\
+Linux doesn't break because it's fragile. Linux breaks because
+\textbf{permissions exist} and \textbf{you don't understand them yet}.
+
+Permissions protect your system, prevent malware from wrecking
+everything, and make Linux powerful for servers, DevOps, security, and
+cloud. Once this clicks: errors make sense, ``Permission denied'' stops
+ruining your day, and you stop nuking your system with
+\texttt{sudo\ rm\ -rf}.
+
+Every file has: - \textbf{Owner} - \textbf{Group} - \textbf{Permissions}
+
+Check with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{{-}rwxr{-}xr{-}{-}}\NormalTok{ 1 ahmad staff script.sh}
+\end{Highlighting}
+\end{Shaded}
+
+Breakdown: - Owner: ahmad (rwx) - Group: staff (r-x) - Others: (r--)
+
+\textbf{Three permission types:} - \textbf{r} = read (4) - \textbf{w} =
+write (2) - \textbf{x} = execute (1)
+
+\textbf{Permission Numbers (Octal Mode):}
+
+\begin{verbatim}
+7 = rwx
+6 = rw-
+5 = r-x
+4 = r--
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chmod}\NormalTok{ 755 script.sh    }\CommentTok{\# Owner: rwx, Group: r{-}x, Others: r{-}x}
+\FunctionTok{chmod}\NormalTok{ +x script.sh     }\CommentTok{\# Make executable}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+• You will see \texttt{755} and \texttt{644} everywhere.
+\end{quote}
+
+\textbf{Changing Ownership:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{chown}\NormalTok{ user file}
+\FunctionTok{chown}\NormalTok{ user:group file}
+\FunctionTok{sudo}\NormalTok{ chown root:root config.conf}
+\end{Highlighting}
+\end{Shaded}
+
+\faExclamationCircle Wrong ownership = broken apps
+
+\textbf{Typical groups for hardware access:} \texttt{dialout},
+\texttt{gpio}, \texttt{video}. Correct group membership often resolves
+``permission denied'' with serial/camera devices.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{5) Root Permissions (\texttt{sudo},
+\texttt{su},
+\texttt{/etc/sudoers})}{5) Root Permissions (sudo, su, /etc/sudoers)}}\label{root-permissions-sudo-su-etcsudoers}
+
+\textbf{Root} is the system administrator---the power mode user. Root
+can read any file, delete any file, and change any permission.
+
+\textbf{\texttt{sudo} --- Temporary Root:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ command}
+\end{Highlighting}
+\end{Shaded}
+
+Executes command as root, logs actions, requires password.\\
+\textgreater{} • \textbf{Best practice:} Use \texttt{sudo}, not
+permanent root login
+
+\textbf{\texttt{su} --- Switch User:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{su}
+\FunctionTok{su}\NormalTok{ username}
+\end{Highlighting}
+\end{Shaded}
+
+Switches shell to another user. \faExclamationCircle Dangerous if
+misused.
+
+\textbf{\texttt{/etc/sudoers} --- Who Can Use sudo:}\\
+DO NOT edit directly. Always use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ visudo}
+\end{Highlighting}
+\end{Shaded}
+
+Wrong syntax here → no sudo → bad day.
+
+\textbf{Common Beginner Mistakes:} - \faTimesCircle Running everything
+with sudo (bad for security) - \faTimesCircle \texttt{chmod\ 777}
+everything (everyone can do everything---bad for security \& interviews
+:-)) - \faTimesCircle Editing system files without backup
+(\texttt{sudo\ cp\ config.conf\ config.conf.bak}---always!) -
+\faTimesCircle Deleting random stuff in \texttt{/etc} or \texttt{/usr} -
+\faTimesCircle Not reading error messages (Linux tells you what failed
+and why)
+
+\begin{quote}
+• Use sudo \textbf{only when required}. Permissions are not
+obstacles---they are \textbf{guardrails}.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Hard Links and Soft
+Links}\label{hard-links-and-soft-links}
+
+Links are \textbf{references} to files.
+
+\textbf{Hard Links:} - Point to the same inode - File exists in multiple
+locations - Deleting one doesn't remove data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ln}\NormalTok{ file1 file2}
+\end{Highlighting}
+\end{Shaded}
+
+Limitations: Same filesystem only, can't link directories.
+
+\textbf{Soft Links (Symlinks):} - Pointer to file path - Like Windows
+shortcuts
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ln} \AttributeTok{{-}s}\NormalTok{ target linkname}
+\FunctionTok{ln} \AttributeTok{{-}s}\NormalTok{ /var/log/syslog syslog\_link}
+\end{Highlighting}
+\end{Shaded}
+
+If target is deleted → \faTimesCircle Link breaks\\
+\textgreater{} • Most commonly used type.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) Shell Aliases}\label{shell-aliases}
+
+\begin{quote}
+→ \textbf{See Session 1 §11} for the mindset behind customization and
+efficiency.
+\end{quote}
+
+Aliases save time---like macros for your shell. Speed up common
+workflows with carefully chosen aliases.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{alias}\NormalTok{ ll=}\StringTok{\textquotesingle{}ls {-}la\textquotesingle{}}
+\BuiltInTok{alias}\NormalTok{ gs=}\StringTok{\textquotesingle{}git status\textquotesingle{}}
+\BuiltInTok{echo} \StringTok{"alias ll=\textquotesingle{}ls {-}lah\textquotesingle{}"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ \textasciitilde{}/.bashrc}
+\end{Highlighting}
+\end{Shaded}
+
+Add to \texttt{\textasciitilde{}/.bashrc} or
+\texttt{\textasciitilde{}/.zshrc} and
+\texttt{source\ \textasciitilde{}/.bashrc} to reload. You'll thank
+yourself later when typing gets lazy :)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{8) Font/Theme Customization}\label{fonttheme-customization}
+
+Long robotics sessions benefit from readable fonts and reduced visual
+fatigue.
+
+\begin{itemize}
+\tightlist
+\item
+  Install custom fonts: \texttt{sudo\ apt\ install\ fonts-roboto}
+\item
+  GNOME Tweaks for themes
+\item
+  Flatpak themes from Flathub
+\end{itemize}
+
+Fonts + themes = aesthetic \textasciitilde100\% more hipster points B-)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Virtual Device
+Exploration}\label{virtual-device-exploration}
+
+Understand how simulated hardware appears in \texttt{/dev} and how
+tooling discovers it.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{10) Install Common Software}\label{install-common-software}
+
+\begin{quote}
+→ \textbf{See Session 3 §7} for detailed package manager coverage
+(\texttt{apt}, \texttt{dnf}, \texttt{yum}, \texttt{pip},
+\texttt{snap}).\\
+→ \textbf{See Session 2 §4} for Flatpak and Snap setup details.
+\end{quote}
+
+\textbf{Quick starter pack for Ubuntu:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update}
+\FunctionTok{sudo}\NormalTok{ apt install }\DataTypeTok{\textbackslash{}}
+\NormalTok{    git htop tmux fastfetch}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 6}\label{useful-links-session-6}
+
+\textbf{Package Management:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://wiki.debian.org/Apt}{\textcolor{blue}{\underline{\faLink\quad APT docs (Debian Wiki)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://help.ubuntu.com/community/AptGet/Howto}{\textcolor{blue}{\underline{\faLink\quad APT Howto (Ubuntu Community)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://wiki.debian.org/SourcesList}{\textcolor{blue}{\underline{\faLink\quad Debian SourcesList}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://help.ubuntu.com/community/Repositories}{\textcolor{blue}{\underline{\faLink\quad Ubuntu Repositories}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.kali.org/docs/general-use/kali-linux-sources-list-repositories/}{\textcolor{blue}{\underline{\faLink\quad Kali Repositories docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/YI1Q3R0TEYs?si=TO3KfOz4nq0sSIVw}{\textcolor{blue}{\underline{\faLink\quad Adding Kali repos to Debian (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Build from Source:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://suckless.org/st/}{\textcolor{blue}{\underline{\faLink\quad suckless st}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://suckless.org/dmenu/}{\textcolor{blue}{\underline{\faLink\quad suckless dmenu}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://gcc.gnu.org/onlinedocs/}{\textcolor{blue}{\underline{\faLink\quad GCC docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.gnu.org/software/gdb/documentation/}{\textcolor{blue}{\underline{\faLink\quad GDB docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.gnu.org/software/make/manual/}{\textcolor{blue}{\underline{\faLink\quad GNU Make manual}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.nongnu.org/avr-libc/}{\textcolor{blue}{\underline{\faLink\quad avr-libc}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Web Development:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://docs.python.org/3/library/http.server.html}{\textcolor{blue}{\underline{\faLink\quad Python http.server docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.npmjs.com/package/serve}{\textcolor{blue}{\underline{\faLink\quad npm serve}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.php.net/manual/en/}{\textcolor{blue}{\underline{\faLink\quad PHP Manual}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.apachefriends.org/index.html}{\textcolor{blue}{\underline{\faLink\quad XAMPP download}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.apachefriends.org/faq\_linux.html}{\textcolor{blue}{\underline{\faLink\quad XAMPP FAQ (Linux)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Node.js \& React:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://nodejs.org/en/docs}{\textcolor{blue}{\underline{\faLink\quad Node.js docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://react.dev/learn}{\textcolor{blue}{\underline{\faLink\quad React docs}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Java:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://openjdk.org/}{\textcolor{blue}{\underline{\faLink\quad OpenJDK}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://docs.oracle.com/javase/tutorial/}{\textcolor{blue}{\underline{\faLink\quad Oracle Java Tutorial}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Python:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://docs.python.org/3/tutorial/venv.html}{\textcolor{blue}{\underline{\faLink\quad Python venv tutorial}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://pip.pypa.io/en/stable/}{\textcolor{blue}{\underline{\faLink\quad pip docs}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Apps \& IDEs:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.google.com/chrome/}{\textcolor{blue}{\underline{\faLink\quad Google Chrome}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://code.visualstudio.com/}{\textcolor{blue}{\underline{\faLink\quad VS Code}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://code.visualstudio.com/docs/setup/linux}{\textcolor{blue}{\underline{\faLink\quad VS Code Linux Setup}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://docs.arduino.cc/}{\textcolor{blue}{\underline{\faLink\quad Arduino}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Containers:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://docs.docker.com/engine/install/ubuntu/}{\textcolor{blue}{\underline{\faLink\quad Docker install docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mmbesar.github.io/Tutorials/HS-Docker/}{\textcolor{blue}{\underline{\faLink\quad Docker tutorial (mmbesar)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://distrobox.it/}{\textcolor{blue}{\underline{\faLink\quad Distrobox docs}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{AppImage:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://docs.appimage.org/}{\textcolor{blue}{\underline{\faLink\quad AppImage docs}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mmbesar.github.io/Tutorials/appimages/}{\textcolor{blue}{\underline{\faLink\quad AppImage tutorial (mmbesar)}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 7: Process Monitoring \& Robotics System
+Management}\label{session-7-process-monitoring-robotics-system-management}
+
+\begin{quote}
+\textbf{Verify \texttt{htop} is installed.}
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-6}
+
+\begin{itemize}
+\tightlist
+\item
+  Monitor process/resource usage under robotics workloads
+\item
+  Control or terminate stalled tasks safely
+\item
+  Use background execution and command chaining
+\item
+  Reason about embedded constraints (thermal/memory throttling)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) What Is a Process?}\label{what-is-a-process}
+
+Every program you run becomes a \emph{process}---an instance of a
+running program with a unique ID (PID). Linux lets you \textbf{list},
+\textbf{monitor}, and \textbf{control} these processes using simple
+tools.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{2) \texttt{htop} --- Interactive Process
+Viewer}{2) htop --- Interactive Process Viewer}}\label{htop-interactive-process-viewer}
+
+\faLightbulb \texttt{htop} is like \texttt{top}, but \emph{way more
+human-friendly}: color, scrolling, arrow navigation, signal menus, and
+killer shortcuts.
+
+\textbf{Why \texttt{htop}?} - Shows CPU, RAM, threads in real-time -
+Scroll through processes - Select and kill without typing PIDs
+
+\textbf{Install \& Run:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update}
+\FunctionTok{sudo}\NormalTok{ apt install htop}
+\ExtensionTok{htop}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Inside \texttt{htop}:} - ↑/↓ --- move - F9 --- kill selected
+process - F3 --- search/filter - F5 --- tree view (parent/child
+structure)
+
+\begin{quote}
+Always use \texttt{htop} to \textbf{see what's happening right
+now}---you'll \emph{instantly} understand resource bottlenecks.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{3) \texttt{kill} and \texttt{pkill} --- End
+Processes}{3) kill and pkill --- End Processes}}\label{kill-and-pkill-end-processes}
+
+When a process misbehaves (freezes, uses all your CPU), you kill it.
+
+\textbf{kill} (targets by PID):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{kill}\NormalTok{ 1234               }\CommentTok{\# SIGTERM {-} politely asks to quit}
+\BuiltInTok{kill} \AttributeTok{{-}9}\NormalTok{ 1234            }\CommentTok{\# SIGKILL {-} stops immediately}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{pkill} (targets by name .. no need to look up PID):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{pkill}\NormalTok{ firefox}
+\ExtensionTok{pkill} \AttributeTok{{-}u}\NormalTok{ someuser}
+\end{Highlighting}
+\end{Shaded}
+
+{[}NOTE{]} Tip: \texttt{kill} works on PIDs, \texttt{pkill} works on
+\emph{names}.\\
+\textgreater{} \faExclamationCircle Use \texttt{kill}
+sparingly---force-killing can corrupt data if the program is mid-write.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{4) \texttt{ps} + \texttt{grep} --- Find
+Processes via
+CLI}{4) ps + grep --- Find Processes via CLI}}\label{ps-grep-find-processes-via-cli}
+
+\texttt{ps} gives you a \emph{snapshot} of currently running
+processes---not real-time like \texttt{htop}, but extremely useful.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ps}\NormalTok{ aux                    }\CommentTok{\# List ALL processes}
+\FunctionTok{ps}\NormalTok{ aux }\KeywordTok{|} \FunctionTok{grep} \AttributeTok{{-}i}\NormalTok{ ros      }\CommentTok{\# Find ROS processes}
+\FunctionTok{ps}\NormalTok{ aux }\KeywordTok{|} \FunctionTok{grep}\NormalTok{ firefox     }\CommentTok{\# Find Firefox}
+\FunctionTok{ps} \AttributeTok{{-}ef} \KeywordTok{|} \FunctionTok{grep}\NormalTok{ python      }\CommentTok{\# Find Python instances}
+\end{Highlighting}
+\end{Shaded}
+
+\faExclamationCircle Pro tip: wrap your grep to \emph{not} match itself
+(e.g., \texttt{grep\ "{[}f{]}irefox"}), because normal grep often shows
+its \emph{own} process.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{5) Background Execution
+(\texttt{\&})}{5) Background Execution (\&)}}\label{background-execution}
+
+Sometimes you want to start a long-running task \emph{without blocking
+your terminal}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sleep}\NormalTok{ 60 }\KeywordTok{\&}                \CommentTok{\# Run in background}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{\&} → run command in the background
+\item
+  You get your prompt back immediately
+\item
+  Shell assigns a job number and PID
+\end{itemize}
+
+\textbf{Job Management:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{jobs}                      \CommentTok{\# List jobs}
+\BuiltInTok{fg}\NormalTok{ \%1                     }\CommentTok{\# Bring job 1 to foreground}
+\BuiltInTok{bg}\NormalTok{ \%1                     }\CommentTok{\# Resume job 1 in background}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{\&}, \texttt{screen}, \texttt{tmux} keep long tasks active while
+terminal remains usable.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{6) Command Chaining --- \texttt{\&\&},
+\texttt{\textbar{}\textbar{}},
+\texttt{;}}{6) Command Chaining --- \&\&, \textbar\textbar, ;}}\label{command-chaining}
+
+Command chaining lets you fire off multiple commands in one
+line---\emph{with logic about success or failure}.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Operator & What it Means \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{cmd1\ ;\ cmd2} & Run cmd1, then cmd2 no matter what \\
+\texttt{cmd1\ \&\&\ cmd2} & Run cmd2 ONLY if cmd1 succeeds (exit status
+0) \\
+\texttt{cmd1\ \textbackslash{}\textbar{}\textbackslash{}\textbar{}\ cmd2}
+& Run cmd2 ONLY if cmd1 fails \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt update }\KeywordTok{\&\&} \FunctionTok{sudo}\NormalTok{ apt upgrade }\AttributeTok{{-}y}
+\FunctionTok{rm}\NormalTok{ temp.log }\KeywordTok{||} \BuiltInTok{echo} \StringTok{"Could not delete temp.log"}
+\ExtensionTok{cmd1} \KeywordTok{;} \ExtensionTok{cmd2} \KeywordTok{;} \ExtensionTok{cmd3}
+\end{Highlighting}
+\end{Shaded}
+
+• Perfect for chaining updates, scripts, and error handling. Practice
+chaining---it's a \emph{game changer} for automation and scripting.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) Embedded Constraints}\label{embedded-constraints}
+
+Understand temperature, throttling, and memory pressure behavior on
+small devices.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{8) Real-Time Resource
+Management}\label{real-time-resource-management}
+
+Prioritize critical processes and avoid overload from concurrent jobs.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Simulation Monitoring}\label{simulation-monitoring}
+
+Track simulator CPU/RAM impact and tune settings to maintain
+responsiveness.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 7}\label{useful-links-session-7}
+
+\textbf{Process Management:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.geeksforgeeks.org/linux-unix/using-htop-to-monitor-system-processes-on-linux/}{\textcolor{blue}{\underline{\faLink\quad htop tutorial (GeeksforGeeks)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.howtogeek.com/how-to-manage-linux-processes-using-ps-kill-and-pkill/}{\textcolor{blue}{\underline{\faLink\quad Manage processes with ps, kill, pkill (How-To Geek)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://discourse.ubuntu.com/t/viewing-and-monitoring-processes-in-linux/26024}{\textcolor{blue}{\underline{\faLink\quad Viewing and Monitoring Processes (Ubuntu Community)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Job Control \& Commands:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.digitalocean.com/community/tutorials/how-to-use-bash-s-job-control-to-manage-foreground-and-background-processes}{\textcolor{blue}{\underline{\faLink\quad Bash job control (DigitalOcean)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.geeksforgeeks.org/linux-unix/chaining-commands-in-linux/}{\textcolor{blue}{\underline{\faLink\quad Chaining Commands (GeeksforGeeks)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{General References:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://ubuntu.com/tutorials/command-line-for-beginners}{\textcolor{blue}{\underline{\faLink\quad Ubuntu CLI for Beginners}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.gnu.org/software/bash/manual/}{\textcolor{blue}{\underline{\faLink\quad Bash Reference Manual}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Chapter 3: System Management, Scripting \&
+Networking}\label{chapter-3-system-management-scripting-networking}
+
+\subsubsection{Session 8: Automation with systemd \&
+Cron}\label{session-8-automation-with-systemd-cron}
+
+\begin{quote}
+Alright .. this is the session where you level up from ``I run Linux''
+to: ``I control what runs on Linux\ldots{} and when it runs.''
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-7}
+
+\begin{itemize}
+\tightlist
+\item
+  Create/manage systemd services for robotics startup
+\item
+  Schedule recurring tasks using timers and cron
+\item
+  Understand unit dependencies and debugging basics
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) What is systemd? (And Why You Should
+Care)}\label{what-is-systemd-and-why-you-should-care}
+
+On modern Debian-based systems (Debian, Ubuntu, Linux Mint), the init
+system is \textbf{systemd}.
+
+An \emph{init system} is the first userspace process started by the
+kernel. Check it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ps} \AttributeTok{{-}p}\NormalTok{ 1 }\AttributeTok{{-}o}\NormalTok{ comm=    }\CommentTok{\# Should show "systemd"}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{What Does systemd Do?} - Starts services during boot - Manages
+background processes (daemons) - Handles logging (via \texttt{journald})
+- Mounts filesystems - Manages network services - Handles timers (our
+main topic today)
+
+\begin{quote}
+If Linux is a city □, \texttt{systemd} is the mayor.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Understanding Units in
+systemd}\label{understanding-units-in-systemd}
+
+Everything in systemd is a \textbf{Unit}---a configuration file that
+tells systemd what to manage.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Type & Extension & Purpose \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Service & \texttt{.service} & Background services \\
+Timer & \texttt{.timer} & Scheduling \\
+Mount & \texttt{.mount} & Mount points \\
+Target & \texttt{.target} & Group of units \\
+Socket & \texttt{.socket} & Socket activation \\
+\end{longtable}
+}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{systemctl}\NormalTok{ list{-}units           }\CommentTok{\# List all active units}
+\ExtensionTok{systemctl}\NormalTok{ list{-}unit{-}files      }\CommentTok{\# List all installed units}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Managing Services with
+systemctl}\label{managing-services-with-systemctl}
+
+This is daily Linux admin stuff.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ systemctl start apache2       }\CommentTok{\# Start}
+\FunctionTok{sudo}\NormalTok{ systemctl stop apache2        }\CommentTok{\# Stop}
+\FunctionTok{sudo}\NormalTok{ systemctl restart apache2     }\CommentTok{\# Restart}
+\FunctionTok{sudo}\NormalTok{ systemctl reload apache2      }\CommentTok{\# Reload config (keeps connections alive)}
+\FunctionTok{sudo}\NormalTok{ systemctl enable apache2      }\CommentTok{\# Enable at boot}
+\FunctionTok{sudo}\NormalTok{ systemctl disable apache2     }\CommentTok{\# Disable at boot}
+\FunctionTok{sudo}\NormalTok{ systemctl mask apache2        }\CommentTok{\# Completely block from starting}
+\FunctionTok{sudo}\NormalTok{ systemctl unmask apache2      }\CommentTok{\# Unmask}
+\ExtensionTok{systemctl}\NormalTok{ status apache2           }\CommentTok{\# Check status}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Reload vs Restart (Important!):} - \texttt{reload}: Reloads
+configuration, does NOT stop process, keeps connections alive -
+\texttt{restart}: Stops service, starts again, drops active connections
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) Where Are Unit Files
+Stored?}\label{where-are-unit-files-stored}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Directory & Purpose \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{/usr/lib/systemd/system/} & Default package units \\
+\texttt{/lib/systemd/system/} & (Debian equivalent) \\
+\texttt{/etc/systemd/system/} & Custom \& overrides \\
+\end{longtable}
+}
+
+\textbf{Priority Order (highest to lowest):}
+\texttt{/etc/systemd/system/} overrides defaults.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Anatomy of a Service
+File}\label{anatomy-of-a-service-file}
+
+Inspect a service file structure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{systemctl}\NormalTok{ cat apache2.service}
+\end{Highlighting}
+\end{Shaded}
+
+Typical structure:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[Unit]}
+\DataTypeTok{Description}\OtherTok{=}\StringTok{...}
+\DataTypeTok{After}\OtherTok{=}\StringTok{network.target}
+
+\KeywordTok{[Service]}
+\DataTypeTok{Type}\OtherTok{=}\StringTok{forking}
+\DataTypeTok{ExecStart}\OtherTok{=}\StringTok{/usr/sbin/apachectl start}
+\DataTypeTok{ExecReload}\OtherTok{=}\StringTok{/usr/sbin/apachectl graceful}
+\DataTypeTok{ExecStop}\OtherTok{=}\StringTok{/usr/sbin/apachectl stop}
+
+\KeywordTok{[Install]}
+\DataTypeTok{WantedBy}\OtherTok{=}\StringTok{multi{-}user.target}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{{[}Unit{]} Section:} Metadata and dependencies (Description,
+After=, Requires=)\\
+\textbf{{[}Service{]} Section:} How the service runs (ExecStart,
+ExecStop, Restart, User, Type)\\
+\textbf{{[}Install{]} Section:} Boot integration
+(\texttt{WantedBy=multi-user.target} means start in normal multi-user
+mode)
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Creating Your Own
+Service}\label{creating-your-own-service}
+
+\textbf{Goal: Run a simple script at boot}
+
+Create script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /usr/local/bin/hello.sh}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\BuiltInTok{echo} \StringTok{"Hello from systemd!"} \OperatorTok{\textgreater{}\textgreater{}}\NormalTok{ /tmp/hello.log}
+\end{Highlighting}
+\end{Shaded}
+
+Make executable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ chmod +x /usr/local/bin/hello.sh}
+\end{Highlighting}
+\end{Shaded}
+
+Create service file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /etc/systemd/system/hello.service}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[Unit]}
+\DataTypeTok{Description}\OtherTok{=}\StringTok{My Hello Service}
+
+\KeywordTok{[Service]}
+\DataTypeTok{Type}\OtherTok{=}\StringTok{oneshot}
+\DataTypeTok{ExecStart}\OtherTok{=}\StringTok{/usr/local/bin/hello.sh}
+
+\KeywordTok{[Install]}
+\DataTypeTok{WantedBy}\OtherTok{=}\StringTok{multi{-}user.target}
+\end{Highlighting}
+\end{Shaded}
+
+Reload systemd (IMPORTANT anytime you create/edit/delete unit files):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ systemctl daemon{-}reload}
+\FunctionTok{sudo}\NormalTok{ systemctl start hello.service}
+\FunctionTok{cat}\NormalTok{ /tmp/hello.log    }\CommentTok{\# Boom \textbackslash{}faExclamationCircle}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) Editing \& Overriding Units (The Smart
+Way)}\label{editing-overriding-units-the-smart-way}
+
+\textbf{Never edit files in \texttt{/lib/systemd/system/}.}
+
+Instead:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ systemctl edit apache2}
+\end{Highlighting}
+\end{Shaded}
+
+This creates
+\texttt{/etc/systemd/system/apache2.service.d/override.conf}. Safe
+override.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[Service]}
+\DataTypeTok{Restart}\OtherTok{=}\StringTok{always}
+\end{Highlighting}
+\end{Shaded}
+
+Save → \texttt{sudo\ systemctl\ daemon-reload} → restart service.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{8) systemd Timers (Modern
+Scheduling)}\label{systemd-timers-modern-scheduling}
+
+Now we level up. \textbf{Timers = replacement for cron.}
+
+\textbf{Why Use systemd Timers Instead of Cron?} - Integrated with
+services - Better logging - More control - Dependency aware - Can use
+calendar expressions
+
+\begin{quote}
+Note that systemd is more complex than Cron and requires systemd to work
+on your system.
+\end{quote}
+
+\textbf{Timer Structure:} A timer requires (1) a \texttt{.service} file
+and (2) a \texttt{.timer} file.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Example: Send Message to All
+Users}\label{example-send-message-to-all-users}
+
+Create script:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /usr/local/bin/wall{-}msg.sh}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+\FunctionTok{wall} \StringTok{"System reminder: Stay awesome!"}
+\end{Highlighting}
+\end{Shaded}
+
+Make executable:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ chmod +x /usr/local/bin/wall{-}msg.sh}
+\end{Highlighting}
+\end{Shaded}
+
+Create service file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /etc/systemd/system/wall{-}msg.service}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[Unit]}
+\DataTypeTok{Description}\OtherTok{=}\StringTok{Wall Message Service}
+
+\KeywordTok{[Service]}
+\DataTypeTok{Type}\OtherTok{=}\StringTok{oneshot}
+\DataTypeTok{ExecStart}\OtherTok{=}\StringTok{/usr/local/bin/wall{-}msg.sh}
+\end{Highlighting}
+\end{Shaded}
+
+Create timer file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /etc/systemd/system/wall{-}msg.timer}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{[Unit]}
+\DataTypeTok{Description}\OtherTok{=}\StringTok{Run wall message every minute}
+
+\KeywordTok{[Timer]}
+\DataTypeTok{OnCalendar}\OtherTok{=}\StringTok{*{-}*{-}* *:*:00}
+\DataTypeTok{Persistent}\OtherTok{=}\KeywordTok{true}
+
+\KeywordTok{[Install]}
+\DataTypeTok{WantedBy}\OtherTok{=}\StringTok{timers.target}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Breaking down the timer file:}
+
+\textbf{\texttt{{[}Unit{]}} --- The ID Card} - \texttt{Description}: A
+human-readable label. It doesn't affect logic, but when you run
+\texttt{systemctl\ status}, this is what you see.
+
+\textbf{\texttt{{[}Timer{]}} --- The Alarm Clock} - \texttt{OnCalendar}:
+Defines \emph{when} the task runs (explained in detail below). -
+\texttt{Persistent=true}: Acts like a ``snooze'' button for missed jobs.
+If your computer was turned off when the timer was supposed to trigger,
+systemd will \textbf{immediately run the task as soon as you turn the
+computer back on}.
+
+\textbf{\texttt{{[}Install{]}} --- The Connection} -
+\texttt{WantedBy=timers.target}: Tells systemd how to ``hook'' this
+timer into the system. When you run \texttt{systemctl\ enable}, it links
+this timer to the standard group of system timers so it starts
+automatically on boot.
+
+Activate:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ systemctl daemon{-}reload}
+\FunctionTok{sudo}\NormalTok{ systemctl enable wall{-}msg.timer}
+\FunctionTok{sudo}\NormalTok{ systemctl start wall{-}msg.timer}
+\ExtensionTok{systemctl}\NormalTok{ list{-}timers    }\CommentTok{\# Check timers \textbackslash{}faExclamationCircle}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{10) Understanding OnCalendar}\label{understanding-oncalendar}
+
+\texttt{OnCalendar} uses a simple format:
+\texttt{DayOfWeek\ Year-Month-Day\ Hour:Minute:Second}
+
+\textbf{The Asterisk (\texttt{*}) means ``every'' or ``don't care''.}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Expression
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Meaning
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Breakdown
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{*-*-*\ *:*:00} & Every minute & Every year-month-day, every
+hour:minute, at second 00 \\
+\texttt{daily} & Once per day & Shortcut for \texttt{*-*-*\ 00:00:00} \\
+\texttt{weekly} & Once per week & Shortcut for
+\texttt{Mon\ *-*-*\ 00:00:00} \\
+\texttt{Mon\ *-*-*\ 09:00:00} & Every Monday at 9AM & Monday, any date,
+at 09:00:00 \\
+\texttt{*-*-01\ 00:00:00} & First day of every month & Any year-month,
+day 01, at midnight \\
+\texttt{*-*-*\ *:00:00} & Every hour, on the hour & Any date, every
+hour, at minute 00, second 00 \\
+\texttt{Mon..Fri\ *-*-*\ 08:30:00} & Weekdays at 8:30AM & Monday through
+Friday, any date, at 08:30 \\
+\texttt{*-*-12,24\ 03:00:00} & 12th and 24th of every month at 3AM & Any
+year-month, days 12 and 24, at 03:00 \\
+\end{longtable}
+}
+
+\textbf{Pro Tips:} - You can use shortcuts: \texttt{hourly},
+\texttt{daily}, \texttt{weekly}, \texttt{monthly}, \texttt{yearly} - Use
+\texttt{systemd-analyze\ calendar\ "YOUR\_EXPRESSION"} to test and
+verify your schedule before using it.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Test a calendar expression}
+\ExtensionTok{systemd{-}analyze}\NormalTok{ calendar }\StringTok{"Mon *{-}*{-}* 09:00:00"}
+\end{Highlighting}
+\end{Shaded}
+
+This command will show you the next scheduled run time so you can verify
+your expression is correct.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{11) Other Timer Options}\label{other-timer-options}
+
+\textbf{Other Timer Options:} - \texttt{OnBootSec=} --- After boot -
+\texttt{OnUnitActiveSec=} --- After last run - \texttt{Persistent=true}
+--- Run missed jobs after reboot
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{12) Timer vs Cron Comparison}\label{timer-vs-cron-comparison}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Feature & Cron & systemd Timer \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Logging & Basic & journalctl \\
+Dependencies & No & Yes \\
+Missed Runs & No & Yes (Persistent) \\
+Integration & Separate & Native \\
+\end{longtable}
+}
+
+\textbf{Cron jobs for repetitive tasks:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{crontab} \AttributeTok{{-}l}      \CommentTok{\# List cron jobs}
+\FunctionTok{crontab} \AttributeTok{{-}e}      \CommentTok{\# Edit cron jobs}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{13) Debugging Services \&
+Timers}\label{debugging-services-timers}
+
+Check service logs and failures:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{journalctl} \AttributeTok{{-}u}\NormalTok{ wall{-}msg.service    }\CommentTok{\# Logs for specific service}
+\ExtensionTok{journalctl} \AttributeTok{{-}f}                     \CommentTok{\# Live logs}
+\ExtensionTok{systemctl} \AttributeTok{{-}{-}failed}                \CommentTok{\# Check failures}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{14) Real World Use Cases}\label{real-world-use-cases}
+
+\begin{itemize}
+\tightlist
+\item
+  Backup scripts
+\item
+  Log cleanup
+\item
+  Health checks
+\item
+  Auto-updates
+\item
+  Dev server restarts
+\item
+  IoT tasks
+\end{itemize}
+
+\textbf{Common Mistakes:} - \faTimesCircle Forgetting
+\texttt{daemon-reload} - \faTimesCircle Editing
+\texttt{/lib/systemd/system/} directly - \faTimesCircle Wrong file
+permissions - \faTimesCircle Forgetting \texttt{WantedBy=}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Final Mental Model:} - Service = What to run - Timer = When to
+run - Unit file = Configuration blueprint - systemctl = Control center
+
+\begin{quote}
+You are no longer a Linux user. You're becoming a Linux operator. →
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 8}\label{useful-links-session-8}
+
+\textbf{systemd Fundamentals:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.geeksforgeeks.org/linux-unix/linux-systemd-and-its-components/}{\textcolor{blue}{\underline{\faLink\quad Linux systemd and its components (GeeksforGeeks)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.geeksforgeeks.org/linux-unix/an-introduction-to-systemd-and-its-role-in-the-boot-process/}{\textcolor{blue}{\underline{\faLink\quad Introduction to systemd (GeeksforGeeks)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.geeksforgeeks.org/linux-unix/how-to-mask-a-systemd-unit-in-linux/}{\textcolor{blue}{\underline{\faLink\quad How to mask a systemd unit (GeeksforGeeks)}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 9: Storage Management \& Performance
+Optimization}\label{session-9-storage-management-performance-optimization}
+
+\begin{quote}
+\textbf{\texttt{zram-tools} is optional but recommended for low-memory
+systems.}
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-8}
+
+\begin{itemize}
+\tightlist
+\item
+  Inspect and mount storage devices correctly
+\item
+  Configure persistent mounts through \texttt{/etc/fstab}
+\item
+  Monitor memory behavior and choose swap/zram strategy
+\item
+  Manage datasets/models under embedded storage constraints
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Why This Session Matters}\label{why-this-session-matters}
+
+Before we touch commands, understand this: - Your \textbf{disk} stores
+data permanently - Your \textbf{RAM} is fast temporary memory -
+\textbf{Swap} is emergency backup memory - \textbf{zram} is compressed
+RAM swap (smart trick for low-memory systems)
+
+If you understand this session, you'll mount extra drives safely, fix
+broken boot issues, add a second disk like a pro, understand RAM
+pressure, and boost low-RAM machines using zram.
+
+\textbf{This is not theory. This is real Linux power.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Understanding Your Disks}\label{understanding-your-disks}
+
+\textbf{\texttt{lsblk} --- The Disk Tree Viewer:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{lsblk}
+\ExtensionTok{lsblk} \AttributeTok{{-}f}          \CommentTok{\# Shows filesystem, UUID, mountpoint (MORE DETAILED)}
+\end{Highlighting}
+\end{Shaded}
+
+Example output:
+
+\begin{verbatim}
+sda
+├─sda1
+├─sda2
+└─sda3
+sdb
+└─sdb1
+\end{verbatim}
+
+\textbf{Shows:} Disk names, partitions, mount points, size, type.\\
+\faExclamationCircle Use this before and after plugging a USB.
+
+\textbf{\texttt{blkid} --- UUID Finder:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ blkid}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+/dev/sda1: UUID="1A2B-3C4D" TYPE="vfat"
+\end{verbatim}
+
+Why important? Because in \texttt{/etc/fstab}, we use \textbf{UUID}, not
+\texttt{/dev/sda1}. Why? Because device names can change on boot.
+\textbf{UUID never lies.}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Mounting and Unmounting
+Drives}\label{mounting-and-unmounting-drives}
+
+Unlike Windows, Linux does not auto-use disks unless mounted.
+
+\textbf{Manual Mount:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ mkdir /mnt/mydrive           }\CommentTok{\# Step 1: Create mount point}
+\FunctionTok{sudo}\NormalTok{ mount /dev/sdb1 /mnt/mydrive }\CommentTok{\# Step 2: Mount}
+\FunctionTok{ls}\NormalTok{ /mnt/mydrive                   }\CommentTok{\# Step 3: Check}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Unmount:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ umount /mnt/mydrive}
+\CommentTok{\# OR}
+\FunctionTok{sudo}\NormalTok{ umount /dev/sdb1}
+\end{Highlighting}
+\end{Shaded}
+
+\faExclamationCircle If busy error:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{lsof} \KeywordTok{|} \FunctionTok{grep}\NormalTok{ sdb1    }\CommentTok{\# Find what\textquotesingle{}s using it}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{\texorpdfstring{4) Persistent Mounts with
+\texttt{/etc/fstab}}{4) Persistent Mounts with /etc/fstab}}\label{persistent-mounts-with-etcfstab}
+
+This file controls what mounts at boot.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ nano /etc/fstab}
+\end{Highlighting}
+\end{Shaded}
+
+Example entry:
+
+\begin{verbatim}
+UUID=1a2b3c4d-xxxx-xxxx-xxxx-xxxxxxxxxxxx  /mnt/mydrive  ext4  defaults  0  2
+\end{verbatim}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Column & Meaning \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+UUID & Disk identifier \\
+Mount point & Where it appears \\
+Filesystem & ext4, ntfs, vfat \\
+Options & defaults, noatime \\
+Dump & usually 0 \\
+fsck order & usually 2 \\
+\end{longtable}
+}
+
+\textbf{{[}LAB{]} Test Before Reboot:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ mount }\AttributeTok{{-}a}    \CommentTok{\# If no errors → safe to reboot. If error → FIX IT before rebooting.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Pro tip:} Use \texttt{nofail} option in fstab for external
+drives so system doesn't panic if drive is missing.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Monitoring RAM Usage}\label{monitoring-ram-usage}
+
+RAM = short-term memory.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{free} \AttributeTok{{-}h}
+\end{Highlighting}
+\end{Shaded}
+
+Example:
+
+\begin{verbatim}
+              total   used   free  shared  buff/cache  available
+Mem:           7.6G   3.1G   1.2G     500M     3.3G       3.8G
+Swap:          2.0G   0B     2.0G
+\end{verbatim}
+
+\textbf{Important columns:} - \textbf{used} → currently used -
+\textbf{available} → real usable memory - \textbf{buff/cache} → Linux
+using RAM smartly
+
+\faExclamationCircle Linux uses RAM aggressively. That's GOOD. Unused
+RAM = wasted RAM.
+
+\textbf{Real-time view:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{watch} \AttributeTok{{-}n}\NormalTok{ 1 free }\AttributeTok{{-}h}    \CommentTok{\# Updates every second}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Understanding Swap}\label{understanding-swap}
+
+Swap = disk used as overflow memory. When RAM fills up → inactive pages
+move to swap. But swap is slower than RAM.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{swapon} \AttributeTok{{-}{-}show}         \CommentTok{\# Check swap}
+\FunctionTok{cat}\NormalTok{ /proc/swaps}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Creating a Swap File (Manual Way):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ fallocate }\AttributeTok{{-}l}\NormalTok{ 2G /swapfile    }\CommentTok{\# Step 1}
+\FunctionTok{sudo}\NormalTok{ chmod 600 /swapfile          }\CommentTok{\# Step 2}
+\FunctionTok{sudo}\NormalTok{ mkswap /swapfile             }\CommentTok{\# Step 3}
+\FunctionTok{sudo}\NormalTok{ swapon /swapfile             }\CommentTok{\# Step 4}
+\end{Highlighting}
+\end{Shaded}
+
+Make permanent---add to \texttt{/etc/fstab}:
+
+\begin{verbatim}
+/swapfile none swap sw 0 0
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) Swap and zram}\label{swap-and-zram}
+
+\textbf{zram --- Compressed RAM Swap:}\\
+zram creates compressed swap \emph{in RAM}. Instead of writing to disk,
+it compresses pages and stores them in RAM---faster than disk swap.
+
+Great for 4GB RAM laptops, old machines, and low-resource VPS.
+
+\textbf{Install on Debian/Ubuntu/Mint:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ apt install zram{-}tools}
+\ExtensionTok{dpkg} \AttributeTok{{-}l} \KeywordTok{|} \FunctionTok{grep}\NormalTok{ zram              }\CommentTok{\# Check if installed}
+\ExtensionTok{systemctl}\NormalTok{ status zramswap        }\CommentTok{\# Check if active}
+\end{Highlighting}
+\end{Shaded}
+
+Check config:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{ /etc/default/zramswap}
+\end{Highlighting}
+\end{Shaded}
+
+You can adjust \texttt{PERCENT=70} (use 70\% of RAM for
+zram---recommended: 70\%-80\%).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sudo}\NormalTok{ systemctl restart zramswap}
+\ExtensionTok{swapon} \AttributeTok{{-}{-}show}                    \CommentTok{\# Should show /dev/zram0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Swap vs zram Comparison:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Feature & Disk Swap & zram \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Speed & Slow & Faster \\
+Uses disk & Yes & No \\
+Best for & Large systems & Low RAM \\
+Compression & No & Yes \\
+\end{longtable}
+}
+
+\begin{quote}
+\textbf{Best practice for laptops:} Use zram + keep small disk swap.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{8) Embedded Storage Choices (SD vs
+SSD)}\label{embedded-storage-choices-sd-vs-ssd}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{SD:} Portable and common, but limited endurance
+\item
+  \textbf{SSD:} Better durability/performance for heavy read/write
+  workloads
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{9) Storage Lifespan
+Optimization}\label{storage-lifespan-optimization}
+
+Reduce unnecessary writes, rotate logs, and separate high-write data
+paths where possible.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{10) AI and Simulation Storage
+Management}\label{ai-and-simulation-storage-management}
+
+Organize datasets/models/simulation outputs with clear cleanup and
+archival policy.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{11) Troubleshooting Boot Failures (fstab
+Mistakes)}\label{troubleshooting-boot-failures-fstab-mistakes}
+
+If system won't boot: 1. Boot into recovery mode 2. Mount root 3. Edit
+\texttt{/etc/fstab} 4. Fix or comment broken line
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{12) Useful Extra Commands}\label{useful-extra-commands}
+
+Additional disk and memory utilities:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{df} \AttributeTok{{-}h}                 \CommentTok{\# Disk usage}
+\FunctionTok{du} \AttributeTok{{-}sh} \PreprocessorTok{*}              \CommentTok{\# Folder sizes}
+\FunctionTok{mount} \KeywordTok{|} \FunctionTok{grep}\NormalTok{ sdb      }\CommentTok{\# See mount points}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Practice}\label{practice-1}
+
+Verify your disk and memory configuration:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{lsblk}
+\ExtensionTok{blkid}
+\FunctionTok{free} \AttributeTok{{-}h}
+\FunctionTok{vmstat}\NormalTok{ 1 5}
+\FunctionTok{df} \AttributeTok{{-}h}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Practical Lab Exercises}\label{practical-lab-exercises}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Plug USB → identify it using \texttt{lsblk}
+\item
+  Mount it manually in \texttt{/mnt/testusb}
+\item
+  Make it permanent in fstab
+\item
+  Create 1GB swap file
+\item
+  Install zram and compare swap usage
+\end{enumerate}
+
+\begin{quote}
+\textbf{Final Advice:} Disk and memory management is not optional
+knowledge. It's what separates ``Linux user'' from ``Linux operator''.
+Break things in a VM. Test everything with \texttt{mount\ -a}. Never
+reboot blindly after editing fstab. You're building serious Linux skills
+now.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 9}\label{useful-links-session-9}
+
+\textbf{Disk \& Storage Tutorials:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mmbesar.github.io/Tutorials/2nd-drive/}{\textcolor{blue}{\underline{\faLink\quad Adding 2nd drive tutorial (mmbesar)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mmbesar.github.io/Tutorials/RAM-SWAP-ZRAM/}{\textcolor{blue}{\underline{\faLink\quad RAM, SWAP, ZRAM tutorial (mmbesar)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.youtube.com/watch?v=yWuHI7uoftY}{\textcolor{blue}{\underline{\faLink\quad Disk management video guide}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/CPvJvY79vEw}{\textcolor{blue}{\underline{\faLink\quad Swap \& ZRAM video guide}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 10: Shell Scripting \& Robotics
+Networking}\label{session-10-shell-scripting-robotics-networking}
+
+\begin{quote}
+\textbf{Verify packages:} \texttt{curl}, \texttt{aria2}, \texttt{ssh},
+\texttt{net-tools}
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-9}
+
+\begin{itemize}
+\tightlist
+\item
+  Build practical Bash scripts for robotics operations
+\item
+  Diagnose and configure network connectivity
+\item
+  Transfer data/models securely and efficiently
+\item
+  Set up static IP and SSH keys for automation
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Part 1: Bash Scripting for Robotics
+Automation}\label{part-1-bash-scripting-for-robotics-automation}
+
+You already know how to navigate the terminal. You've used
+\texttt{grep}, \texttt{sed}, and \texttt{awk}. You've redirected output
+and written basic scripts. Now it's time to think like a developer and
+build tools that actually \emph{do} things.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Variables and Data Types}\label{variables-and-data-types}
+
+In Bash, everything is a string. But that doesn't mean you can't be
+clever.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\CommentTok{\# Variable assignment (no spaces!)}
+\VariableTok{user\_name}\OperatorTok{=}\StringTok{"hacker"}
+\VariableTok{age}\OperatorTok{=}\NormalTok{21}
+\VariableTok{is\_cool}\OperatorTok{=}\NormalTok{true}
+
+\CommentTok{\# Accessing variables}
+\BuiltInTok{echo} \StringTok{"Hey }\VariableTok{$user\_name}\StringTok{, you\textquotesingle{}re }\VariableTok{$age}\StringTok{ years old!"}
+
+\CommentTok{\# Command substitution}
+\VariableTok{current\_date}\OperatorTok{=}\VariableTok{$(}\FunctionTok{date}\NormalTok{ +\%Y{-}\%m{-}\%d}\VariableTok{)}
+\VariableTok{kernel\_version}\OperatorTok{=}\VariableTok{$(}\FunctionTok{uname} \AttributeTok{{-}r}\VariableTok{)}
+
+\BuiltInTok{echo} \StringTok{"Today is }\VariableTok{$current\_date}\StringTok{, running kernel }\VariableTok{$kernel\_version}\StringTok{"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Pro Tip:} Use \texttt{\$()} for command substitution instead of
+backticks. It's nestable and easier to read.
+\end{quote}
+
+\textbf{Core script blocks to practice:} Variables, Conditions and
+loops, Functions, Exit codes and basic error handling.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Control Flow}\label{control-flow}
+
+\textbf{If Statements:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\VariableTok{file\_count}\OperatorTok{=}\VariableTok{$(}\FunctionTok{ls} \KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}\VariableTok{)}
+
+\ControlFlowTok{if} \BuiltInTok{[} \VariableTok{$file\_count} \OtherTok{{-}gt}\NormalTok{ 10 }\BuiltInTok{]}\KeywordTok{;} \ControlFlowTok{then}
+    \BuiltInTok{echo} \StringTok{"Directory is cluttered (}\VariableTok{$file\_count}\StringTok{ files). Time to clean up!"}
+\ControlFlowTok{elif} \BuiltInTok{[} \VariableTok{$file\_count} \OtherTok{{-}eq}\NormalTok{ 0 }\BuiltInTok{]}\KeywordTok{;} \ControlFlowTok{then}
+    \BuiltInTok{echo} \StringTok{"Empty directory. Lonely vibes."}
+\ControlFlowTok{else}
+    \BuiltInTok{echo} \StringTok{"Looking good with }\VariableTok{$file\_count}\StringTok{ files."}
+\ControlFlowTok{fi}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Important:} Always use spaces inside brackets \texttt{{[}\ {]}}.
+\texttt{{[}\ \$var\ -eq\ 1\ {]}} works, \texttt{{[}\$var\ -eq\ 1{]}}
+fails.
+\end{quote}
+
+\textbf{Case Statements:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\BuiltInTok{echo} \StringTok{"Choose your distro:"}
+\BuiltInTok{echo} \StringTok{"1) Arch"}
+\BuiltInTok{echo} \StringTok{"2) Debian"}
+\BuiltInTok{echo} \StringTok{"3) Fedora"}
+\BuiltInTok{read} \VariableTok{choice}
+
+\ControlFlowTok{case} \VariableTok{$choice} \KeywordTok{in}
+    \SpecialStringTok{1}\KeywordTok{)} \BuiltInTok{echo} \StringTok{"I use Arch, btw"} \ControlFlowTok{;;}
+    \SpecialStringTok{2}\KeywordTok{)} \BuiltInTok{echo} \StringTok{"Stable and reliable. Nice."} \ControlFlowTok{;;}
+    \SpecialStringTok{3}\KeywordTok{)} \BuiltInTok{echo} \StringTok{"Red Hat family represent!"} \ControlFlowTok{;;}
+    \PreprocessorTok{*}\KeywordTok{)} \BuiltInTok{echo} \StringTok{"Invalid choice. Try again."} \ControlFlowTok{;;}
+\ControlFlowTok{esac}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Loops}\label{loops}
+
+\textbf{For Loops:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\ControlFlowTok{for}\NormalTok{ file }\KeywordTok{in} \PreprocessorTok{*}\NormalTok{.txt}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"Processing }\VariableTok{$file}\StringTok{..."}
+    \FunctionTok{wc} \AttributeTok{{-}l} \StringTok{"}\VariableTok{$file}\StringTok{"}
+\ControlFlowTok{done}
+
+\CommentTok{\# C{-}style}
+\ControlFlowTok{for} \KeywordTok{((}\VariableTok{i}\OperatorTok{=}\DecValTok{0}\KeywordTok{;} \VariableTok{i}\OperatorTok{\textless{}}\DecValTok{5}\KeywordTok{;} \VariableTok{i}\OperatorTok{++}\KeywordTok{));} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"Iteration }\VariableTok{$i}\StringTok{"}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{While Loops:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\CommentTok{\# Read file line by line}
+\ControlFlowTok{while} \VariableTok{IFS}\OperatorTok{=} \BuiltInTok{read} \AttributeTok{{-}r} \VariableTok{line}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"Line: }\VariableTok{$line}\StringTok{"}
+\ControlFlowTok{done} \OperatorTok{\textless{}}\NormalTok{ input.txt}
+
+\CommentTok{\# With break}
+\VariableTok{counter}\OperatorTok{=}\NormalTok{0}
+\ControlFlowTok{while} \FunctionTok{true}\KeywordTok{;} \ControlFlowTok{do}
+    \BuiltInTok{echo} \StringTok{"Loop }\VariableTok{$counter}\StringTok{"}
+    \KeywordTok{((}\VariableTok{counter}\OperatorTok{++}\KeywordTok{))}
+    \BuiltInTok{[} \VariableTok{$counter} \OtherTok{{-}eq}\NormalTok{ 5 }\BuiltInTok{]} \KeywordTok{\&\&} \ControlFlowTok{break}
+\ControlFlowTok{done}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) Functions}\label{functions}
+
+Write reusable code blocks:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\FunctionTok{check\_port()} \KeywordTok{\{}
+    \BuiltInTok{local} \VariableTok{host}\OperatorTok{=}\VariableTok{$1}
+    \BuiltInTok{local} \VariableTok{port}\OperatorTok{=}\VariableTok{$2}
+    \FunctionTok{timeout}\NormalTok{ 2 bash }\AttributeTok{{-}c} \StringTok{"\textless{}/dev/tcp/}\VariableTok{$host}\StringTok{/}\VariableTok{$port}\StringTok{"} \DecValTok{2}\OperatorTok{\textgreater{}}\NormalTok{/dev/null }\KeywordTok{\&\&} \DataTypeTok{\textbackslash{}}
+        \BuiltInTok{echo} \StringTok{"Port }\VariableTok{$port}\StringTok{ on }\VariableTok{$host}\StringTok{ is OPEN"} \KeywordTok{||} \DataTypeTok{\textbackslash{}}
+        \BuiltInTok{echo} \StringTok{"Port }\VariableTok{$port}\StringTok{ on }\VariableTok{$host}\StringTok{ is CLOSED"}
+\KeywordTok{\}}
+
+\ExtensionTok{check\_port} \StringTok{"google.com"}\NormalTok{ 443}
+\ExtensionTok{check\_port} \StringTok{"localhost"}\NormalTok{ 22}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Key Points:} - Use \texttt{local} for variables inside functions
+to avoid global scope pollution - Functions should do one thing well
+(Unix philosophy) - Return values are 0-255 (exit codes), not strings
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Error Handling}\label{error-handling}
+
+Don't let your scripts crash silently:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\CommentTok{\# Automatic error handling}
+\BuiltInTok{set} \AttributeTok{{-}euo}\NormalTok{ pipefail}
+\CommentTok{\# {-}e: Exit on error}
+\CommentTok{\# {-}u: Exit on undefined variable}
+\CommentTok{\# {-}o pipefail: Catch errors in pipelines}
+
+\CommentTok{\# Or handle manually}
+\ControlFlowTok{if} \OtherTok{! }\FunctionTok{ping} \AttributeTok{{-}c}\NormalTok{ 1 google.com }\OperatorTok{\&\textgreater{}}\NormalTok{ /dev/null}\KeywordTok{;} \ControlFlowTok{then}
+    \BuiltInTok{echo} \StringTok{"ERROR: No internet connection"} \OperatorTok{\textgreater{}\&}\DecValTok{2}
+    \BuiltInTok{exit}\NormalTok{ 1}
+\ControlFlowTok{fi}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Working with APIs}\label{working-with-apis}
+
+Modern scripting is all about data:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/bin/bash}
+
+\VariableTok{response}\OperatorTok{=}\VariableTok{$(}\ExtensionTok{curl} \AttributeTok{{-}s} \StringTok{"https://api.github.com/users/torvalds"}\VariableTok{)}
+\VariableTok{login}\OperatorTok{=}\VariableTok{$(}\BuiltInTok{echo} \StringTok{"}\VariableTok{$response}\StringTok{"} \KeywordTok{|} \ExtensionTok{jq} \AttributeTok{{-}r} \StringTok{\textquotesingle{}.login\textquotesingle{}}\VariableTok{)}
+\VariableTok{followers}\OperatorTok{=}\VariableTok{$(}\BuiltInTok{echo} \StringTok{"}\VariableTok{$response}\StringTok{"} \KeywordTok{|} \ExtensionTok{jq} \AttributeTok{{-}r} \StringTok{\textquotesingle{}.followers\textquotesingle{}}\VariableTok{)}
+\VariableTok{created\_at}\OperatorTok{=}\VariableTok{$(}\BuiltInTok{echo} \StringTok{"}\VariableTok{$response}\StringTok{"} \KeywordTok{|} \ExtensionTok{jq} \AttributeTok{{-}r} \StringTok{\textquotesingle{}.created\_at\textquotesingle{}}\VariableTok{)}
+
+\BuiltInTok{echo} \StringTok{"User: }\VariableTok{$login}\StringTok{"}
+\BuiltInTok{echo} \StringTok{"Followers: }\VariableTok{$followers}\StringTok{"}
+\BuiltInTok{echo} \StringTok{"Joined: }\VariableTok{$created\_at}\StringTok{"}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Part 2: Networking
+Essentials}\label{part-2-networking-essentials}
+
+Linux networking tools are your eyes and ears into the digital world.
+Whether you're debugging connectivity, downloading files, or managing
+remote systems, these commands are essential.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Connectivity Testing}\label{connectivity-testing}
+
+\textbf{ping --- The Classic:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ping}\NormalTok{ google.com}
+\FunctionTok{ping} \AttributeTok{{-}c}\NormalTok{ 4 8.8.8.8           }\CommentTok{\# Stop after 4 packets}
+\FunctionTok{sudo}\NormalTok{ ping }\AttributeTok{{-}i}\NormalTok{ 0.2 google.com }\CommentTok{\# Faster ping}
+\FunctionTok{ping} \AttributeTok{{-}a}\NormalTok{ 192.168.1.1         }\CommentTok{\# Audible ping}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{traceroute / tracepath:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{traceroute}\NormalTok{ google.com       }\CommentTok{\# See the path your packets take}
+\ExtensionTok{tracepath}\NormalTok{ google.com        }\CommentTok{\# Alternative without root}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Network Interface
+Configuration}\label{network-interface-configuration}
+
+\textbf{ip (Modern Replacement for ifconfig):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{ip}\NormalTok{ a                        }\CommentTok{\# Show all interfaces (short form)}
+\ExtensionTok{ip}\NormalTok{ addr show eth0           }\CommentTok{\# Specific interface}
+\FunctionTok{sudo}\NormalTok{ ip link set eth0 up    }\CommentTok{\# Bring interface up/down}
+\FunctionTok{sudo}\NormalTok{ ip link set eth0 down}
+\FunctionTok{sudo}\NormalTok{ ip addr add 192.168.1.100/24 dev eth0  }\CommentTok{\# Add IP}
+\ExtensionTok{ip}\NormalTok{ route show               }\CommentTok{\# Routing table}
+\FunctionTok{sudo}\NormalTok{ ip route add default via 192.168.1.1   }\CommentTok{\# Add route}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Why \texttt{ip} over \texttt{ifconfig}?} \texttt{ip} is part of
+the iproute2 package, actively maintained, and supports modern
+networking features.
+
+\textbf{ifconfig (Legacy---still works on many systems):}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{ifconfig}
+\ExtensionTok{ifconfig}\NormalTok{ eth0}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Data Transfer}\label{data-transfer}
+
+\textbf{curl --- The URL Swiss Army Knife:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{curl}\NormalTok{ https://api.example.com/data                }\CommentTok{\# GET request}
+\ExtensionTok{curl} \AttributeTok{{-}o}\NormalTok{ file.zip https://example.com/file.zip    }\CommentTok{\# Save to file}
+\ExtensionTok{curl} \AttributeTok{{-}L}\NormalTok{ https://bit.ly/xyz                       }\CommentTok{\# Follow redirects}
+\ExtensionTok{curl} \AttributeTok{{-}I}\NormalTok{ https://google.com                       }\CommentTok{\# Headers only}
+\ExtensionTok{curl} \AttributeTok{{-}X}\NormalTok{ POST }\AttributeTok{{-}d} \StringTok{"name=john"}\NormalTok{ https://api.example.com/users  }\CommentTok{\# POST}
+\ExtensionTok{curl} \AttributeTok{{-}C} \AttributeTok{{-}} \AttributeTok{{-}o}\NormalTok{ large.iso https://example.com/large.iso       }\CommentTok{\# Resume download}
+\ExtensionTok{curl} \AttributeTok{{-}s}\NormalTok{ https://api.ipify.org                    }\CommentTok{\# Silent mode}
+\ExtensionTok{curl} \AttributeTok{{-}I}\NormalTok{ https://example.com                      }\CommentTok{\# Check headers}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{wget --- The Download Specialist:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{wget}\NormalTok{ https://example.com/file.zip                }\CommentTok{\# Simple download}
+\FunctionTok{wget} \AttributeTok{{-}P}\NormalTok{ \textasciitilde{}/Downloads https://example.com/file.zip }\CommentTok{\# To specific dir}
+\FunctionTok{wget} \AttributeTok{{-}c}\NormalTok{ https://example.com/large.iso            }\CommentTok{\# Resume}
+\FunctionTok{wget} \AttributeTok{{-}b}\NormalTok{ https://example.com/large{-}file.tar.gz    }\CommentTok{\# Background}
+\FunctionTok{wget} \AttributeTok{{-}{-}limit{-}rate}\OperatorTok{=}\NormalTok{500k https://example.com/file.zip }\CommentTok{\# Limit speed}
+\FunctionTok{wget} \AttributeTok{{-}r} \AttributeTok{{-}A.pdf}\NormalTok{ https://example.com/documents/    }\CommentTok{\# Recursive download}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{aria2 --- The Download Accelerator:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{aria2c} \AttributeTok{{-}x}\NormalTok{ 16 }\AttributeTok{{-}s}\NormalTok{ 16 https://example.com/large.iso }\CommentTok{\# Multi{-}connection (faster!)}
+\ExtensionTok{aria2c} \AttributeTok{{-}c}\NormalTok{ https://example.com/large.iso           }\CommentTok{\# Resume}
+\ExtensionTok{aria2c} \AttributeTok{{-}{-}max{-}download{-}limit}\OperatorTok{=}\NormalTok{2M https://example.com/file.zip}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{curl vs wget:} Use \texttt{curl} for APIs and complex HTTP. Use
+\texttt{wget} for reliable downloads and recursive fetching.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) Remote Access}\label{remote-access}
+
+\textbf{ssh --- Secure Shell:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ssh}\NormalTok{ username@remote{-}host                         }\CommentTok{\# Basic connection}
+\FunctionTok{ssh} \AttributeTok{{-}p}\NormalTok{ 2222 username@remote{-}host                 }\CommentTok{\# Specific port}
+\FunctionTok{ssh}\NormalTok{ user@host }\StringTok{"ls {-}la /var/log"}                  \CommentTok{\# Execute command remotely}
+\FunctionTok{ssh} \AttributeTok{{-}L}\NormalTok{ 8080:localhost:80 user@host               }\CommentTok{\# Tunnel}
+\FunctionTok{ssh} \AttributeTok{{-}D}\NormalTok{ 1080 user@host                            }\CommentTok{\# SOCKS proxy}
+\FunctionTok{ssh} \AttributeTok{{-}X}\NormalTok{ user@host                                 }\CommentTok{\# X11 forwarding}
+\ExtensionTok{ssh{-}copy{-}id}\NormalTok{ user@host                            }\CommentTok{\# Key{-}based auth (no password!)}
+\FunctionTok{ssh} \AttributeTok{{-}i}\NormalTok{ \textasciitilde{}/.ssh/my\_key user@host                   }\CommentTok{\# Use specific key}
+\FunctionTok{ssh}\NormalTok{ user@robot{-}host}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{SSH Key Generation:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ssh{-}keygen} \AttributeTok{{-}t}\NormalTok{ ed25519}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Next Steps:} Disable password authentication in
+\texttt{/etc/ssh/sshd\_config}. Use key pairs with passphrase. Change
+default port. Use \texttt{fail2ban} to block brute force attempts.
+\end{quote}
+
+\textbf{scp --- Secure Copy:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{scp}\NormalTok{ file.txt user@host:/home/user/               }\CommentTok{\# Local to remote}
+\FunctionTok{scp}\NormalTok{ user@host:/var/log/syslog ./local{-}syslog     }\CommentTok{\# Remote to local}
+\FunctionTok{scp} \AttributeTok{{-}r}\NormalTok{ ./project user@host:/var/www/             }\CommentTok{\# Directory}
+\FunctionTok{scp} \AttributeTok{{-}p}\NormalTok{ file.txt user@host:/backup/               }\CommentTok{\# Preserve attributes}
+\FunctionTok{scp}\NormalTok{ model.bin user@robot{-}host:/tmp/}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{rsync --- Efficient Incremental Sync:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{rsync} \AttributeTok{{-}av}\NormalTok{ /src/ /dest/                           }\CommentTok{\# Local sync}
+\FunctionTok{rsync} \AttributeTok{{-}avz}\NormalTok{ /src/ user@host:/dest/                }\CommentTok{\# Remote sync}
+\FunctionTok{rsync} \AttributeTok{{-}av}\NormalTok{ logs/ user@robot{-}host:/tmp/logs/}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+Learn the difference trailing slash makes---it's the ``slash of power''
+vs.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Multi-Robot Network
+Configuration}\label{multi-robot-network-configuration}
+
+Plan IP ranges, naming conventions, and role-based segmentation.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Static IP Setup for Raspberry Pi
+Robots}\label{static-ip-setup-for-raspberry-pi-robots}
+
+Stable addressing is critical for predictable remote control and
+orchestration.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{7) SSH Key-Based
+Authentication}\label{ssh-key-based-authentication}
+
+Use keys for secure, passwordless automation across robot fleets.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 10}\label{useful-links-session-10}
+
+\textbf{Bash Scripting:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/tK9Oc6AEnR4?si=y3M0s1AIVfqtzCJB}{\textcolor{blue}{\underline{\faLink\quad Bash scripting tutorial (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mywiki.wooledge.org/BashGuide}{\textcolor{blue}{\underline{\faLink\quad BashGuide}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.shellcheck.net/}{\textcolor{blue}{\underline{\faLink\quad ShellCheck — lint your scripts}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://explainshell.com/}{\textcolor{blue}{\underline{\faLink\quad ExplainShell — understand complex commands}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Networking Tools:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://curl.se/docs/}{\textcolor{blue}{\underline{\faLink\quad curl documentation}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.gnu.org/software/wget/manual/wget.html}{\textcolor{blue}{\underline{\faLink\quad GNU Wget Manual}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://aria2.github.io/manual/en/html/}{\textcolor{blue}{\underline{\faLink\quad aria2 manual}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.openssh.com/manual.html}{\textcolor{blue}{\underline{\faLink\quad OpenSSH Manual}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Man Pages:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://linux.die.net/man/8/ping}{\textcolor{blue}{\underline{\faLink\quad ping}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://man7.org/linux/man-pages/man8/ip.8.html}{\textcolor{blue}{\underline{\faLink\quad ip}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://linux.die.net/man/8/ifconfig}{\textcolor{blue}{\underline{\faLink\quad ifconfig}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://man7.org/linux/man-pages/man1/scp.1.html}{\textcolor{blue}{\underline{\faLink\quad scp}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{Session 11: Building Embedded Linux Systems with
+Buildroot}\label{session-11-building-embedded-linux-systems-with-buildroot}
+
+\begin{quote}
+\textbf{Requirements:} 20 GB+ free storage, stable internet\\
+\textbf{Tutorial reference:}
+https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy
+\end{quote}
+
+\paragraph{Learning outcomes}\label{learning-outcomes-10}
+
+\begin{itemize}
+\tightlist
+\item
+  Explain Buildroot vs Yocto tradeoffs
+\item
+  Configure and build a minimal embedded Linux image
+\item
+  Interpret output artifacts (kernel/rootfs/bootloader)
+\item
+  Apply basic customization and package integration
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{1) Build Systems Overview}\label{build-systems-overview}
+
+\textbf{Buildroot:} simpler, faster, approachable for learning and many
+practical projects\\
+\textbf{Yocto:} highly flexible and powerful, but steeper complexity
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{2) Buildroot Architecture and
+Workflow}\label{buildroot-architecture-and-workflow}
+
+Pipeline: 1. Get source 2. Select base configuration 3. Configure
+options 4. Build toolchain + packages + images 5. Collect final
+artifacts
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{3) Configuration Basics}\label{configuration-basics}
+
+Start with a baseline, then customize:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make}\NormalTok{ defconfig          }\CommentTok{\# Baseline setup}
+\FunctionTok{make}\NormalTok{ menuconfig         }\CommentTok{\# Interactive customization}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Core choices:} target architecture, toolchain, init system,
+filesystem image format.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{4) First Build and Outputs}\label{first-build-and-outputs}
+
+Run the build and inspect the output:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make}                    \CommentTok{\# Build everything}
+\FunctionTok{ls}\NormalTok{ output/images        }\CommentTok{\# Check results}
+\end{Highlighting}
+\end{Shaded}
+
+\texttt{make} produces images such as: - Root filesystem - Kernel image
+- Bootloader-related artifacts
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{5) Customization}\label{customization}
+
+\begin{itemize}
+\tightlist
+\item
+  Add packages through menuconfig
+\item
+  Use rootfs overlays for custom files
+\item
+  Add post-build scripts
+\item
+  Create custom packages with \texttt{.mk} and \texttt{Config.in}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{6) Practical Exercise}\label{practical-exercise}
+
+Build a minimal ARM system for Raspberry Pi emulation including Python
+and SSH support.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{make}\NormalTok{ defconfig}
+\FunctionTok{make}\NormalTok{ menuconfig}
+\FunctionTok{make}
+\FunctionTok{ls}\NormalTok{ output/images}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Session 11}\label{useful-links-session-11}
+
+\textbf{Buildroot:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/ey3sKdOmPa8?si=H0kdd-9R5Id4XoXy}{\textcolor{blue}{\underline{\faLink\quad Buildroot tutorial video}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Arch Wiki:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://wiki.archlinux.org/}{\textcolor{blue}{\underline{\faLink\quad Arch Wiki — the ultimate Linux reference}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\paragraph{Useful Links --- Cool Stuff \&
+Extras}\label{useful-links-cool-stuff-extras}
+
+\textbf{Multimedia:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://itsfoss.com/ffmpeg/}{\textcolor{blue}{\underline{\faLink\quad FFmpeg tutorial (It's FOSS)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://ffmpeg.org/ffmpeg.html}{\textcolor{blue}{\underline{\faLink\quad FFmpeg docs}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{FOSS Alternatives:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.neowin.net/guides/top-10-foss-apps-to-make-your-linux-experience-more-enjoyable/}{\textcolor{blue}{\underline{\faLink\quad Top 10 FOSS Apps (Neowin)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://alternativeto.net/}{\textcolor{blue}{\underline{\faLink\quad AlternativeTo.net}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Windows Apps/Games on Linux:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/xGbQZt96q54?si=FgQJ\_\_YMpISs7L1c}{\textcolor{blue}{\underline{\faLink\quad Bottles + Wine (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/JXHvGgiJJG0?si=1fI81xIr7zichNDy}{\textcolor{blue}{\underline{\faLink\quad Lutris (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Sync \& Backup:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://www.digitalocean.com/community/tutorials/how-to-use-rsync-to-sync-local-and-remote-directories}{\textcolor{blue}{\underline{\faLink\quad DigitalOcean rsync tutorial}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/GqSxR93xK6E?si=c2TvpU8R-53SXDty}{\textcolor{blue}{\underline{\faLink\quad rsync backup tutorial (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Ricing \& Customization:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/z1-yuolwrVs?si=3IKioFlYz9L8vkNS}{\textcolor{blue}{\underline{\faLink\quad Ricing inspiration (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://github.com/mikeroyal/Perfect-Ubuntu-Guide}{\textcolor{blue}{\underline{\faLink\quad Perfect Ubuntu Guide (GitHub)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://mmbesar.github.io/Tutorials/Best-Arabic-Font-in-Linux/}{\textcolor{blue}{\underline{\faLink\quad Best Arabic Font in Linux (mmbesar)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://github.com/Tinram/Linux-Utilities}{\textcolor{blue}{\underline{\faLink\quad Linux Utilities (GitHub Tinram)}}}%
+  \par\vspace{0.5ex}%
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://youtu.be/nCS4BtJ34-o?si=T6gagbT5k71H5BNE}{\textcolor{blue}{\underline{\faLink\quad 12 GREAT CLI programs (YouTube)}}}%
+  \par\vspace{0.5ex}%
+
+\textbf{Shell \& Scripting Resources:}
+
+%
+  \par\vspace{0.5ex}%
+  \href{https://learnbyexample.github.io/scripting\_course/Linux\_curated\_resources.html}{\textcolor{blue}{\underline{\faLink\quad Shell scripting course (Learn By Example)}}}%
+  \par\vspace{0.5ex}%
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Suggested Projects}\label{suggested-projects}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{System Monitor Script:} Create a Bash monitor script for
+  CPU/RAM with logging and \textgreater80\% alerts.
+\item
+  \textbf{Automated Backup:} Build an automated workspace backup script
+  to remote/cloud storage.
+\item
+  \textbf{SSH Remote Execution:} Practice SSH remote command execution
+  between two machines/VMs (or localhost).
+\item
+  \textbf{QEMU Emulation:} Run full Raspberry Pi OS emulation in QEMU.
+\item
+  \textbf{Mobile SSH:} Optional: manage your Linux machine remotely from
+  mobile (Termux + SSH).
+\item
+  \textbf{Custom Buildroot Image:} Build and document a custom Buildroot
+  image with Python + SSH.
+\item
+  \textbf{Info Script:} Write a bash script that fetches currency rates,
+  prayer times, or weather forecast using APIs with colored output and
+  error handling.
+\item
+  \textbf{Rice Your Desktop:} Create a customized desktop environment
+  with documented dotfiles on Git.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Contact the Author}\label{contact-the-author}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Email:} khaledmhfz2004@gmail.com
+\item
+  \textbf{GitHub:} https://github.com/KhaledMahfouz5/linux-course
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Copyright}\label{copyright}
+
+All rights reserved for \textbf{hamakRobotTeam} {[}NOT For Commercial
+Use{]}!!
+
+DONE !! thanks Allah.
+
+\end{document}
