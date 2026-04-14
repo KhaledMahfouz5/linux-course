@@ -1,75 +1,49 @@
 # Linux Course
 
-A comprehensive Linux course covering fundamental concepts, commands, and system administration.
+This branch contains the Linux course material for **hamakRobotTeam**, focused on AI and robotics foundations (Raspberry Pi + ROS context).
 
-## Course Structure
+## Branch Notes
 
-This course is organized into chapters that progressively build your Linux knowledge and skills.
+- This branch uses a **single-source course file** (`linux-course.md`) instead of per-chapter directories.
+- The generated outputs (`linux-course.tex`, `linux-course.pdf`) are included in the repository.
 
-### Chapter 1: Introduction to Linux
+## Repository Contents
 
-- Basic Linux concepts and history
-- Understanding the Linux file system
-- Essential commands for navigation and file management
-
-### Chapter 2: File System Management
-
-- Advanced file operations
-- Permissions and ownership
-- Working with directories and file manipulation
-
-### Chapter 3: System Administration
-
-- Process management
-- User and group management
-- System monitoring and maintenance
-
-## Course Materials
-
-- **Chapter_1/**: Introduction materials and exercises
-- **Chapter_2/**: File system management resources
-- **Chapter_3/**: System administration guides
-- **Fonts/**: Additional fonts used in course materials
-- **Linux_course_hierarchy/**: Course structure overview
+- `linux-course.md`: Main editable source for the full course.
+- `linux-course.tex`: LaTeX output generated from the Markdown source.
+- `linux-course.pdf`: Final rendered course PDF.
+- `Linux_course_hierarchy/Linux_Course_Hierarchy.md`: High-level hierarchy/outline.
+- `markdownToPdf.sh`: Script used to build the PDF from Markdown.
+- `LICENSE`: Project license file.
 
 ## Getting Started
 
-1. Clone this repository:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/KhaledMahfouz5/linux-course.git
    cd linux-course
    ```
 
-2. Navigate through the chapters in order:
-   - Start with `Chapter_1/` for foundational concepts
-   - Progress to `Chapter_2/` for file system management
-   - Complete with `Chapter_3/` for system administration
+2. Read the source content:
+
+   ```bash
+   less linux-course.md
+   ```
+
+3. Build the PDF (optional):
+
+   ```bash
+   bash markdownToPdf.sh
+   ```
 
 ## Prerequisites
 
-- Basic computer literacy
-- Access to a Linux system (virtual machine, dual boot, or cloud instance)
-- Command line interface access
+- Basic programming knowledge (variables, conditions, loops, functions)
+- A Linux environment (native install, VM, or WSL)
+- Command-line familiarity
+- Enough disk space for toolchains and packages (recommended: 30+ GB free)
 
 ## License
 
-This course is licensed under the GNU General Public License v2.0. See the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues for improvements and corrections.
-
-## Usage
-
-This course is designed for self-paced learning. Each chapter contains:
-
-- Theoretical explanations
-- Practical exercises
-- Examples and demonstrations
-
-Follow the chapters sequentially for the best learning experience.
-
----
-
-**Note**: This course is provided as-is under the GPLv2 license. Feel free to modify, distribute, and use it according to the license terms.
+See [LICENSE](LICENSE) for licensing terms.
