@@ -32,6 +32,10 @@ This course is organized into chapters that progressively build your Linux knowl
 - **Fonts/**: Additional fonts used in course materials
 - **Linux_course_hierarchy/**: Course structure overview
 
+## NotebookLM Resource
+
+- **[NotebookLM Audio Overview & Source Hub](https://notebook.google.com/notebook/36cb2020-cc6a-4a4b-9e4b-7b61de0e7cb1)**: Access the public NotebookLM notebook for interactive summaries, audio overviews, and Q&A on the course material.
+
 ## Getting Started
 
 1. Clone this repository:
